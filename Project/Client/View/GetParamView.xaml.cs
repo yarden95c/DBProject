@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Client.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,18 +17,13 @@ using System.Windows.Shapes;
 namespace Project.Client.View
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for GetParamView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class GetParamView : UserControl
     {
-        public HomeView()
+        public GetParamView()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-             NavigationCommands.GoToPage.Execute("/Client/View/IKnowWhatIWantView.xaml", this);
         }
     }
 }

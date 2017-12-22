@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:Project.Client.ViewModel"
+                    xmlns:vw="clr-namespace:Project.Client.View"
+                    xmlns:mui="http://firstfloorsoftware.com/ModernUI"                    
+                    xmlns:local="clr-namespace:Project">
+    
+    <DataTemplate x:Shared="False"  DataType="{x:Type vm:IKnowWhatIWantViewModel}">
+        <vw:IKnowWhatIWantView/>
+    </DataTemplate>
+    <DataTemplate x:Shared="False" DataType="{x:Type vm:GetParamViewModel}">
+        <vw:GetParamView/>
+    </DataTemplate>
+</ResourceDictionary>

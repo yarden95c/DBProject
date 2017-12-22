@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:Project.Client.View"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI" 
              mc:Ignorable="d" 
-            Height="400" Width="500"
+             Height="400" Width="500"
              >
 
     <UserControl.Resources>
-        <Style TargetType="{x:Type CheckBox}">
+        <Style TargetType="{x:Type RadioButton}">
             <Style.Setters>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style.Setters>
@@ -18,15 +18,42 @@
     </UserControl.Resources>
 
     <Grid>
-        <TextBlock FontWeight="Bold" Margin="120,60,89,10" Width="228"> I Know What I Want</TextBlock>
+        <TextBlock FontWeight="Bold" Margin="120,20,89,10" Width="228"> I Know What I Want</TextBlock>
         <mui:ModernFrame Height="300" Width="400">
-            <StackPanel>
-                
-                <CheckBox Margin="71,40,71,10">Song</CheckBox>
-                <CheckBox Margin="71,20,71,10">Artist</CheckBox>
-                <CheckBox Margin="71,20,71,30">Place</CheckBox>
+            <StackPanel Visibility="{Binding RadioButtonsVisibility}">
+                <!--<RadioButton Margin="50,40,71,10" IsChecked="{Binding SongIsChecked}">Song</RadioButton>
+                <RadioButton Margin="50,20,71,10" IsChecked="{Binding ArtistIsChecked}">artist</RadioButton>
+                <RadioButton Margin="50,20,71,30" IsChecked="{Binding PlaceIsChecked}">place</RadioButton>-->
+                <ItemsControl Height="200" ItemsSource="{Binding FirstChoises}">
+
+                    <ItemsControl.ItemsPanel>
+
+                        <ItemsPanelTemplate>
+
+                            <WrapPanel Orientation="Vertical"/>
+
+                        </ItemsPanelTemplate>
+
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+                            <RadioButton Height="40" Width="115" IsChecked="{Binding IsChecked}" GroupName="group1" Content="{Binding Name}" />
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
         </mui:ModernFrame>
+        <mui:ModernFrame Width="400">
+            <StackPanel Visibility="{Binding ParamsVisibility}">
+                <ItemsControl ItemsSource="{Binding RequestedParams}">
+                </ItemsControl>
+                <Button VerticalAlignment="Bottom" Command="{Binding SendMyRequestCommand}">Send My Request</Button>
+            </StackPanel>
+        </mui:ModernFrame>
+        <Button HorizontalAlignment="{Binding ContinueButtonAlignment}" VerticalAlignment="Bottom" Command="{Binding ContinueCommand}" Content="{Binding ContinueButton}"/>
 
     </Grid>
 </UserControl>
