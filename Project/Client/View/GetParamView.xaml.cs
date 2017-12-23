@@ -25,5 +25,6 @@ namespace Project.Client.View
         {
             InitializeComponent();
         }
+
     }
 }

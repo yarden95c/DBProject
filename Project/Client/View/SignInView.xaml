@@ -4,9 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Project.Client.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Label>Sign in</Label>
-    </Grid>
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI" 
+             mc:Ignorable="d" Height="250" Width="420">
+    <UserControl.Resources>
+        <DropShadowEffect x:Key="dropShadow" Color="Black" Opacity="1" ShadowDepth="6" />
+        <DropShadowEffect x:Key="dropShadow2" Color="LightGray" Opacity="5" ShadowDepth="6" />
+        <Style TargetType="{x:Type Button}">
+            <Style.Setters>
+                <Setter Property="Effect" Value="{StaticResource dropShadow2}"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="Width" Value="130"/>
+                <Setter Property="Height" Value="36"/>
+                <Setter Property="Background" Value="FloralWhite"></Setter>
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
+
+    <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}">
+        <mui:ModernFrame VerticalAlignment="Center" >
+            <StackPanel VerticalAlignment="Stretch">
+                    <ItemsControl ItemsSource="{Binding RequestedParams}" Margin="5,5,5,5">
+                    </ItemsControl>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="1" Background="Transparent" >Log in!</Button>
+                    <mui:BBCodeBlock BBCode="Don't have an account yet?  [url=\Client\View\SignUpView.xaml]Sign Up Here![/url] " VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="17" Margin="10,50,10,0"/>
+              
+            </StackPanel>
+        </mui:ModernFrame>
+
+    </Border>
+
 </UserControl>

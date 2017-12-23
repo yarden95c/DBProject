@@ -7,53 +7,50 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI" 
              mc:Ignorable="d" 
              Height="400" Width="500"
+             VerticalAlignment="Top"
              >
 
     <UserControl.Resources>
         <Style TargetType="{x:Type RadioButton}">
             <Style.Setters>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Height" Value="40"/>
             </Style.Setters>
+        </Style>
+        <Style TargetType="mui:BBCodeBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="120,20,89,10"/>
+            <Setter Property="Width" Value="228"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
     </UserControl.Resources>
 
-    <Grid>
-        <TextBlock FontWeight="Bold" Margin="120,20,89,10" Width="228"> I Know What I Want</TextBlock>
-        <mui:ModernFrame Height="300" Width="400">
-            <StackPanel Visibility="{Binding RadioButtonsVisibility}">
-                <!--<RadioButton Margin="50,40,71,10" IsChecked="{Binding SongIsChecked}">Song</RadioButton>
-                <RadioButton Margin="50,20,71,10" IsChecked="{Binding ArtistIsChecked}">artist</RadioButton>
-                <RadioButton Margin="50,20,71,30" IsChecked="{Binding PlaceIsChecked}">place</RadioButton>-->
+    <Grid >
+        <mui:BBCodeBlock > I Know What I Want</mui:BBCodeBlock>
+            <mui:ModernFrame Height="300" Width="400">
+                <StackPanel Visibility="{Binding RadioButtonsVisibility}">
                 <ItemsControl Height="200" ItemsSource="{Binding FirstChoises}">
-
                     <ItemsControl.ItemsPanel>
-
                         <ItemsPanelTemplate>
-
                             <WrapPanel Orientation="Vertical"/>
-
                         </ItemsPanelTemplate>
-
                     </ItemsControl.ItemsPanel>
-
                     <ItemsControl.ItemTemplate>
-
                         <DataTemplate>
                             <RadioButton Height="40" Width="115" IsChecked="{Binding IsChecked}" GroupName="group1" Content="{Binding Name}" />
                         </DataTemplate>
-
                     </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </mui:ModernFrame>
-        <mui:ModernFrame Width="400">
-            <StackPanel Visibility="{Binding ParamsVisibility}">
-                <ItemsControl ItemsSource="{Binding RequestedParams}">
-                </ItemsControl>
-                <Button VerticalAlignment="Bottom" Command="{Binding SendMyRequestCommand}">Send My Request</Button>
-            </StackPanel>
-        </mui:ModernFrame>
-        <Button HorizontalAlignment="{Binding ContinueButtonAlignment}" VerticalAlignment="Bottom" Command="{Binding ContinueCommand}" Content="{Binding ContinueButton}"/>
-
+                    </ItemsControl>
+                </StackPanel>
+            </mui:ModernFrame>
+            <mui:ModernFrame Width="400">
+                <StackPanel Visibility="{Binding ParamsVisibility}">
+                    <ItemsControl ItemsSource="{Binding RequestedParams}">
+                    </ItemsControl>
+                    <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding SendMyRequestCommand}">Send My Request</Button>
+                </StackPanel>
+            </mui:ModernFrame>
+            <Button HorizontalAlignment="{Binding ContinueButtonAlignment}" VerticalAlignment="Bottom" Command="{Binding ContinueCommand}" Content="{Binding ContinueButton}"/>
     </Grid>
+
 </UserControl>

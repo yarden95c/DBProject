@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace Project.Client.ViewModel
 {
-    class IKnowWhatIWantViewModel : BaseViewModel
+    public class IKnowWhatIWantViewModel : BaseViewModel
     {
         private ICommand _continueCommand;
         private ICommand _sendMyRequestCommand;

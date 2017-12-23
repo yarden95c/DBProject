@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project.Client.ViewModel
 {
-    class ArtistViewModel : FirstChoiseViewModel
+    public class ArtistViewModel : FirstChoiseViewModel
     {
 
         public ArtistViewModel(string name)

@@ -5,18 +5,12 @@ xmlns:mui="http://firstfloorsoftware.com/ModernUI" Title="Music Fact Generator"
                   IsTitleVisible="True"
                   IsEnabled="True"
                   Height="600"
-                  Width="700" WindowStyle="ThreeDBorderWindow"
+                  Width="700" WindowStyle="ToolWindow"
+                  ContentSource="Client/View/SignInView.xaml"
                   >
     <Window.Resources>
-        <DropShadowEffect x:Key="dropShadow" Color="Black" Opacity="1" ShadowDepth="6" />
-        <LinearGradientBrush x:Key="brush" EndPoint="0.5,1" StartPoint="0.5,0" >
-            <GradientStop Color="#FF5F35A1" Offset="0.9"/>
-            <GradientStop Color="#FF4FBDEE"/>
-        </LinearGradientBrush>
         <Style TargetType="{x:Type mui:ModernFrame}">
             <Style.Setters>
-                <!--Setter Property="Background" Value="{StaticResource brush}"/-->
-                <!--Setter Property="Effect" Value="{StaticResource dropShadow}"/-->
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style.Setters>
@@ -32,8 +26,8 @@ xmlns:mui="http://firstfloorsoftware.com/ModernUI" Title="Music Fact Generator"
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="Welcome">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Sign in" Source="\Client\View\SignInView.xaml"></mui:Link>
                 <mui:Link DisplayName="Sign up" Source="\Client\View\SignUpView.xaml"></mui:Link>
+                <mui:Link DisplayName="Sign in" Source="\Client\View\SignInView.xaml"></mui:Link>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="Start" >

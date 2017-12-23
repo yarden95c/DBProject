@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace Project.Client.View
 {
-    class SongViewModel : FirstChoiseViewModel
+    public class SongViewModel : FirstChoiseViewModel
     {
         public SongViewModel(string name)
         {

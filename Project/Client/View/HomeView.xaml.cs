@@ -24,10 +24,6 @@ namespace Project.Client.View
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-             NavigationCommands.GoToPage.Execute("/Client/View/IKnowWhatIWantView.xaml", this);
-        }
+        
     }
 }

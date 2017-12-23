@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project.Client.ViewModel
 {
-    abstract class FirstChoiseViewModel : BaseViewModel
+    public abstract class FirstChoiseViewModel : BaseViewModel
     {
         protected bool _isChecked;
         protected string _name;

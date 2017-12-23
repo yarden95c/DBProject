@@ -11,4 +11,7 @@
     <DataTemplate x:Shared="False" DataType="{x:Type vm:GetParamViewModel}">
         <vw:GetParamView/>
     </DataTemplate>
+    <DataTemplate x:Shared="False" DataType="{x:Type vm:SignInViewModel}">
+        <vw:SignInView></vw:SignInView>
+    </DataTemplate>
 </ResourceDictionary>

@@ -4,23 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Project.Client.View"
+             xmlns:viewModel="clr-namespace:Project.Client.ViewModel"
              mc:Ignorable="d" 
 
-             Height="70" Width="400">
+             Height="50" Width="400">
     <Border>
-        <Grid Width="400" Height="70">
+        <Grid Width="400" Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="229*"/>
                 <ColumnDefinition Width="171*"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
 
-            <TextBlock Text="{Binding NameOfParam}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="28,23,0,23"/>
-            <!--TextBox Text="{Binding GivvenParam}"  Height="25" Width="170" HorizontalAlignment="Right" Margin="0,22,116,23" Grid.ColumnSpan="2"/-->
-                <ComboBox IsEnabled="{Binding IsNotWaitingForResponse}"
-								IsEditable="True" VerticalAlignment="Center" ItemsSource="{Binding ParamOptions}" 
-                                               Text="{Binding GivvenParam, Mode=TwoWay, UpdateSourceTrigger=Default}" Grid.Column="2">
-                </ComboBox>
-
+            <TextBlock Text="{Binding NameOfParam}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding GivvenParam}"  VerticalAlignment="Center" Width="170"  Grid.Column="1"
+                      Visibility="{Binding TextBoxVisibility}" />
+            <ComboBox IsEnabled="{Binding IsNotWaitingForResponse}" IsEditable="True" VerticalAlignment="Center" ItemsSource="{Binding ParamOptions}" 
+                                               Text="{Binding GivvenParam, Mode=TwoWay, UpdateSourceTrigger=Default}" Grid.Column="1" Visibility="{Binding CheckBoxVisibility}">
+            </ComboBox>
+            <PasswordBox  viewModel:PasswordHelper.Attach="True" 
+                          viewModel:PasswordHelper.Password="{Binding GivvenName, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" 
+                          Grid.Column="1" Visibility="{Binding PasswordBoxVisibility}" VerticalAlignment="Center"
+                         Width="170"/>
         </Grid>
     </Border>
 
