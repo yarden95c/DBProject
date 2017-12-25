@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLogic;
+using Project.Client.Logic;
 
 namespace Project.Client.ViewModel
 {
@@ -12,17 +14,20 @@ namespace Project.Client.ViewModel
 
         public PlaceViewModel(string name)
         {
+            type = EntityType.AREA;
             _name = name;
+            _getParamViewModels = new ObservableCollection<GetParamViewModel>
+            {
+                new GetParamViewModel(Consts.Area.PlaceName, getParamOptions:_dbManager.GetTopPlacesNameStartWith),
+                new GetParamViewModel(Consts.Area.ArtistWhoLivedThere, getParamOptions:_dbManager.GetTopArtistNamesStartWith),
+                new GetParamViewModel(Consts.Area.SongWrittenThere,getParamOptions:_dbManager.GetTopSongsNameStartWith)
+            };
         }
         
         public override ObservableCollection<GetParamViewModel> GetRequestParams()
         {
-            return new ObservableCollection<GetParamViewModel>
-            {
-                new GetParamViewModel("Place Name:",fieldName:"name_area", getParamOptions:_dbManager.GetTopPlacesNameStartWith),
-                new GetParamViewModel("Artist Who Lived There: ", fieldName:"list_of_artists", getParamOptions:_dbManager.GetTopArtistNamesStartWith),
-                new GetParamViewModel("Song WrittenThere: ",fieldName:"list_of_artists" ,getParamOptions:_dbManager.GetTopSongsNameStartWith)
-            };
+            return _getParamViewModels;
         }
+        
     }
 }

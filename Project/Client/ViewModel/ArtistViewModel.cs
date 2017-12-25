@@ -4,26 +4,30 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLogic;
+using Project.Client.Logic;
 
 namespace Project.Client.ViewModel
 {
     public class ArtistViewModel : FirstChoiseViewModel
     {
-
+        
         public ArtistViewModel(string name)
         {
+            type = EntityType.ARTIST;
             _name = name;
-            
+            _getParamViewModels = new ObservableCollection<GetParamViewModel>
+            {
+                new GetParamViewModel(Consts.Artist.ArtistName ,getParamOptions: _dbManager.GetTopArtistNamesStartWith),
+                new GetParamViewModel(Consts.Artist.SongOfArtist ,getParamOptions:_dbManager.GetTopArtistDateOfBirthsStartWith),
+                new GetParamViewModel(Consts.Artist.LivingPlace,getParamOptions: _dbManager.GetTopSongsNameStartWith),
+                new GetParamViewModel(Consts.Artist.YearOfBirth, getParamOptions:_dbManager.GetTopPlacesNameStartWith)
+            };
         }
         public override ObservableCollection<GetParamViewModel> GetRequestParams()
         {
-            return new ObservableCollection<GetParamViewModel>
-            {
-                new GetParamViewModel("Artist Name:",fieldName:"name" ,getParamOptions: _dbManager.GetTopArtistNamesStartWith),
-                new GetParamViewModel("Year Of Birth: ",fieldName:"begin_date_year" ,getParamOptions:_dbManager.GetTopArtistDateOfBirthsStartWith),
-                new GetParamViewModel("Song Of This Artist: ", fieldName:"list_of_songs",getParamOptions: _dbManager.GetTopSongsNameStartWith),
-                new GetParamViewModel("Living Place: ", fieldName:"area_Id", getParamOptions:_dbManager.GetTopPlacesNameStartWith)
-            };
+            return _getParamViewModels;
         }
+        
     }
 }

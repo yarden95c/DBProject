@@ -72,6 +72,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Client\Logic\Consts.cs" />
+    <Compile Include="Client\Logic\RequestParams.cs" />
     <Compile Include="Client\ViewModel\ArtistViewModel.cs" />
     <Compile Include="Client\ViewModel\BaseViewModel.cs" />
     <Compile Include="Client\ViewModel\GetParamViewModel.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Client\ViewModel\IKnowWhatIWantViewModel.cs" />
     <Compile Include="Client\ViewModel\PasswordHelper.cs" />
     <Compile Include="Client\ViewModel\PlaceViewModel.cs" />
+    <Compile Include="Client\ViewModel\ResultViewModel.cs" />
     <Compile Include="Client\ViewModel\SignInViewModel.cs" />
     <Compile Include="Client\ViewModel\SignUpViewModel.cs" />
     <Compile Include="Client\View\FeelingLuckyView.xaml.cs">
@@ -95,6 +98,9 @@
     </Compile>
     <Compile Include="Client\View\IKnowWhatIWantView.xaml.cs">
       <DependentUpon>IKnowWhatIWantView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Client\View\ResultView.xaml.cs">
+      <DependentUpon>ResultView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Client\View\SignInView.xaml.cs">
       <DependentUpon>SignInView.xaml</DependentUpon>
@@ -122,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Client\View\IKnowWhatIWantView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Client\View\ResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

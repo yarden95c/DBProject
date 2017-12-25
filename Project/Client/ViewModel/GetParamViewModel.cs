@@ -54,7 +54,6 @@ namespace Project.Client.ViewModel
                 TextBoxVisibility = Visibility.Collapsed;
                 CheckBoxVisibility = Visibility.Visible;
             });
-                
         }
         public string NameOfParam
         {

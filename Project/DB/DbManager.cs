@@ -1,40 +1,38 @@
 ﻿using BusinessLogic;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using Project.Client.Logic;
 
 namespace Project.DB
 {
     public class DbManager
     {
 
-        private ICommand command;
-
+        private readonly ICommand _command;
+        private readonly Mutex _dbMutex = new Mutex();
 
         public DbManager()
         {
             DataBaseEngine.DataBaseEngine db = new DataBaseEngine.DataBaseEngine();
-            this.command = new IKnowWhatIWantCommand(db);
+            this._command = new IKnowWhatIWantCommand(db);
         }
-
 
         public List<string> GetTopArtistNamesStartWith(string prefix)
         {
             return BuildResultList(prefix, "name", EntityType.ARTIST);
         }
 
-
-
         public List<string> GetTopSongsNameStartWith(string prefix)
         {
             return BuildResultList(prefix, "song_name", EntityType.SONG);
         }
-
-
+        
         public List<string> GetTopPlacesNameStartWith(string prefix)
         {
             return BuildResultList(prefix, "name_area", EntityType.AREA);
         }
-
 
         public List<string> GetTopArtistDateOfBirthsStartWith(string prefix)
         {
@@ -52,19 +50,32 @@ namespace Project.DB
             var l = new List<string>();
             try
             {
+
                 var d = new Dictionary<string, string> {{fieldName, prefix}};
-                List<IEntity> list = command.Execute(type, d);
+                _dbMutex.WaitOne();
+                List<IEntity> list = _command.Execute(type, d);
+
+                _dbMutex.ReleaseMutex();
                 foreach (IEntity entity in list)
                 {
                     l.Add(entity[fieldName]);
                 }
-
             }
             catch (Exception e)
             {
+
+                _dbMutex.ReleaseMutex();
                 Console.WriteLine(e);
             }
             return l;
+        }
+
+
+
+        public IEntity GetEntity(RequestParams request)
+        {
+            return _command.Execute(request.Type, request.FieldsAndValues).FirstOrDefault();
+
         }
 
     }

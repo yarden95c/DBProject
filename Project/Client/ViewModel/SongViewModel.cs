@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using BusinessLogic;
+using Project.Client.Logic;
 
 namespace Project.Client.View
 {
@@ -13,15 +15,19 @@ namespace Project.Client.View
         public SongViewModel(string name)
         {
             _name = name;
+            type = EntityType.SONG;
+            _getParamViewModels = new ObservableCollection<GetParamViewModel>
+            {
+                new GetParamViewModel(Consts.Song.SongName,getParamOptions:_dbManager.GetTopSongsNameStartWith),
+                new GetParamViewModel(Consts.Song.WhoSingIt, getParamOptions:_dbManager.GetTopArtistNamesStartWith),
+                new GetParamViewModel(Consts.Song.Year,getParamOptions:_dbManager.GetTopSongsYearsStartWith)
+            };
         }
         public override ObservableCollection<GetParamViewModel> GetRequestParams()
         {
-            return new ObservableCollection<GetParamViewModel>
-            {
-                new GetParamViewModel("Song Name: ",fieldName:"song_name" ,getParamOptions:_dbManager.GetTopSongsNameStartWith),
-               // new GetParamViewModel("Who Sing It: ", fieldName:"artist_name", getParamOptions:_dbManager.GetTopArtistNamesStartWith),
-                //new GetParamViewModel("Year: ",fieldName:"release_date_year" ,getParamOptions:_dbManager.GetTopSongsYearsStartWith)
-            };
+            return _getParamViewModels;
         }
+
+
     }
 }

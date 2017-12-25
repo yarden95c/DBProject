@@ -169,6 +169,7 @@ namespace Project.Client.ViewModel
 
         private void SendRequestParams()
         {
+            _firstChoise.GetEntityFromRequest();
             Application.Current.Dispatcher.Invoke(() =>
             {
                 var m = (FirstFloor.ModernUI.Windows.Controls.ModernWindow)Application.Current.MainWindow;

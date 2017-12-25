@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLogic;
+using Project.Client.Logic;
 
 namespace Project.Client.ViewModel
 {
@@ -13,12 +15,11 @@ namespace Project.Client.ViewModel
         protected bool _isChecked;
         protected string _name;
         protected static DbManager _dbManager = new DbManager();
+        protected ObservableCollection<GetParamViewModel> _getParamViewModels;
+        protected EntityType type;
         public string Name
         {
-            get
-            {
-                return _name;
-            }
+            get => _name;
             set
             {
                 if (_name == value)
@@ -29,10 +30,7 @@ namespace Project.Client.ViewModel
         }
         public bool IsChecked
         {
-            get
-            {
-                return _isChecked;
-            }
+            get => _isChecked;
             set
             {
                 if (_isChecked == value)
@@ -42,6 +40,15 @@ namespace Project.Client.ViewModel
             }
         }
         public abstract ObservableCollection<GetParamViewModel> GetRequestParams();
-       
+        public IEntity GetEntityFromRequest()
+        {
+            Dictionary<string, string> paramsAndValues = new Dictionary<string, string>();
+            foreach (var paramViewModel in _getParamViewModels)
+            {
+                paramsAndValues.Add(paramViewModel.NameOfParam, paramViewModel.GivvenParam);
+            }
+            RequestParams request = new RequestParams(type, paramsAndValues);
+            return _dbManager.GetEntity(request);
+        }
     }
 }
