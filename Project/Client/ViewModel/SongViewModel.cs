@@ -18,9 +18,9 @@ namespace Project.Client.View
         {
             return new ObservableCollection<GetParamViewModel>
             {
-                new GetParamViewModel("Song Name: ", _dbManager.GetTopSongsNameStartWith),
-                new GetParamViewModel("Who Sing It: ", _dbManager.GetTopArtistNamesStartWith),
-                new GetParamViewModel("Year: ", _dbManager.GetTopSongsYearsStartWith)
+                new GetParamViewModel("Song Name: ",fieldName:"song_name" ,getParamOptions:_dbManager.GetTopSongsNameStartWith),
+               // new GetParamViewModel("Who Sing It: ", fieldName:"artist_name", getParamOptions:_dbManager.GetTopArtistNamesStartWith),
+                //new GetParamViewModel("Year: ",fieldName:"release_date_year" ,getParamOptions:_dbManager.GetTopSongsYearsStartWith)
             };
         }
     }

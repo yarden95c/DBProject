@@ -12,7 +12,7 @@ namespace Project.Client.ViewModel
     {
         protected bool _isChecked;
         protected string _name;
-        protected DbManager _dbManager = new DbManager();
+        protected static DbManager _dbManager = new DbManager();
         public string Name
         {
             get

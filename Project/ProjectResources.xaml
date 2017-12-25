@@ -14,4 +14,8 @@
     <DataTemplate x:Shared="False" DataType="{x:Type vm:SignInViewModel}">
         <vw:SignInView></vw:SignInView>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SignUpViewModel}">
+        <vw:SignUpView></vw:SignUpView>
+    </DataTemplate>
+
 </ResourceDictionary>

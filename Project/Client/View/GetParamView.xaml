@@ -25,7 +25,7 @@
                                                Text="{Binding GivvenParam, Mode=TwoWay, UpdateSourceTrigger=Default}" Grid.Column="1" Visibility="{Binding CheckBoxVisibility}">
             </ComboBox>
             <PasswordBox  viewModel:PasswordHelper.Attach="True" 
-                          viewModel:PasswordHelper.Password="{Binding GivvenName, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" 
+                          viewModel:PasswordHelper.Password="{Binding GivvenParam, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" 
                           Grid.Column="1" Visibility="{Binding PasswordBoxVisibility}" VerticalAlignment="Center"
                          Width="170"/>
         </Grid>

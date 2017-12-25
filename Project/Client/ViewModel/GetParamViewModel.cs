@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,12 +21,12 @@ namespace Project.Client.ViewModel
         private bool _isNotWaitingForResponse;
         private readonly bool _isPassword;
         
-        public GetParamViewModel(string name, Func<string, List<string>> getParamOptions = null, bool isPassword = false)
+        public GetParamViewModel(string name, string fieldName= null, Func<string, List<string>> getParamOptions = null, bool isPassword = false)
         {
             _isPassword = isPassword;
             _nameOfParam = name;
             _getParamOptions = getParamOptions;
-
+            FieldName = fieldName;
             Init();
             SetParamOptions();
         }
@@ -46,11 +47,14 @@ namespace Project.Client.ViewModel
             TextBoxVisibility = Visibility.Visible;
             CheckBoxVisibility = Visibility.Collapsed;
             if (_getParamOptions == null) return;
-            ParamOptions = _getParamOptions(GivvenParam);
-            IsNotWaitingForResponse = true;
-            TextBoxVisibility = Visibility.Collapsed;
-            CheckBoxVisibility = Visibility.Visible;
-
+           Task.Run(() =>
+            {
+                ParamOptions = _getParamOptions(GivvenParam);
+                IsNotWaitingForResponse = true;
+                TextBoxVisibility = Visibility.Collapsed;
+                CheckBoxVisibility = Visibility.Visible;
+            });
+                
         }
         public string NameOfParam
         {
@@ -134,6 +138,7 @@ namespace Project.Client.ViewModel
                 OnPropertyChanged("PasswordBoxVisibility");
             }
         }
-        
+
+        public string FieldName { get; set; }
     }
 }

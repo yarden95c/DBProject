@@ -24,14 +24,13 @@
     <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}">
         <mui:ModernFrame VerticalAlignment="Center" >
             <StackPanel VerticalAlignment="Stretch">
-                    <ItemsControl ItemsSource="{Binding RequestedParams}" Margin="5,5,5,5">
-                    </ItemsControl>
-                    <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="1" Background="Transparent" >Log in!</Button>
-                    <mui:BBCodeBlock BBCode="Don't have an account yet?  [url=\Client\View\SignUpView.xaml]Sign Up Here![/url] " VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="17" Margin="10,50,10,0"/>
-              
+                <ItemsControl ItemsSource="{Binding RequestedParams}" Margin="5,5,5,5">
+                </ItemsControl>
+                <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="1" Background="Transparent" >Log in!</Button>
+                <mui:BBCodeBlock BBCode="Don't have an account yet?  [url=\Client\View\SignUpView.xaml]Sign Up Here![/url] " VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="17" Margin="10,50,10,0"/>
+
             </StackPanel>
         </mui:ModernFrame>
-
     </Border>
 
 </UserControl>

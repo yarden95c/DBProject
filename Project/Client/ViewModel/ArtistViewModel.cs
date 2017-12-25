@@ -19,10 +19,10 @@ namespace Project.Client.ViewModel
         {
             return new ObservableCollection<GetParamViewModel>
             {
-                new GetParamViewModel("Artist Name:", _dbManager.GetTopArtistNamesStartWith),
-                new GetParamViewModel("Date Of Birth: ", _dbManager.GetTopArtistDateOfBirthsStartWith),
-                new GetParamViewModel("Song Of This Artist: ", _dbManager.GetTopSongsNameStartWith),
-                new GetParamViewModel("Livving Place: ", _dbManager.GetTopPlacesNameStartWith)
+                new GetParamViewModel("Artist Name:",fieldName:"name" ,getParamOptions: _dbManager.GetTopArtistNamesStartWith),
+                new GetParamViewModel("Year Of Birth: ",fieldName:"begin_date_year" ,getParamOptions:_dbManager.GetTopArtistDateOfBirthsStartWith),
+                new GetParamViewModel("Song Of This Artist: ", fieldName:"list_of_songs",getParamOptions: _dbManager.GetTopSongsNameStartWith),
+                new GetParamViewModel("Living Place: ", fieldName:"area_Id", getParamOptions:_dbManager.GetTopPlacesNameStartWith)
             };
         }
     }

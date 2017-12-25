@@ -19,9 +19,9 @@ namespace Project.Client.ViewModel
         {
             return new ObservableCollection<GetParamViewModel>
             {
-                new GetParamViewModel("Place Name:", _dbManager.GetTopPlacesNameStartWith),
-                new GetParamViewModel("Artist Who Lived There: ", _dbManager.GetTopArtistNamesStartWith),
-                new GetParamViewModel("Song WrittenThere: ", _dbManager.GetTopSongsNameStartWith)
+                new GetParamViewModel("Place Name:",fieldName:"name_area", getParamOptions:_dbManager.GetTopPlacesNameStartWith),
+                new GetParamViewModel("Artist Who Lived There: ", fieldName:"list_of_artists", getParamOptions:_dbManager.GetTopArtistNamesStartWith),
+                new GetParamViewModel("Song WrittenThere: ",fieldName:"list_of_artists" ,getParamOptions:_dbManager.GetTopSongsNameStartWith)
             };
         }
     }

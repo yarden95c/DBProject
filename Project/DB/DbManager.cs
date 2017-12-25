@@ -1,9 +1,6 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogic;
 
 namespace Project.DB
 {
@@ -22,42 +19,40 @@ namespace Project.DB
 
         public List<string> GetTopArtistNamesStartWith(string prefix)
         {
-            return buildResultList(prefix, "name", EntityType.ARTIST);
+            return BuildResultList(prefix, "name", EntityType.ARTIST);
         }
 
 
 
         public List<string> GetTopSongsNameStartWith(string prefix)
         {
-            return buildResultList(prefix, "song_name", EntityType.SONG);
+            return BuildResultList(prefix, "song_name", EntityType.SONG);
         }
 
 
         public List<string> GetTopPlacesNameStartWith(string prefix)
         {
-            return buildResultList(prefix, "name_area", EntityType.AREA);
+            return BuildResultList(prefix, "name_area", EntityType.AREA);
         }
 
 
         public List<string> GetTopArtistDateOfBirthsStartWith(string prefix)
         {
-            return buildResultList(prefix, "begin_date_year", EntityType.ARTIST);
+            return BuildResultList(prefix, "begin_date_year", EntityType.ARTIST);
         }
-
 
         public List<string> GetTopSongsYearsStartWith(string prefix)
         {
-            return buildResultList(prefix, "release_date_year", EntityType.SONG);
+            return BuildResultList(prefix, "release_date_year", EntityType.SONG);
         }
 
-        private List<string> buildResultList(string prefix, string fieldName,
+        private List<string> BuildResultList(string prefix, string fieldName,
             EntityType type)
         {
-            List<string> l = new List<string>();
+            var l = new List<string>();
             try
             {
-                Dictionary<string, string> d = new Dictionary<string, string>();
-                d.Add(fieldName, prefix);
+                var d = new Dictionary<string, string> {{fieldName, prefix}};
                 List<IEntity> list = command.Execute(type, d);
                 foreach (IEntity entity in list)
                 {
