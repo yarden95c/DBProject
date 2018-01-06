@@ -74,6 +74,7 @@ namespace BusinessLogic
             {
                 MySqlDataReader queryResult = db.ExecuteSimpleQuery(en.buildExtraQuery(en));
                 result.Add(en.AddValueToExtraField(queryResult));
+
             }
             return result;
         }

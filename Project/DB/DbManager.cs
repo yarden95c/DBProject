@@ -15,6 +15,7 @@ namespace Project.DB
 
         public DbManager()
         {
+            Console.WriteLine("db manager constructor");
             DataBaseEngine.DataBaseEngine db = new DataBaseEngine.DataBaseEngine();
             this._command = new IKnowWhatIWantCommand(db);
         }

@@ -12,22 +12,20 @@ namespace DataBaseEngine
     {
         private SqlConnection sqlConn;
         private MySqlConnection mySqlConn;
+        private MySqlCommand myCommand;
         public DataBaseEngine()
         {
             sqlConn = new SqlConnection("user id=root;" +
                                        "password=root;server=127.0.0.1:3306;" +
                                        "Trusted_Connection=yes;" +
                                        "database=music;");
-            mySqlConn = new MySqlConnection("Server = 127.0.0.1; Port = 3306; Database = final; Uid = root; Pwd = q;");
+            mySqlConn = new MySqlConnection("Server = 127.0.0.1; Port = 3306; Database = music_fact_generator; Uid = root; Pwd = root;");
 
-            try
-            {
+
                 mySqlConn.Open();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+                myCommand = new MySqlCommand();
+
+         
         }
 
         public MySqlDataReader ExecuteSimpleQuery(string tableName, List<string> columns, string condition,int limit)
@@ -42,7 +40,9 @@ namespace DataBaseEngine
             stringBuilder.Append(" from " + tableName);
             stringBuilder.Append(" " + condition);
             stringBuilder.Append(" limit " + limit);
-            MySqlCommand myCommand = new MySqlCommand(stringBuilder.ToString(),mySqlConn);
+
+            myCommand.Connection = mySqlConn;
+            myCommand.CommandText = stringBuilder.ToString();
             return myCommand.ExecuteReader();
         }
 
