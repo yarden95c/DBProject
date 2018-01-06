@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project", "Project\Project.csproj", "{91FB71FB-3448-448B-AFC9-4FEF4598624C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseEngine", "..\..\..\..\Desktop\שנה ג\מסדי נתונים\DataBaseEngine\DataBaseEngine.csproj", "{881F82C9-C758-47EA-ACCD-4AA5C876BFE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseEngine", "Project\DataBaseEngine\DataBaseEngine.csproj", "{881F82C9-C758-47EA-ACCD-4AA5C876BFE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "..\..\..\..\Desktop\שנה ג\מסדי נתונים\BusinessLogic\BusinessLogic.csproj", "{2F604916-07F7-4F16-8984-E9CCDE62032C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "Project\BusinessLogic\BusinessLogic.csproj", "{2F604916-07F7-4F16-8984-E9CCDE62032C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
