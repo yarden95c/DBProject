@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Project.Client.Logic;
 
 namespace Project.Client.ViewModel
 {
@@ -18,9 +19,11 @@ namespace Project.Client.ViewModel
         private ICommand _sendMyRequestCommand;
         private Visibility _radioButtonsVisibility;
         private Visibility _paramsVisibility;
+        private Visibility _resultVisibility;
         private HorizontalAlignment _continueButtonAlignment;
         private ObservableCollection<GetParamViewModel> _requestedParams;
         private ObservableCollection<FirstChoiseViewModel> _firstChoises;
+        private ObservableCollection<ResultViewModel> _results;
         private FirstChoiseViewModel _firstChoise;
         private string _continueButton;
 
@@ -32,6 +35,7 @@ namespace Project.Client.ViewModel
         }
         public void Init()
         {
+            ResultVisibility = Visibility.Collapsed;
             RadioButtonsVisibility = Visibility.Visible;
             ParamsVisibility = Visibility.Collapsed;
             FirstChoises = new ObservableCollection<FirstChoiseViewModel>
@@ -77,6 +81,21 @@ namespace Project.Client.ViewModel
                 OnPropertyChanged("ParamsVisibility");
             }
         }
+
+        public Visibility ResultVisibility
+        {
+            get => _resultVisibility;
+            set
+
+            {
+                if(_resultVisibility == value)
+                    return;
+
+                _resultVisibility = value;
+                OnPropertyChanged("ResultVisibility");
+            }
+        }
+
         public ObservableCollection<GetParamViewModel> RequestedParams
         {
             get => _requestedParams;
@@ -97,6 +116,17 @@ namespace Project.Client.ViewModel
                     return;
                 _firstChoises = value;
                 OnPropertyChanged("FirstChoises");
+            }
+        }
+        public ObservableCollection<ResultViewModel> ResultsParams
+        {
+            get => _results;
+            set
+            {
+                if (_results == value)
+                    return;
+                _results = value;
+                OnPropertyChanged("ResultsParams");
             }
         }
         public FirstChoiseViewModel FirstChoise
@@ -136,6 +166,7 @@ namespace Project.Client.ViewModel
                 OnPropertyChanged("ContinueButtonAlignment");
             }
         }
+
         #endregion
 
 
@@ -169,13 +200,21 @@ namespace Project.Client.ViewModel
 
         private void SendRequestParams()
         {
-            _firstChoise.GetEntityFromRequest();
-            Application.Current.Dispatcher.Invoke(() =>
+            
+            ResultParams result=_firstChoise.GetEntityFromRequest();
+            ResultsParams = new ObservableCollection<ResultViewModel>
             {
-                var m = (FirstFloor.ModernUI.Windows.Controls.ModernWindow)Application.Current.MainWindow;
-                if (m != null) m.ContentSource = m.MenuLinkGroups[1].Links.First().Source;
-            });
-            this.Init();
+                new ResultViewModel(result)
+            };
+
+            ResultVisibility = Visibility.Visible;
+            ParamsVisibility = Visibility.Collapsed;
+            //Application.Current.Dispatcher.Invoke(() =>
+            //{
+            //    var m = (FirstFloor.ModernUI.Windows.Controls.ModernWindow)Application.Current.MainWindow;
+            //    if (m != null) m.ContentSource = m.MenuLinkGroups[1].Links.First().Source;
+            //});
+            // this.Init();
         }
     }
 }

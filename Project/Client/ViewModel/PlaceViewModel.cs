@@ -20,7 +20,6 @@ namespace Project.Client.ViewModel
             {
                 new GetParamViewModel(Consts.Area.PlaceName, getParamOptions:_dbManager.GetTopPlacesNameStartWith),
                 new GetParamViewModel(Consts.Area.ArtistWhoLivedThere, getParamOptions:_dbManager.GetTopArtistNamesStartWith),
-                new GetParamViewModel(Consts.Area.SongWrittenThere,getParamOptions:_dbManager.GetTopSongsNameStartWith)
             };
         }
         

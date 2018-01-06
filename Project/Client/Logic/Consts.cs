@@ -14,7 +14,7 @@ namespace Project.Client.Logic
         }; 
         public static class Artist
         {
-            public const string ArtistName = "Artist Name:";
+            public const string ArtistName = "Artist Name: ";
             public const string YearOfBirth = "Year Of Birth: ";
             public const string SongOfArtist = "Song Of This Artist: ";
             public const string LivingPlace = "Living Place: ";
@@ -24,7 +24,13 @@ namespace Project.Client.Logic
                 {YearOfBirth,"begin_date_year" },
                 {SongOfArtist, "list_of_songs" },
                 {LivingPlace, "area_Id"}
+            };
 
+            public static Dictionary<string,string> ReturnsDictionary = new Dictionary<string, string>
+            {
+                {ArtistName, "name" },
+                {"Songs of this artist: ", "list_of_songs" },
+                {YearOfBirth, "begin_date_year" }
             };
         };
         public static class Song
@@ -38,18 +44,28 @@ namespace Project.Client.Logic
                 {WhoSingIt, "artist_name"},
                 {Year,"release_date_year" }
             };
+            public static Dictionary<string, string> ReturnsDictionary = new Dictionary<string, string>
+            {
+                {SongName, "name" },
+                {"Artist Name: ", "artist_name" },
+                {"Wrote in: ", "begin_date_year" }
+            };
+
         }
 
         public static class Area
         {
             public const string PlaceName = "Place Name:";
             public const string ArtistWhoLivedThere = "Artist Who Lived There: ";
-            public const string SongWrittenThere = "Song Written There: ";
             public static Dictionary<string, string> fields = new Dictionary<string, string>
             {
                 {PlaceName,"name_area"},
                 {ArtistWhoLivedThere, "list_of_artists"},
-                {SongWrittenThere, "list_of_artists" }
+            };
+            public static Dictionary<string, string> ReturnsDictionary = new Dictionary<string, string>
+            {
+                {PlaceName, "name" },
+                {"Artists Who Lived There: ", "artist_name" },
             };
         }
     }

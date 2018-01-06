@@ -72,9 +72,22 @@ namespace Project.DB
 
 
 
-        public IEntity GetEntity(RequestParams request)
+        public ResultParams GetResult(RequestParams request)
         {
-            return _command.Execute(request.Type, request.FieldsAndValues).FirstOrDefault();
+            IEntity song = EntityFactory.CreateEntity(EntityType.SONG);
+            Dictionary<string, string> fieldsAndValues = request.FieldsAndValues;
+            List<string> fields = song.FieldsNames;
+            foreach (var field in fields)
+            {
+                if(fieldsAndValues.ContainsKey(field))
+                song[field] = fieldsAndValues[field];
+            }
+            
+            List<IEntity> entiies = new List<IEntity>
+            {
+                song
+            };
+            return new ResultParams(entiies, EntityType.SONG, request);
 
         }
 

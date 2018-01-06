@@ -74,6 +74,7 @@
     </ApplicationDefinition>
     <Compile Include="Client\Logic\Consts.cs" />
     <Compile Include="Client\Logic\RequestParams.cs" />
+    <Compile Include="Client\Logic\ResultParams.cs" />
     <Compile Include="Client\ViewModel\ArtistViewModel.cs" />
     <Compile Include="Client\ViewModel\BaseViewModel.cs" />
     <Compile Include="Client\ViewModel\GetParamViewModel.cs" />

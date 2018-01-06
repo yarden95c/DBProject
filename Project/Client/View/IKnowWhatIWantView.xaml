@@ -43,14 +43,22 @@
                     </ItemsControl>
                 </StackPanel>
             </mui:ModernFrame>
-            <mui:ModernFrame Width="400">
-                <StackPanel Visibility="{Binding ParamsVisibility}">
-                    <ItemsControl ItemsSource="{Binding RequestedParams}">
-                    </ItemsControl>
-                    <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding SendMyRequestCommand}">Send My Request</Button>
-                </StackPanel>
-            </mui:ModernFrame>
-            <Button HorizontalAlignment="{Binding ContinueButtonAlignment}" VerticalAlignment="Bottom" Command="{Binding ContinueCommand}" Content="{Binding ContinueButton}"/>
+        <mui:ModernFrame Width="400">
+            <StackPanel Visibility="{Binding ParamsVisibility}">
+                <ItemsControl ItemsSource="{Binding RequestedParams}">
+                </ItemsControl>
+                <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding SendMyRequestCommand}">Send My Request</Button>
+            </StackPanel>
+        </mui:ModernFrame>
+        <mui:ModernFrame Width="400">
+            <StackPanel Visibility="{Binding ResultVisibility}">
+                <ItemsControl ItemsSource="{Binding ResultsParams}">
+                </ItemsControl>
+            </StackPanel>
+        </mui:ModernFrame>
+
+
+        <Button HorizontalAlignment="{Binding ContinueButtonAlignment}" VerticalAlignment="Bottom" Command="{Binding ContinueCommand}" Content="{Binding ContinueButton}"/>
     </Grid>
 
 </UserControl>

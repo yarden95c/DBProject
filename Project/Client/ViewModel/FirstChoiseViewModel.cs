@@ -40,7 +40,7 @@ namespace Project.Client.ViewModel
             }
         }
         public abstract ObservableCollection<GetParamViewModel> GetRequestParams();
-        public IEntity GetEntityFromRequest()
+        public ResultParams GetEntityFromRequest()
         {
             Dictionary<string, string> paramsAndValues = new Dictionary<string, string>();
             foreach (var paramViewModel in _getParamViewModels)
@@ -48,7 +48,7 @@ namespace Project.Client.ViewModel
                 paramsAndValues.Add(paramViewModel.NameOfParam, paramViewModel.GivvenParam);
             }
             RequestParams request = new RequestParams(type, paramsAndValues);
-            return _dbManager.GetEntity(request);
+            return _dbManager.GetResult(request);
         }
     }
 }
