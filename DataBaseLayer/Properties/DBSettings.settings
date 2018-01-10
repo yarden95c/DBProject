@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DataBaseLayer.Properties" GeneratedClassName="DBSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DBName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">music_fact_generator</Value>
+    </Setting>
+    <Setting Name="userName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">root</Value>
+    </Setting>
+    <Setting Name="password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">root</Value>
+    </Setting>
+    <Setting Name="serverName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="port" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3306</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

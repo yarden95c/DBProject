@@ -201,14 +201,15 @@ namespace Project.Client.ViewModel
         private void SendRequestParams()
         {
             
-            ResultParams result=_firstChoise.GetEntityFromRequest();
-            ResultsParams = new ObservableCollection<ResultViewModel>
+                ResultParams result = _firstChoise.GetEntityFromRequest();
+                ResultsParams = new ObservableCollection<ResultViewModel>
             {
                 new ResultViewModel(result)
             };
 
-            ResultVisibility = Visibility.Visible;
-            ParamsVisibility = Visibility.Collapsed;
+                ResultVisibility = Visibility.Visible;
+                ParamsVisibility = Visibility.Collapsed;
+            
             //Application.Current.Dispatcher.Invoke(() =>
             //{
             //    var m = (FirstFloor.ModernUI.Windows.Controls.ModernWindow)Application.Current.MainWindow;

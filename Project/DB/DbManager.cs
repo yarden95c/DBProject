@@ -49,8 +49,7 @@ namespace Project.DB
             EntityType type)
         {
             var l = new List<string>();
-            try
-            {
+            
 
                 var d = new Dictionary<string, string> {{fieldName, prefix}};
                 _dbMutex.WaitOne();
@@ -61,13 +60,7 @@ namespace Project.DB
                 {
                     l.Add(entity[fieldName]);
                 }
-            }
-            catch (Exception e)
-            {
-
-                _dbMutex.ReleaseMutex();
-                Console.WriteLine(e);
-            }
+            
             return l;
         }
 
@@ -75,7 +68,7 @@ namespace Project.DB
 
         public ResultParams GetResult(RequestParams request)
         {
-            IEntity song = EntityFactory.CreateEntity(EntityType.SONG);
+            /*IEntity song = EntityFactory.CreateEntity(EntityType.SONG);
             Dictionary<string, string> fieldsAndValues = request.FieldsAndValues;
             List<string> fields = song.FieldsNames;
             foreach (var field in fields)
@@ -88,7 +81,12 @@ namespace Project.DB
             {
                 song
             };
-            return new ResultParams(entiies, EntityType.SONG, request);
+            return new ResultParams(entiies, EntityType.SONG, request); */
+
+            List<IEntity> result = this._command.Execute(request.Type,request.FieldsAndValues);
+
+            return new ResultParams(result, request.Type, request);
+
 
         }
 

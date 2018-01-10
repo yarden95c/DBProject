@@ -45,9 +45,9 @@ namespace BusinessLogic
             foreach (string key in fields.Keys)
             {
                 stringBuilder.Append("LOWER("+key+")");
-                stringBuilder.Append(" like \"%"+fields[key].ToLower()+"%\" and");
+                stringBuilder.Append(" like \"%"+fields[key].ToLower()+"%\" and ");
             }
-            stringBuilder.Remove(stringBuilder.Length - 4, 4);
+            stringBuilder.Remove(stringBuilder.Length - 5, 5);
 
             MySqlDataReader queryResult = db.ExecuteSimpleQuery(tableName, columns, stringBuilder.ToString(),LIMIT_QUERY);
             while (queryResult.Read())

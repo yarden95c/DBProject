@@ -47,13 +47,13 @@ namespace Project.Client.ViewModel
             TextBoxVisibility = Visibility.Visible;
             CheckBoxVisibility = Visibility.Collapsed;
             if (_getParamOptions == null) return;
-           Task.Run(() =>
+          // Task.Run(() =>
             {
                 ParamOptions = _getParamOptions(GivvenParam);
                 IsNotWaitingForResponse = true;
                 TextBoxVisibility = Visibility.Collapsed;
                 CheckBoxVisibility = Visibility.Visible;
-            });
+            }//);
         }
         public string NameOfParam
         {

@@ -43,6 +43,7 @@ namespace DataBaseEngine
 
             myCommand.Connection = mySqlConn;
             myCommand.CommandText = stringBuilder.ToString();
+
             return myCommand.ExecuteReader();
         }
 
