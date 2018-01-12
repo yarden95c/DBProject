@@ -6,6 +6,7 @@ namespace Project.Client.Logic
 {
     public static class Consts
     {
+
         public static Dictionary<EntityType, Dictionary<string,string>> FieldsDictionary = new Dictionary<EntityType, Dictionary<string, string>>
         {
             { EntityType.AREA, Area.fields},

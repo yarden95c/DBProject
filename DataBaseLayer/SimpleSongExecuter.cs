@@ -32,11 +32,13 @@ namespace DataBaseLayer
             }
 
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("We found you the following songs:");
+            builder.AppendLine("We found you the following songs:\n");
             
             foreach(Dictionary<string,string> song in result)
             {
                 builder.Append(SongString(song));
+                builder.AppendLine();
+
             }
 
             return builder.ToString();

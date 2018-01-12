@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLogic;
+using Controllers;
 using Project.Client.Logic;
 
 namespace Project.Client.ViewModel
@@ -17,6 +18,7 @@ namespace Project.Client.ViewModel
         protected static DbManager _dbManager = new DbManager();
         protected ObservableCollection<GetParamViewModel> _getParamViewModels;
         protected EntityType type;
+        protected IKnowWhatIWantController Controller;
         public string Name
         {
             get => _name;
@@ -40,6 +42,9 @@ namespace Project.Client.ViewModel
             }
         }
         public abstract ObservableCollection<GetParamViewModel> GetRequestParams();
+        public abstract void InitIKnowParams();
+        public abstract string GetResultInfo();
+         
         public ResultParams GetEntityFromRequest()
         {
             Dictionary<string, string> paramsAndValues = new Dictionary<string, string>();

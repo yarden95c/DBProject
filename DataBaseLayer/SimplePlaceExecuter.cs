@@ -51,6 +51,7 @@ namespace DataBaseLayer
                 foreach(string artist in places[place])
                 {
                     builder.AppendFormat("\n\t" + artist);
+                    builder.AppendLine();
                 }
 
                 builder.AppendLine();

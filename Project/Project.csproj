@@ -198,11 +198,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\repos\DBProject\Project\BusinessLogic\BusinessLogic.csproj">
+    <ProjectReference Include="..\Controllers\Controllers.csproj">
+      <Project>{8b5770eb-adf5-4f6f-bd39-312bc84efd61}</Project>
+      <Name>Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataBaseLayer\DataBaseLayer.csproj">
+      <Project>{6a95e323-3c26-47b0-9846-ef4ca5fa0027}</Project>
+      <Name>DataBaseLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test\Test.csproj">
+      <Project>{72f7f1d1-bb94-4df5-bd82-4b380de6a38b}</Project>
+      <Name>Test</Name>
+    </ProjectReference>
+    <ProjectReference Include="BusinessLogic\BusinessLogic.csproj">
       <Project>{2F604916-07F7-4F16-8984-E9CCDE62032C}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\repos\DBProject\Project\DataBaseEngine\DataBaseEngine.csproj">
+    <ProjectReference Include="DataBaseEngine\DataBaseEngine.csproj">
       <Project>{881F82C9-C758-47EA-ACCD-4AA5C876BFE7}</Project>
       <Name>DataBaseEngine</Name>
     </ProjectReference>

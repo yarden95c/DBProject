@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLogic;
+using Controllers;
 using Project.Client.Logic;
 
 namespace Project.Client.ViewModel
@@ -12,21 +13,33 @@ namespace Project.Client.ViewModel
     public class PlaceViewModel : FirstChoiseViewModel
     {
 
-        public PlaceViewModel(string name)
+        public PlaceViewModel(string name, IKnowWhatIWantController controller)
         {
+            Controller = controller;
             type = EntityType.AREA;
             _name = name;
-            _getParamViewModels = new ObservableCollection<GetParamViewModel>
-            {
-                new GetParamViewModel(Consts.Area.PlaceName, getParamOptions:_dbManager.GetTopPlacesNameStartWith),
-                new GetParamViewModel(Consts.Area.ArtistWhoLivedThere, getParamOptions:_dbManager.GetTopArtistNamesStartWith),
-            };
+            
         }
         
         public override ObservableCollection<GetParamViewModel> GetRequestParams()
         {
             return _getParamViewModels;
         }
-        
+
+        public override void InitIKnowParams()
+        {
+            _getParamViewModels = new ObservableCollection<GetParamViewModel>
+            {
+                new GetParamViewModel(Consts.Area.PlaceName, getParamOptions:Controller.GetTopPlacesNames),
+                new GetParamViewModel(Consts.Area.ArtistWhoLivedThere, getParamOptions:Controller.GetTopArtistsNames)
+            };
+        }
+
+        public override string GetResultInfo()
+        {
+            string placeName = _getParamViewModels[0].GivvenParam;
+            string artistName = _getParamViewModels[1].GivvenParam;
+            return Controller.GetPlace(placeName, artistName);
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace DataBaseEngine
                                        "password=root;server=127.0.0.1:3306;" +
                                        "Trusted_Connection=yes;" +
                                        "database=music;");
-            mySqlConn = new MySqlConnection("Server = 127.0.0.1; Port = 3306; Database = music_fact_generator; Uid = root; Pwd = root;");
+            mySqlConn = new MySqlConnection("Server = 127.0.0.1; Port = 3306; Database = final; Uid = root; Pwd = root;");
 
 
                 mySqlConn.Open();

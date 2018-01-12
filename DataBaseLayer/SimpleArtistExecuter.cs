@@ -58,6 +58,7 @@ namespace DataBaseLayer
             foreach(Artist artist in artists)
             {
                 builder.Append(artist.ToString());
+                builder.AppendLine();
             }
 
             return builder.ToString();
