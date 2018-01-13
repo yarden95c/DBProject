@@ -22,6 +22,7 @@ namespace Controllers
             _topSongsCache = new Dictionary<string, List<string>>();
             _yearsList = new List<string>
             {
+                "1900 - 1940",
                 "1940 - 1960",
                 "1960 - 1980",
                 "1980 - 2000",

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataBaseLayer
 {
-    class Artist
+    class Artist : IEquatable<Artist>
     {
         private string id;
         private string name;
@@ -18,6 +18,11 @@ namespace DataBaseLayer
         public Artist()
         {
             songs = new List<string>();
+            id = null;
+            name = null;
+            day = null;
+            month = null;
+            year = null;
         }
 
         public string Id { get => id; set => id = value; }
@@ -32,13 +37,27 @@ namespace DataBaseLayer
             songs.Add(song);
         }
 
+        public bool Equals(Artist other)
+        {
+            bool result = this.id.Equals(other.id);
+            return result;
+        }
+
         // what to print if day or month or songs is null?
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("Artist name : " + name);
+            if(day.Equals(string.Empty))
+            {
+                day = "unknown";
+            }
+            if(month.Equals(string.Empty))
+            {
+                month = "unknown";
+            }
             builder.AppendFormat("Birthday : {0}/{1}/{2}\n", day, month, Year);
-            builder.AppendLine("Songs list : ");
+            builder.Append("Songs list : ");
 
             foreach(string song in songs)
             {

@@ -27,10 +27,10 @@ namespace DataBaseLayer
             return command;
         }
 
-        public static List<MySqlCommand> GetArtistQuery(MySqlConnection conn)
+        public static MySqlCommand GetArtistQuery(MySqlConnection conn)
         {
-            /* MySqlCommand command = new MySqlCommand();
-             command.CommandText = "select DISTINCT artist_name,song_name,begin_date_day,begin_date_month,begin_date_year from artists left join songsbyartist using(id_artist) left join songs using(id_song) " +
+            MySqlCommand command = new MySqlCommand();
+             command.CommandText = "select DISTINCT id_artist,artist_name,song_name,begin_date_day,begin_date_month,begin_date_year from artists left join songsbyartist using(id_artist) left join songs using(id_song) " +
                                    "where lower(artist_name) like @artistName " +
                                    "and lower(song_name) like @songName " +
                                    "and begin_date_year between @fromYear and @toYear limit 10; ";
@@ -42,9 +42,9 @@ namespace DataBaseLayer
              command.Parameters.AddWithValue("@toYear", 9999);
              command.Prepare();
 
-             return command; */
+             return command; 
 
-            List<MySqlCommand> commands = new List<MySqlCommand>();
+           /* List<MySqlCommand> commands = new List<MySqlCommand>();
             commands.Add(new MySqlCommand());
             commands.Add(new MySqlCommand());
             foreach (MySqlCommand command in commands)
@@ -54,7 +54,7 @@ namespace DataBaseLayer
 
             commands[0].CommandText = "select id_artist,artist_name,begin_date_day,begin_date_month,begin_date_year from artists " +
                                       "where lower(artist_name) like @artistName " +
-                                      "and begin_date_year between @fromYear and @toYear limit 100;";
+                                      "and begin_date_year between @fromYear and @toYear;";
             commands[0].Parameters.AddWithValue("@artistName", "%%");
             commands[0].Parameters.AddWithValue("@fromYear", 0);
             commands[0].Parameters.AddWithValue("@toYear", 9999);
@@ -68,7 +68,7 @@ namespace DataBaseLayer
                 command.Prepare();
             }
 
-            return commands;
+            return commands; */
         }
 
         public static MySqlCommand GetPlaceQuery(MySqlConnection conn)

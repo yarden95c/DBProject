@@ -15,7 +15,7 @@ namespace Project.Client.ViewModel
     {
         protected bool _isChecked;
         protected string _name;
-        protected static DbManager _dbManager = new DbManager();
+       // protected static DbManager _dbManager = new DbManager();
         protected ObservableCollection<GetParamViewModel> _getParamViewModels;
         protected EntityType type;
         protected IKnowWhatIWantController Controller;
@@ -45,7 +45,7 @@ namespace Project.Client.ViewModel
         public abstract void InitIKnowParams();
         public abstract string GetResultInfo();
          
-        public ResultParams GetEntityFromRequest()
+     /*   public ResultParams GetEntityFromRequest()
         {
             Dictionary<string, string> paramsAndValues = new Dictionary<string, string>();
             foreach (var paramViewModel in _getParamViewModels)
@@ -54,6 +54,6 @@ namespace Project.Client.ViewModel
             }
             RequestParams request = new RequestParams(type, paramsAndValues);
             return _dbManager.GetResult(request);
-        }
+        } */
     }
 }

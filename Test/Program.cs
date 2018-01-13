@@ -18,10 +18,10 @@ namespace Test
             comm.CommandText = "select * from artists limit 10";
             List<Dictionary<string, string>> res = conn.ExecuteCommand(comm); */
             IKnowWhatIWantController cont = new IKnowWhatIWantController();
-            //Console.WriteLine(cont.GetSong("b","a",0,9999));
-            //Console.WriteLine(cont.GetArtist("", "round", 0, 9999));    
+          // Console.WriteLine(cont.GetSong("","the spinners",0,9999));
+            Console.WriteLine(cont.GetArtist("the SPInners", "", 0, 9999));    
             // Console.WriteLine(cont.GetPlace("f", ""));
-            List<string> result=cont.GetTopPlacesNames("flor");
+           // List<string> result=cont.GetTopPlacesNames("flor");
             while (true) ;
         }
     }

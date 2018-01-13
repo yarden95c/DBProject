@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="DBName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">final</Value>
+      <Value Profile="(Default)">music_fact_generator</Value>
     </Setting>
     <Setting Name="userName" Type="System.String" Scope="User">
       <Value Profile="(Default)">root</Value>

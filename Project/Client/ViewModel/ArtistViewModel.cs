@@ -44,7 +44,7 @@ namespace Project.Client.ViewModel
             try
             {
                 string fromYearString = _getParamViewModels[2].GivvenParam.Split('-')[0].Remove(4);
-                string toYearString = _getParamViewModels[2].GivvenParam.Split('-')[1].Remove(0);
+                string toYearString = _getParamViewModels[2].GivvenParam.Split('-')[1].Remove(/*0*/5);
                 int from, to;
                 if (!int.TryParse(fromYearString, out from))
                 {
@@ -60,9 +60,9 @@ namespace Project.Client.ViewModel
             }
             catch (Exception e)
             {
-                return Controller.GetSong(artistName, songName, 0000, 9999);
+                return Controller.GetArtist(artistName, songName, 0000, 9999);
 
-            }
+            } 
         }
     }
 }
