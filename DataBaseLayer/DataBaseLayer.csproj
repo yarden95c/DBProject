@@ -61,9 +61,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>DBSettings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SignInExecuter.cs" />
     <Compile Include="SimplePlaceExecuter.cs" />
     <Compile Include="SimpleArtistExecuter.cs" />
     <Compile Include="SimpleSongExecuter.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserQueryBank.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

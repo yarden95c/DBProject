@@ -33,6 +33,16 @@ select song_name from songsbyartist left join songs using(id_song) where song_na
  
  
  -- place
-select area_name,artist_name from area left join artists using(id_area)
-where lower(area_name) like '%f%'
-and lower(artist_name) like '%g%' order by area_name;
+select area_name,IFNULL(artist_name,"") from area left join artists using(id_area)
+where lower(area_name) like "%A Arnoia%"
+and lower(artist_name) like "%%" order by area_name;
+
+
+select area_name,artist_name from (select area_name,IFNULL(artist_name,"") as artist_name from area left join artists using(id_area)) as t
+where lower(area_name) like "%A Arnoia%"
+and lower(artist_name) like "%%" order by area_name;
+
+
+select area_name as area_name,IFNULL(artist_name,"") as artist_name from area left join artists using(id_area);
+
+

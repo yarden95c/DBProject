@@ -74,9 +74,14 @@ namespace DataBaseLayer
         public static MySqlCommand GetPlaceQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
-            command.CommandText = "select area_name,artist_name from area left join artists using (id_area) "+
-                                  "where lower(area_name) like @placeName "+
-                                  "and lower(artist_name) like @artistName order by area_name;" ;
+            /* command.CommandText = "select area_name,artist_name from area left join artists using (id_area) "+
+                                   "where lower(area_name) like @placeName "+
+                                   "and lower(artist_name) like @artistName order by area_name;" ; */
+
+            command.CommandText = "select area_name, artist_name from (select area_name, IFNULL(artist_name, \"\") as artist_name from area left join artists using (id_area)) as t " +
+                                  "where lower(area_name) like @placeName " +
+                                  "and lower(artist_name) like @artistName order by area_name;";
+
 
             command.Connection = conn;
             command.Parameters.AddWithValue("@placeName", "%%");
