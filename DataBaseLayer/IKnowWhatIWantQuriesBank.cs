@@ -9,7 +9,7 @@ namespace DataBaseLayer
 {
     public class IKnowWhatIWantQuriesBank
     {
-        public static MySqlCommand GetSongQuery(MySqlConnection conn)
+        public static MySqlCommand GetSongQuery(MySqlConnection conn/*, bool songName,bool artistName,bool years*/)
         {
             MySqlCommand command = new MySqlCommand();
             command.CommandText = "select DISTINCT song_name,release_date_year,artist_name " +
@@ -71,21 +71,38 @@ namespace DataBaseLayer
             return commands; */
         }
 
-        public static MySqlCommand GetPlaceQuery(MySqlConnection conn)
+        public static MySqlCommand GetPlaceQuery(MySqlConnection conn, bool artistName,bool placeName)
         {
             MySqlCommand command = new MySqlCommand();
             /* command.CommandText = "select area_name,artist_name from area left join artists using (id_area) "+
                                    "where lower(area_name) like @placeName "+
                                    "and lower(artist_name) like @artistName order by area_name;" ; */
-
-            command.CommandText = "select area_name, artist_name from (select area_name, IFNULL(artist_name, \"\") as artist_name from area left join artists using (id_area)) as t " +
-                                  "where lower(area_name) like @placeName " +
-                                  "and lower(artist_name) like @artistName order by area_name;";
+            if (artistName && placeName)
+            {
+                command.CommandText = "select area_name, artist_name from area left join artists using (id_area) where lower(area_name) like @placeName and lower(artist_name) like @artistName  limit 10;";
+            } else if (placeName)
+            {
+                command.CommandText = "select area_name, artist_name from (select area_name, IFNULL(artist_name, \"\") as artist_name from area left join artists using (id_area)) as t " +
+                                      "where lower(area_name) like @placeName order by area_name limit 10;";
+            } else if (artistName)
+            {
+                command.CommandText = "select area_name, artist_name from area left join artists using (id_area) where lower(artist_name) like @artistName order by area_name limit 10;";
+            } else
+            {
+                command.CommandText = "select area_name, artist_name from area left join artists using (id_area) " +
+                                      "limit 10;";
+            }
 
 
             command.Connection = conn;
-            command.Parameters.AddWithValue("@placeName", "%%");
-            command.Parameters.AddWithValue("@artistName", "%%");
+            if(placeName)
+            {
+                command.Parameters.AddWithValue("@placeName", "%%");
+            }
+            if(artistName)
+            {
+                command.Parameters.AddWithValue("@artistName", "%%");
+            }
             command.Prepare();
 
             return command;

@@ -39,10 +39,12 @@ and lower(artist_name) like "%%" order by area_name;
 
 
 select area_name,artist_name from (select area_name,IFNULL(artist_name,"") as artist_name from area left join artists using(id_area)) as t
-where lower(area_name) like "%A Arnoia%"
-and lower(artist_name) like "%%" order by area_name;
+where lower(area_name) like "%%"
+and lower(artist_name) like "%!deladap%" order by area_name;
 
 
 select area_name as area_name,IFNULL(artist_name,"") as artist_name from area left join artists using(id_area);
+
+select area_name,artist_name from area left join artists using(id_area) where lower(area_name) like '%flo%';
 
 

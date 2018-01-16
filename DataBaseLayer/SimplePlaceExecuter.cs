@@ -16,10 +16,17 @@ namespace DataBaseLayer
         public SimplePlaceExecuter(DataBaseConnector db,string placeName, string artistName)
         {
             this.conn = db;
-            this.command = IKnowWhatIWantQuriesBank.GetPlaceQuery(this.conn.Connection);
-            command.Parameters["@placeName"].Value = "%" + placeName + "%";
-            command.Parameters["@artistName"].Value = "%" + artistName + "%";
-            
+            bool placePresent = !placeName.Equals(string.Empty);
+            bool artistPresent = !artistName.Equals(string.Empty);
+            this.command = IKnowWhatIWantQuriesBank.GetPlaceQuery(this.conn.Connection,artistPresent,placePresent);
+            if(placePresent)
+            {
+                command.Parameters["@placeName"].Value = "%" + placeName + "%";
+            }
+            if(artistPresent)
+            {
+                command.Parameters["@artistName"].Value = "%" + artistName + "%";
+            }
         }
 
         public string Execute()
