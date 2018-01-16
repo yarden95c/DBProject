@@ -21,6 +21,7 @@ namespace Project.Client.ViewModel
         private Visibility _radioButtonsVisibility;
         private Visibility _paramsVisibility;
         private Visibility _resultVisibility;
+        private Visibility _loaderVisibility;
         private HorizontalAlignment _continueButtonAlignment;
         private ObservableCollection<GetParamViewModel> _requestedParams;
         private ObservableCollection<FirstChoiseViewModel> _firstChoises;
@@ -38,6 +39,8 @@ namespace Project.Client.ViewModel
         {
             _controller = new IKnowWhatIWantController();
             ResultVisibility = Visibility.Collapsed;
+            LoaderVisibility = Visibility.Collapsed;
+            LoaderVisibility = Visibility.Collapsed;
             RadioButtonsVisibility = Visibility.Visible;
             ParamsVisibility = Visibility.Collapsed;
             FirstChoises = new ObservableCollection<FirstChoiseViewModel>
@@ -87,7 +90,19 @@ namespace Project.Client.ViewModel
                 OnPropertyChanged("ParamsVisibility");
             }
         }
+        public Visibility LoaderVisibility
+        {
+            get => _loaderVisibility;
+            set
 
+            {
+                if (_loaderVisibility == value)
+                    return;
+
+                _loaderVisibility = value;
+                OnPropertyChanged("LoaderVisibility");
+            }
+        }
         public Visibility ResultVisibility
         {
             get => _resultVisibility;
@@ -206,9 +221,15 @@ namespace Project.Client.ViewModel
 
         private void SendRequestParams()
         {
-            ResultInfo = FirstChoise.GetResultInfo();
-             ResultVisibility = Visibility.Visible;
-                ParamsVisibility = Visibility.Collapsed;
+            ParamsVisibility = Visibility.Collapsed;
+            LoaderVisibility = Visibility.Visible;
+            Task.Run(() =>
+            {
+                ResultInfo = FirstChoise.GetResultInfo();
+                LoaderVisibility = Visibility.Collapsed;
+                ResultVisibility = Visibility.Visible;
+            });
+            Task.WaitAll();
             
         }
     }

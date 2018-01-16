@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Project.Client.View"
-             xmlns:mui="http://firstfloorsoftware.com/ModernUI" 
+             xmlns:local="clr-namespace:Project"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              mc:Ignorable="d" 
-             Height="400" Width="500"
+             Height="400" Width="600"
              VerticalAlignment="Top"
              >
 
@@ -28,8 +29,8 @@
     </UserControl.Resources>
 
     <Grid >
-        <mui:BBCodeBlock > I Know What I Want</mui:BBCodeBlock>
-            <mui:ModernFrame Height="300" Width="400">
+        <mui:BBCodeBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="26" Margin="0,5,0,0" Width="278">I Know What I Want</mui:BBCodeBlock>
+        <mui:ModernFrame Height="300" Width="400">
                 <StackPanel Visibility="{Binding RadioButtonsVisibility}">
                 <ItemsControl Height="200" ItemsSource="{Binding FirstChoises}">
                     <ItemsControl.ItemsPanel>
@@ -52,15 +53,19 @@
                 <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding SendMyRequestCommand}">Send My Request</Button>
             </StackPanel>
         </mui:ModernFrame>
+        <mui:ModernFrame Width="400" Visibility="{Binding LoaderVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center">
+           <StackPanel>
+               <Image Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Resources/spinner.gif" />
+                <mui:BBCodeBlock BBCode="Please wait..." TextAlignment="Justify"/>
+           </StackPanel>
+       </mui:ModernFrame>
         <mui:ModernFrame Width="400" Height="300">
             <StackPanel Visibility="{Binding ResultVisibility}">
                 <Border Background="GhostWhite" BorderBrush="Gainsboro"  BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="300">
-
                     <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Height="300" Width="400" HorizontalAlignment="Left" Margin="-1,0,0,5" >
                         <mui:BBCodeBlock BBCode="{Binding ResultInfo}"  VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap"  Margin="10,50,10,0" Width="300" FontWeight="Bold"/>
-                </ScrollViewer>
+                    </ScrollViewer>
                 </Border>
-
             </StackPanel>
         </mui:ModernFrame>
 

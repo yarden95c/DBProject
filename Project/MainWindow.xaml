@@ -6,7 +6,7 @@ xmlns:mui="http://firstfloorsoftware.com/ModernUI" Title="Music Fact Generator"
                   IsEnabled="True"
                   Height="600"
                   Width="700" WindowStyle="ToolWindow"
-                  ContentSource="Client/View/ResultView.xaml"
+                  ContentSource="Client/View/IKnowWhatIWantView.xaml"
                   >
     <Window.Resources>
         <Style TargetType="{x:Type mui:ModernFrame}">
