@@ -23,7 +23,7 @@ namespace Test
             // Console.WriteLine(cont.GetPlace("f", ""));
             // List<string> result=cont.GetTopPlacesNames("flor");
 
-            SignInController sign = new SignInController();
+            SignInController sign = SignInController.GetInstance();
             Console.WriteLine(sign.SignIn("dui@Craseu.net", "AG48LEC1GB"));
             User user = sign.ConnectedUser;
             while (true) ;

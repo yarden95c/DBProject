@@ -9,21 +9,29 @@ namespace Controllers
 {
     public class SignInController
     {
-        private User connectedUser;
+        private static User connectedUser;
         private DataBaseConnector db;
-
-        public SignInController()
+        private static SignInController _instance;
+        private SignInController()
         {
             connectedUser = null;
             db = new DataBaseConnector();
         }
-
+        public static SignInController GetInstance()
+        {
+            return _instance ?? (_instance = new SignInController());
+        }
         public User ConnectedUser { get => connectedUser; }
 
         public bool SignIn(string email, string password)
         {
             connectedUser = new SignInExecuter(email, password, db).Execute();
             return ConnectedUser != null;
+        }
+
+        public void SignOut()
+        {
+            connectedUser = null;
         }
 
         

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Project.Client.ViewModel;
 
 namespace Project.Client.View
 {
@@ -23,6 +24,7 @@ namespace Project.Client.View
         public HitMeWithView()
         {
             InitializeComponent();
+            this.DataContext = new HitMeWithViewModel();
         }
     }
 }

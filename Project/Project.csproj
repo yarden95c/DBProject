@@ -89,6 +89,7 @@
     <Compile Include="Client\ViewModel\BaseViewModel.cs" />
     <Compile Include="Client\ViewModel\GetParamViewModel.cs" />
     <Compile Include="Client\ViewModel\FirstChoiseViewModel.cs" />
+    <Compile Include="Client\ViewModel\HitMeWithViewModel.cs" />
     <Compile Include="Client\ViewModel\IKnowWhatIWantViewModel.cs" />
     <Compile Include="Client\ViewModel\PasswordHelper.cs" />
     <Compile Include="Client\ViewModel\PlaceViewModel.cs" />

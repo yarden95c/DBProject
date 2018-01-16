@@ -22,15 +22,24 @@
     </UserControl.Resources>
 
     <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}">
-        <mui:ModernFrame VerticalAlignment="Center" >
-            <StackPanel VerticalAlignment="Stretch">
-                <ItemsControl ItemsSource="{Binding RequestedParams}" Margin="5,5,5,5">
-                </ItemsControl>
-                <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="1" Background="Transparent" >Log in!</Button>
-                <mui:BBCodeBlock BBCode="Don't have an account yet?  [url=\Client\View\SignUpView.xaml]Sign Up Here![/url] " VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="17" Margin="10,50,10,0"/>
+        <StackPanel >
+            <mui:ModernFrame VerticalAlignment="Center" Visibility="{Binding BeforeSignInVisibility}">
+                <StackPanel VerticalAlignment="Stretch">
+                    <ItemsControl ItemsSource="{Binding RequestedParams}" Margin="5,5,5,5" >
+                    </ItemsControl>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="1" Background="Transparent" Command="{Binding SignInCommand}" >Log in!</Button>
+                    <mui:BBCodeBlock BBCode="Don't have an account yet?  [url=\Client\View\SignUpView.xaml]Sign Up Here![/url] " VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="17" Margin="10,50,10,0"/>
+                </StackPanel>
+            </mui:ModernFrame>
+            <mui:ModernFrame VerticalAlignment="Center" Visibility="{Binding AfterSignInVisibility}">
+                <StackPanel VerticalAlignment="Stretch">
+                    <mui:BBCodeBlock FontWeight="Bold" FontSize="22" Margin="100,10,5,5" TextWrapping="Wrap" BBCode="You are signed in!"></mui:BBCodeBlock>
+                    <mui:BBCodeBlock FontWeight="Bold" FontSize="18" Margin="30,10,5,5" TextWrapping="Wrap" BBCode="Now you can continue getting more facts :)"></mui:BBCodeBlock>
 
-            </StackPanel>
-        </mui:ModernFrame>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,100,10,10" BorderThickness="1" Background="Transparent" Command="{Binding SignOutCommand}" >sign out</Button>
+                </StackPanel>
+            </mui:ModernFrame>
+        </StackPanel>
     </Border>
 
 </UserControl>

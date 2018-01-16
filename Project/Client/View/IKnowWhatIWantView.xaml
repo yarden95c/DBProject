@@ -62,7 +62,7 @@
         <mui:ModernFrame Width="400" Height="300">
             <StackPanel Visibility="{Binding ResultVisibility}">
                 <Border Background="GhostWhite" BorderBrush="Gainsboro"  BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="300">
-                    <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Height="300" Width="400" HorizontalAlignment="Left" Margin="-1,0,0,5" >
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300" Width="400" HorizontalAlignment="Left" Margin="-1,0,0,5" >
                         <mui:BBCodeBlock BBCode="{Binding ResultInfo}"  VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap"  Margin="10,50,10,0" Width="300" FontWeight="Bold"/>
                     </ScrollViewer>
                 </Border>
