@@ -8,68 +8,13 @@ using MySql.Data.MySqlClient;
 
 namespace Controllers
 {
-    public class IKnowWhatIWantController
+    public class IKnowWhatIWantController : CompletionController
     {
-        private DataBaseConnector conn;
-        private Dictionary<string, List<string>> _topSongsCache;
-        private Dictionary<string, List<string>> _topArtistsCache;
-        private Dictionary<string, List<string>> _topPlacesCache;
-        private List<string> _yearsList;
-        public IKnowWhatIWantController()
+        
+        public IKnowWhatIWantController() : base()
         {
-            _topArtistsCache = new Dictionary<string, List<string>>();
-            _topPlacesCache = new Dictionary<string, List<string>>();
-            _topSongsCache = new Dictionary<string, List<string>>();
-            _yearsList = new List<string>
-            {
-                "1900 - 1940",
-                "1940 - 1960",
-                "1960 - 1980",
-                "1980 - 2000",
-                "2000 - 2018"
-            };
-            conn = new DataBaseConnector();
         }
 
-        public List<string> GetTopSongsNames(string songName)
-        {
-            if (_topSongsCache.ContainsKey(songName))
-                return _topSongsCache[songName];
-            MySqlCommand command = IKnowWhatIWantQuriesBank.GetSongsNamesQuery(conn.Connection);
-            command.Parameters["@songName"].Value = "%" + songName.ToLower() + "%";
-            List<string> responsList = conn.ExecuteOneColumnCommand(command);
-            _topSongsCache.Add(songName, responsList);
-            return responsList;
-        }
-
-        public List<string> GetTopArtistsNames(string artistName)
-        {
-            if (_topArtistsCache.ContainsKey(artistName))
-                return _topArtistsCache[artistName];
-            MySqlCommand command = IKnowWhatIWantQuriesBank.GetArtistsNamesQuery(conn.Connection);
-            command.Parameters["@artistName"].Value = "%" + artistName.ToLower() + "%";
-            List<string> responsList = conn.ExecuteOneColumnCommand(command);
-            _topArtistsCache.Add(artistName, responsList);
-            return responsList;
-
-        }
-
-        public List<string> GetTopPlacesNames(string placeName)
-        {
-            if (_topPlacesCache.ContainsKey(placeName))
-                return _topPlacesCache[placeName];
-            MySqlCommand command = IKnowWhatIWantQuriesBank.GetPlacesNamesQuery(conn.Connection);
-            command.Parameters["@placeName"].Value = "%" + placeName.ToLower() + "%";
-            List<string> responsList = conn.ExecuteOneColumnCommand(command);
-            _topPlacesCache.Add(placeName, responsList);
-            return responsList;
-
-        }
-
-        public List<string> GetYearsList(string Yaer)
-        {
-            return _yearsList.FindAll(s => s.Contains(Yaer));
-        }
 
         public string GetSong(string songName, string artistName, int fromYear, int toYear)
         {

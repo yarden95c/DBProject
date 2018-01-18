@@ -15,7 +15,7 @@ namespace Controllers
         private SignInController()
         {
             connectedUser = null;
-            db = new DataBaseConnector();
+            db = DataBaseConnector.GetInstance();
         }
         public static SignInController GetInstance()
         {

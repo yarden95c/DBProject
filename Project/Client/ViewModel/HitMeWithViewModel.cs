@@ -254,7 +254,7 @@ namespace Project.Client.ViewModel
                         break;
                     case "Number":
                         int.TryParse(GetParam.GivvenParam, out var num);
-                        ResultInfo = _controller.GetNumber(num);
+                        ResultInfo = _controller.GetNumber();
                         break;
                     case "Place":
                         ResultInfo = _controller.GetPlace(GetParam.GivvenParam);

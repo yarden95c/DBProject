@@ -15,8 +15,9 @@ namespace DataBaseLayer
         private string serverName;
         private string port;
         private MySqlConnection conn;
+        private static DataBaseConnector instance;
         
-        public DataBaseConnector()
+        private DataBaseConnector()
         {
             dbName = Properties.DBSettings.Default.DBName;
             userName = Properties.DBSettings.Default.userName;
@@ -32,6 +33,11 @@ namespace DataBaseLayer
                                         "ConnectionTimeout = 60;"
                                        );
             conn.Open();
+        }
+
+        public static DataBaseConnector GetInstance()
+        {
+            return instance ?? (instance = new DataBaseConnector());
         }
 
         public MySqlConnection Connection
@@ -81,6 +87,11 @@ namespace DataBaseLayer
             reader.Close();
 
             return result;
+        }
+
+        public int ExecuteScalarCommand(MySqlCommand command)
+        {
+            return int.Parse(command.ExecuteScalar() + "");
         }
 
         public void StopConnection()

@@ -4,24 +4,14 @@ using MySql.Data.MySqlClient;
 
 namespace Controllers
 {
-    public class HitMeWithController
+    public class HitMeWithController : CompletionController
     {
         private readonly SignInController _signInController;
-        public HitMeWithController()
+        public HitMeWithController() : base()
         {
             _signInController = SignInController.GetInstance();
         }
-
-        public List<string> GetTopPlacesNames(string placeName)
-        {
-            List<string> responsList = new List<string>{"BLABLA", "BLABLA2"};
-            return responsList;
-        }
-        public List<string> GetTopGenresNames(string genreName)
-        {
-            List<string> responsList = new List<string> { "BLABLA", "BLABLA2" };
-            return responsList;
-        }
+        
         public SignInController SignInController
         {
             get => _signInController;
@@ -29,12 +19,14 @@ namespace Controllers
 
         public string GetPlace(string placeName)
         {
-            return placeName;
+            PlaceExecuter placeExecuter = new PlaceExecuter(placeName, conn, SignInController.ConnectedUser);
+            return placeExecuter.Execute();
         }
 
-        public string GetNumber(int num)
+        public string GetNumber()
         {
-            return num.ToString();
+            NumberExecuter numExecuter = new NumberExecuter(SignInController.ConnectedUser, conn);
+            return numExecuter.Execute();
         }
 
         public string GetYear(int year)

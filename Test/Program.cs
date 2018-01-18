@@ -17,15 +17,29 @@ namespace Test
             /*MySqlCommand comm = new MySqlCommand();
             comm.CommandText = "select * from artists limit 10";
             List<Dictionary<string, string>> res = conn.ExecuteCommand(comm); */
-            IKnowWhatIWantController cont = new IKnowWhatIWantController();
-           Console.WriteLine(cont.GetSong("","the spinners",0,9999));
-           // Console.WriteLine(cont.GetArtist("the SPInners", "", 0, 9999));
+           // IKnowWhatIWantController cont = new IKnowWhatIWantController();
+          // Console.WriteLine(cont.GetSong("","the spinners",0,9999));
+            // Console.WriteLine(cont.GetArtist("the SPInners", "", 0, 9999));
             // Console.WriteLine(cont.GetPlace("a", "B"));
             // List<string> result=cont.GetTopPlacesNames("flor");
 
-          /*  SignInController sign = SignInController.GetInstance();
-            Console.WriteLine(sign.SignIn("dui@Craseu.net", "AG48LEC1GB"));
-            User user = sign.ConnectedUser; */
+              SignInController sign = SignInController.GetInstance();
+              Console.WriteLine(sign.SignIn("Donec.dignissim@magnaet.ca", "MHY50WZI0UN"));
+              User user = sign.ConnectedUser;
+
+
+            /*   NumberExecuter number = new NumberExecuter(user, DataBaseConnector.GetInstance());
+               for (int i = 0; i < 10; i++)
+               {
+                   Console.WriteLine(number.Execute());
+               } */
+            user.GenreId = 13;
+            PlaceExecuter place = new PlaceExecuter("florida", DataBaseConnector.GetInstance(), user);
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(place.Execute());
+            }
+
             while (true) ;
         }
     }
