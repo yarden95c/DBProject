@@ -29,14 +29,16 @@ namespace Controllers
             return numExecuter.Execute();
         }
 
-        public string GetYear(int year)
+        public string GetYear(int fromYear,int toYear)
         {
-            return year.ToString();
+            YearExecuter yearExecuter = new YearExecuter(conn, fromYear, toYear, SignInController.ConnectedUser);
+            return yearExecuter.Execute();
         }
 
         public string GetGenre(string genre)
         {
-            return genre;
+            GenreExecuter genreExecuter = new GenreExecuter(genre, conn, SignInController.ConnectedUser);
+            return genreExecuter.Execute();
         }
     }
 }

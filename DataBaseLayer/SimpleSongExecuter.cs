@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DataBaseLayer
 {
-    public class SimpleSongExecuter
+    public class SimpleSongExecuter : IExecuter
     {
         private MySqlCommand command;
         private DataBaseConnector conn;
@@ -52,6 +52,11 @@ namespace DataBaseLayer
             builder.AppendLine("Realase year : " + song["release_date_year"]);
 
             return builder;
+        }
+
+        public string GetSorryMsg()
+        {
+            return sorryMsg;
         }
     }
 }

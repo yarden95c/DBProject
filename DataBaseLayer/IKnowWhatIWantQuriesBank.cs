@@ -150,7 +150,7 @@ namespace DataBaseLayer
         public static MySqlCommand GetGenresNamesQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
-            command.CommandText = "select DISTINCT genere_name from genres where genere_name like @@genreName limit 10;";
+            command.CommandText = "select DISTINCT genere_name from genres where genere_name like @genreName limit 10;";
 
             command.Connection = conn;
             command.Parameters.AddWithValue("@genreName", "%%");

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataBaseLayer
 {
-    public class NumberExecuter
+    public class NumberExecuter : IExecuter
     {
         public delegate Heuristics NumberHeuristics(User user);
 
@@ -69,6 +69,11 @@ namespace DataBaseLayer
             Heuristics h =((NumberHeuristics) arr[queryNum])(user);
             int number = conn.ExecuteScalarCommand(h.Command);
             return string.Format(h.ResultFormat, number);
+        }
+
+        public string GetSorryMsg()
+        {
+            return string.Empty;
         }
     }
 }

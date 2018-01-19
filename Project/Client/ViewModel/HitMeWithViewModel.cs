@@ -250,7 +250,7 @@ namespace Project.Client.ViewModel
                         break;
                     case "Year":
                         int.TryParse(GetParam.GivvenParam, out var year);
-                        ResultInfo = _controller.GetYear(year);
+                        ResultInfo = _controller.GetYear(year,year);
                         break;
                     case "Number":
                         int.TryParse(GetParam.GivvenParam, out var num);

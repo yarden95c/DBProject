@@ -54,8 +54,13 @@
   <ItemGroup>
     <Compile Include="Artist.cs" />
     <Compile Include="DataBaseConnector.cs" />
+    <Compile Include="ExecuterFactory.cs" />
+    <Compile Include="Genre.cs" />
+    <Compile Include="GenreExecuter.cs" />
     <Compile Include="Heuristics.cs" />
+    <Compile Include="IExecuter.cs" />
     <Compile Include="IKnowWhatIWantQuriesBank.cs" />
+    <Compile Include="LuckyExecuter.cs" />
     <Compile Include="NumberExecuter.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="PlaceExecuter.cs" />
@@ -65,6 +70,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>DBSettings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RandomRecordsBank.cs" />
     <Compile Include="SelfExecuterHeuristics.cs" />
     <Compile Include="SignInExecuter.cs" />
     <Compile Include="SimplePlaceExecuter.cs" />
@@ -72,6 +78,7 @@
     <Compile Include="SimpleSongExecuter.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserQueryBank.cs" />
+    <Compile Include="YearExecuter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -24,7 +24,7 @@ namespace Test
             // List<string> result=cont.GetTopPlacesNames("flor");
 
               SignInController sign = SignInController.GetInstance();
-              Console.WriteLine(sign.SignIn("Donec.dignissim@magnaet.ca", "MHY50WZI0UN"));
+              Console.WriteLine(sign.SignIn("sed.turpis@suscipit.org", "BFI65VCD0AG"));
               User user = sign.ConnectedUser;
 
 
@@ -33,11 +33,31 @@ namespace Test
                {
                    Console.WriteLine(number.Execute());
                } */
-            user.GenreId = 13;
-            PlaceExecuter place = new PlaceExecuter("florida", DataBaseConnector.GetInstance(), user);
+            /*   user.GenreId = 13;
+               PlaceExecuter place = new PlaceExecuter("florida", DataBaseConnector.GetInstance(), user);
+               for (int i = 0; i < 10; i++)
+               {
+                   Console.WriteLine(place.Execute());
+               } */
+
+            /*  YearExecuter year = new YearExecuter(DataBaseConnector.GetInstance(), 2000, 2011,user);
+              for (int i = 0; i < 10; i++)
+              {
+                  Console.WriteLine(year.Execute());
+              } */
+
+            /*  HitMeWithController cont = new HitMeWithController();
+              List<string> list = cont.GetTopGenresNames("");
+              GenreExecuter genre = new GenreExecuter("", DataBaseConnector.GetInstance(), user);
+              for (int i = 0; i < 10; i++)
+              {
+                  Console.WriteLine(genre.Execute());
+              } */
+
+            FeelingLuckyController luck = new FeelingLuckyController();
             for (int i = 0; i < 10; i++)
             {
-                Console.WriteLine(place.Execute());
+                Console.WriteLine(luck.GetResult());
             }
 
             while (true) ;

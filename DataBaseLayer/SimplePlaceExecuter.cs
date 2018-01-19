@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DataBaseLayer
 {
-    public class SimplePlaceExecuter
+    public class SimplePlaceExecuter : IExecuter
     {
         private MySqlCommand command;
         private DataBaseConnector conn;
@@ -75,6 +75,11 @@ namespace DataBaseLayer
             builder.AppendLine("Artist Name : " + place["artist_name"]);
 
             return builder;
+        }
+
+        public string GetSorryMsg()
+        {
+            return sorryMsg;
         }
     }
 }

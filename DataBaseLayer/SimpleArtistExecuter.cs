@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DataBaseLayer
 {
-    public class SimpleArtistExecuter
+    public class SimpleArtistExecuter : IExecuter
     {
         //private List<MySqlCommand> commands;
         private MySqlCommand command;
@@ -64,6 +64,11 @@ namespace DataBaseLayer
             }
 
             return builder.ToString();
+        }
+
+        public string GetSorryMsg()
+        {
+            return sorryMsg;
         }
 
         // what to print if day or month or songs is null?

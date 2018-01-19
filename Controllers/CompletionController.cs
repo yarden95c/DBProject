@@ -75,7 +75,7 @@ namespace Controllers
         public List<string> GetTopGenresNames(string genreName)
         {
             if (_topGeneresCache.ContainsKey(genreName))
-                return _topPlacesCache[genreName];
+                return _topGeneresCache[genreName];
             MySqlCommand command = IKnowWhatIWantQuriesBank.GetGenresNamesQuery(conn.Connection);
             command.Parameters["@genreName"].Value = "%" + genreName.ToLower() + "%";
             List<string> result = conn.ExecuteOneColumnCommand(command);

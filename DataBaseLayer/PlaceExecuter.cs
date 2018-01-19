@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DataBaseLayer
 {
-    public class PlaceExecuter
+    public class PlaceExecuter : IExecuter
     {
         delegate SelfExecuterHeuristics PlaceHeuristics(User user, Place place);
 
@@ -150,9 +150,11 @@ namespace DataBaseLayer
             int queryNum = rand.Next(arr.Length);
             SelfExecuterHeuristics h = ((PlaceHeuristics)arr[queryNum])(user,place);
             return h.Executer(conn);
+        }
 
-
-
+        public string GetSorryMsg()
+        {
+            return string.Empty;
         }
     }
 }
