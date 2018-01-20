@@ -7,53 +7,52 @@ using MySql.Data.MySqlClient;
 
 namespace DataBaseLayer
 {
+    /// <summary>
+    /// GenreExecuter - this class reprsent the executer of the genre query.
+    /// </summary>
+    /// <seealso cref="DataBaseLayer.IExecuter" />
     public class GenreExecuter : IExecuter
     {
-        delegate SelfExecuterHeuristics GenreHeuristics(User user, Genre genre);
-
+        /// <summary>
+        /// The genre name
+        /// </summary>
         private string genreName;
+        /// <summary>
+        /// The database connector
+        /// </summary>
         private DataBaseConnector conn;
+        /// <summary>
+        /// The user
+        /// </summary>
         private User user;
-        private GenreHeuristics queriesList;
+        /// <summary>
+        /// The queries list
+        /// </summary>
+        private HeuristicsBank.GenreHeuristics queriesList;
+        /// <summary>
+        /// The random
+        /// </summary>
         private static Random rand = new Random();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GenreExecuter"/> class.
+        /// </summary>
+        /// <param name="genreName">Name of the genre.</param>
+        /// <param name="conn">The connection.</param>
+        /// <param name="user">The user.</param>
         public GenreExecuter(string genreName, DataBaseConnector conn, User user)
         {
             this.genreName = genreName;
             this.conn = conn;
             this.user = user;
-
-            queriesList += (User u, Genre g) => {
-                MySqlCommand command = new MySqlCommand();
-                command.CommandText = "select count(id_artist) from genresbyartist where id_genre = " + g.Id;
-                command.Connection = conn.Connection;
-                string format = "The number of artists tagged as the genre \"" + g.Name + "\" is {0}";
-                SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
-                {
-                    int num = connector.ExecuteScalarCommand(command);
-                    return string.Format(format, num);
-                };
-                return new SelfExecuterHeuristics(command, format, del);
-            };
-
-            queriesList += (User u, Genre g) => {
-                MySqlCommand command = new MySqlCommand();
-                command.CommandText = "select artist_name,num_of_hits from artists left join genresbyartist using (id_artist) where id_genre = " + g.Id + " order by num_of_hits desc limit 1";
-                command.Connection = conn.Connection;
-                string format = "The most popular artist that tagged as the genre \"" + g.Name + "\" is {0}, with {1} number of hits in our database";
-                SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
-                {
-                    List<Dictionary<string, string>> result = connector.ExecuteCommand(command);
-                    if(result.Count == 0)
-                    {
-                        return "There are no artists tagged as the genre \"" + g.Name + "\"";
-                    }
-                    return string.Format(format, result[0]["artist_name"], result[0]["num_of_hits"]);
-                };
-                return new SelfExecuterHeuristics(command, format, del);
-            };
+            this.queriesList = HeuristicsBank.GetGenreHeuristics(this.conn);
         }
 
+        /// <summary>
+        /// Gets the genre entity.
+        /// </summary>
+        /// <param name="genre">The genre name.</param>
+        /// <returns>Genre instance</returns>
         private Genre GetGenre(string genre)
         {
             MySqlCommand command = new MySqlCommand();
@@ -69,6 +68,10 @@ namespace DataBaseLayer
             return genreObject;
         }
 
+        /// <summary>
+        /// Gets the genre entity, that represent the user's favourite genre.
+        /// </summary>
+        /// <returns>Genre instance</returns>
         private Genre GetGenre()
         {
             MySqlCommand command = new MySqlCommand();
@@ -84,6 +87,12 @@ namespace DataBaseLayer
             return genre;
         }
 
+        /// <summary>
+        /// Executes the query.
+        /// </summary>
+        /// <returns>
+        /// string that reprsent the result
+        /// </returns>
         public string Execute()
         {
             Genre genre;
@@ -103,10 +112,16 @@ namespace DataBaseLayer
 
             Delegate[] arr = queriesList.GetInvocationList();
             int queryNum = rand.Next(arr.Length);
-            SelfExecuterHeuristics h = ((GenreHeuristics)arr[queryNum])(user,genre);
+            SelfExecuterHeuristics h = ((HeuristicsBank.GenreHeuristics)arr[queryNum])(user,genre);
             return h.Executer(conn);
         }
 
+        /// <summary>
+        /// Gets the string that repsent that the query returned nothing.
+        /// </summary>
+        /// <returns>
+        /// the sorry message
+        /// </returns>
         public string GetSorryMsg()
         {
             return string.Empty;

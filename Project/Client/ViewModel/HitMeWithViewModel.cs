@@ -249,10 +249,13 @@ namespace Project.Client.ViewModel
                         ResultInfo = _controller.GetGenre(GetParam.GivvenParam);
                         break;
                     case "Year":
+                        // in the year input box- range of years should appear
                         int.TryParse(GetParam.GivvenParam, out var year);
+                        // if no year was entered, one should send -1,-1
                         ResultInfo = _controller.GetYear(year,year);
                         break;
                     case "Number":
+                        // there is no need for an input box in the number window
                         int.TryParse(GetParam.GivvenParam, out var num);
                         ResultInfo = _controller.GetNumber();
                         break;

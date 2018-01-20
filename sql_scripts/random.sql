@@ -1,0 +1,1 @@
+SELECT genere_name FROM genres ORDER BY RAND() LIMIT 1;
