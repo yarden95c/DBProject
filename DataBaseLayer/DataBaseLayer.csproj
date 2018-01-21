@@ -52,21 +52,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Artist.cs" />
+    <Compile Include="Entities\Artist.cs" />
     <Compile Include="DataBaseConnector.cs" />
-    <Compile Include="IKnowWhatIWantQuriesBank.cs" />
+    <Compile Include="ExecuterFactory.cs" />
+    <Compile Include="Entities\Genre.cs" />
+    <Compile Include="Executers\GenreExecuter.cs" />
+    <Compile Include="Heuristics.cs" />
+    <Compile Include="Banks\HeuristicsBank.cs" />
+    <Compile Include="HeuristicsFactory.cs" />
+    <Compile Include="Executers\IExecuter.cs" />
+    <Compile Include="Banks\IKnowWhatIWantQuriesBank.cs" />
+    <Compile Include="Executers\LuckyExecuter.cs" />
+    <Compile Include="Executers\NumberExecuter.cs" />
+    <Compile Include="Entities\Place.cs" />
+    <Compile Include="Executers\PlaceExecuter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\DBSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>DBSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SignInExecuter.cs" />
-    <Compile Include="SimplePlaceExecuter.cs" />
-    <Compile Include="SimpleArtistExecuter.cs" />
-    <Compile Include="SimpleSongExecuter.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserQueryBank.cs" />
+    <Compile Include="Banks\RandomRecordsBank.cs" />
+    <Compile Include="SelfExecuterHeuristics.cs" />
+    <Compile Include="Executers\SignInExecuter.cs" />
+    <Compile Include="Executers\SimplePlaceExecuter.cs" />
+    <Compile Include="Executers\SimpleArtistExecuter.cs" />
+    <Compile Include="Executers\SimpleSongExecuter.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Banks\UserQueryBank.cs" />
+    <Compile Include="Executers\YearExecuter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -89,5 +103,6 @@
     <Content Include="docs\MySqlParameterCollection.xml" />
     <Content Include="docs\MySqlTransaction.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

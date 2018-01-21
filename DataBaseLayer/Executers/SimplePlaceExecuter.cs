@@ -7,12 +7,32 @@ using MySql.Data.MySqlClient;
 
 namespace DataBaseLayer
 {
-    public class SimplePlaceExecuter
+    /// <summary>
+    /// SimplePlaceExecuter - this class reprsent an executer of a simple place query,
+    /// for the "I know what I want" button.
+    /// </summary>
+    /// <seealso cref="DataBaseLayer.IExecuter" />
+    public class SimplePlaceExecuter : IExecuter
     {
+        /// <summary>
+        /// The command
+        /// </summary>
         private MySqlCommand command;
+        /// <summary>
+        /// The database connector
+        /// </summary>
         private DataBaseConnector conn;
+        /// <summary>
+        /// The sorry MSG
+        /// </summary>
         private const string sorryMsg = "Sorry, we couldn't find you an answer, please try again with another parameters.";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SimplePlaceExecuter"/> class.
+        /// </summary>
+        /// <param name="db">The database.</param>
+        /// <param name="placeName">Name of the place.</param>
+        /// <param name="artistName">Name of the artist.</param>
         public SimplePlaceExecuter(DataBaseConnector db,string placeName, string artistName)
         {
             this.conn = db;
@@ -29,6 +49,12 @@ namespace DataBaseLayer
             }
         }
 
+        /// <summary>
+        /// Executes the query.
+        /// </summary>
+        /// <returns>
+        /// string that reprsent the result
+        /// </returns>
         public string Execute()
         {
             List<Dictionary<string, string>> result = conn.ExecuteCommand(command);
@@ -54,11 +80,17 @@ namespace DataBaseLayer
             foreach(string place in places.Keys)
             {
                 builder.AppendLine("Place name: " + place);
-                builder.Append("Artists living at this place : ");
-                foreach(string artist in places[place])
+                if(places[place].Count == 1 && places[place][0].Equals(string.Empty))
                 {
-                    builder.AppendFormat("\n\t" + artist);
-                    builder.AppendLine();
+                    builder.AppendLine("There are no artists living at this place");
+                } else
+                {
+                    builder.Append("Artists living at this place : ");
+                    foreach (string artist in places[place])
+                    {
+                        builder.AppendFormat("\n\t" + artist);
+                        builder.AppendLine();
+                    }
                 }
 
                 builder.AppendLine();
@@ -67,14 +99,15 @@ namespace DataBaseLayer
             return builder.ToString();
         }
 
-        // what to print if day or month is null?
-        private StringBuilder PlaceString(Dictionary<string,string> place)
+        /// <summary>
+        /// Gets the string that repsent that the query returned nothing.
+        /// </summary>
+        /// <returns>
+        /// the sorry message
+        /// </returns>
+        public string GetSorryMsg()
         {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("Place name : " + place["area_name"]);
-            builder.AppendLine("Artist Name : " + place["artist_name"]);
-
-            return builder;
+            return sorryMsg;
         }
     }
 }

@@ -4,47 +4,77 @@ using MySql.Data.MySqlClient;
 
 namespace Controllers
 {
-    public class HitMeWithController
+    /// <summary>
+    /// HitMeWithController - this is the controller for the "Hit me with" button.
+    /// </summary>
+    /// <seealso cref="Controllers.CompletionController" />
+    public class HitMeWithController : CompletionController
     {
+        /// <summary>
+        /// The sign in controller
+        /// </summary>
         private readonly SignInController _signInController;
-        public HitMeWithController()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HitMeWithController"/> class.
+        /// </summary>
+        public HitMeWithController() : base()
         {
             _signInController = SignInController.GetInstance();
         }
 
-        public List<string> GetTopPlacesNames(string placeName)
-        {
-            List<string> responsList = new List<string>{"BLABLA", "BLABLA2"};
-            return responsList;
-        }
-        public List<string> GetTopGenresNames(string genreName)
-        {
-            List<string> responsList = new List<string> { "BLABLA", "BLABLA2" };
-            return responsList;
-        }
+        /// <summary>
+        /// Gets the sign in controller.
+        /// </summary>
+        /// <value>
+        /// The sign in controller.
+        /// </value>
         public SignInController SignInController
         {
             get => _signInController;
         }
 
+        /// <summary>
+        /// Gets the result of the place query.
+        /// </summary>
+        /// <param name="placeName">Name of the place.</param>
+        /// <returns> a string that represent the result of the query </returns>
         public string GetPlace(string placeName)
         {
-            return placeName;
+            PlaceExecuter placeExecuter = new PlaceExecuter(placeName, conn, SignInController.ConnectedUser);
+            return placeExecuter.Execute();
         }
 
-        public string GetNumber(int num)
+        /// <summary>
+        /// Gets the result of the number query.
+        /// </summary>
+        /// <returns> a string that represent the result of the query </returns>
+        public string GetNumber()
         {
-            return num.ToString();
+            NumberExecuter numExecuter = new NumberExecuter(SignInController.ConnectedUser, conn);
+            return numExecuter.Execute();
         }
 
-        public string GetYear(int year)
+        /// <summary>
+        /// Gets the result of the year query.
+        /// </summary>
+        /// <param name="fromYear">From year.</param>
+        /// <param name="toYear">To year.</param>
+        /// <returns> a string that represent the result of the query </returns>
+        public string GetYear(int fromYear,int toYear)
         {
-            return year.ToString();
+            YearExecuter yearExecuter = new YearExecuter(conn, fromYear, toYear, SignInController.ConnectedUser);
+            return yearExecuter.Execute();
         }
 
+        /// <summary>
+        /// Gets the result of the genre query.
+        /// </summary>
+        /// <param name="genre">The genre.</param>
+        /// <returns> a string that represent the result of the query </returns>
         public string GetGenre(string genre)
         {
-            return genre;
+            GenreExecuter genreExecuter = new GenreExecuter(genre, conn, SignInController.ConnectedUser);
+            return genreExecuter.Execute();
         }
     }
 }

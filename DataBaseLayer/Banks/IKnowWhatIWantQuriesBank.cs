@@ -7,9 +7,17 @@ using MySql.Data.MySqlClient;
 
 namespace DataBaseLayer
 {
+    /// <summary>
+    /// IKnowWhatIWantQuriesBank - this class is a bank for different kinds of queries for the "I know what I want" button.
+    /// </summary>
     public class IKnowWhatIWantQuriesBank
     {
-        public static MySqlCommand GetSongQuery(MySqlConnection conn/*, bool songName,bool artistName,bool years*/)
+        /// <summary>
+        /// Gets the song query.
+        /// </summary>
+        /// <param name="conn">The connection.</param>
+        /// <returns> MySqlCommand - query of song </returns>
+        public static MySqlCommand GetSongQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
             command.CommandText = "select DISTINCT song_name,release_date_year,artist_name " +
@@ -27,6 +35,11 @@ namespace DataBaseLayer
             return command;
         }
 
+        /// <summary>
+        /// Gets the artist query.
+        /// </summary>
+        /// <param name="conn">The connection.</param>
+        /// <returns> MySqlCommand - query of artist </returns>
         public static MySqlCommand GetArtistQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -43,40 +56,19 @@ namespace DataBaseLayer
              command.Prepare();
 
              return command; 
-
-           /* List<MySqlCommand> commands = new List<MySqlCommand>();
-            commands.Add(new MySqlCommand());
-            commands.Add(new MySqlCommand());
-            foreach (MySqlCommand command in commands)
-            {
-                command.Connection = conn;
-            }
-
-            commands[0].CommandText = "select id_artist,artist_name,begin_date_day,begin_date_month,begin_date_year from artists " +
-                                      "where lower(artist_name) like @artistName " +
-                                      "and begin_date_year between @fromYear and @toYear;";
-            commands[0].Parameters.AddWithValue("@artistName", "%%");
-            commands[0].Parameters.AddWithValue("@fromYear", 0);
-            commands[0].Parameters.AddWithValue("@toYear", 9999);
-
-            commands[1].CommandText = "select song_name from songsbyartist left join songs using(id_song) where song_name like @songName and id_artist = @idArtist;";
-            commands[1].Parameters.AddWithValue("@songName", "%%");
-            commands[1].Parameters.AddWithValue("@idArtist", "");
-
-            foreach (MySqlCommand command in commands)
-            {
-                command.Prepare();
-            }
-
-            return commands; */
         }
 
+        /// <summary>
+        /// Gets the place query.
+        /// </summary>
+        /// <param name="conn">The connection.</param>
+        /// <param name="artistName">if set to <c>true</c> [artist name]- meaning the artist name is present.</param>
+        /// <param name="placeName">if set to <c>true</c> [place name]- meaning the place name is present.</param>
+        /// <returns> MySqlCommand - query of place </returns>
         public static MySqlCommand GetPlaceQuery(MySqlConnection conn, bool artistName,bool placeName)
         {
             MySqlCommand command = new MySqlCommand();
-            /* command.CommandText = "select area_name,artist_name from area left join artists using (id_area) "+
-                                   "where lower(area_name) like @placeName "+
-                                   "and lower(artist_name) like @artistName order by area_name;" ; */
+
             if (artistName && placeName)
             {
                 command.CommandText = "select area_name, artist_name from area left join artists using (id_area) where lower(area_name) like @placeName and lower(artist_name) like @artistName  limit 10;";
@@ -108,6 +100,11 @@ namespace DataBaseLayer
             return command;
         }
 
+        /// <summary>
+        /// Gets the songs names query.
+        /// </summary>
+        /// <param name="conn">The connection.</param>
+        /// <returns> MySqlCommand - query of song names </returns>
         public static MySqlCommand GetSongsNamesQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -121,6 +118,11 @@ namespace DataBaseLayer
         }
 
 
+        /// <summary>
+        /// Gets the artists names query.
+        /// </summary>
+        /// <param name="conn">The connection.</param>
+        /// <returns> MySqlCommand - query of artists names </returns>
         public static MySqlCommand GetArtistsNamesQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -134,6 +136,11 @@ namespace DataBaseLayer
         }
 
 
+        /// <summary>
+        /// Gets the places names query.
+        /// </summary>
+        /// <param name="conn">The connection.</param>
+        /// <returns> MySqlCommand - query of places names </returns>
         public static MySqlCommand GetPlacesNamesQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -141,6 +148,23 @@ namespace DataBaseLayer
 
             command.Connection = conn;
             command.Parameters.AddWithValue("@placeName", "%%");
+            command.Prepare();
+
+            return command;
+        }
+
+        /// <summary>
+        /// Gets the genres names query.
+        /// </summary>
+        /// <param name="conn">The connection.</param>
+        /// <returns> MySqlCommand - query of genres names </returns>
+        public static MySqlCommand GetGenresNamesQuery(MySqlConnection conn)
+        {
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText = "select DISTINCT genere_name from genres where genere_name like @genreName limit 10;";
+
+            command.Connection = conn;
+            command.Parameters.AddWithValue("@genreName", "%%");
             command.Prepare();
 
             return command;

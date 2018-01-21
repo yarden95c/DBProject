@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompletionController.cs" />
+    <Compile Include="FeelingLuckyController.cs" />
     <Compile Include="HitMeWithController.cs" />
     <Compile Include="IKnowWhatIWantController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

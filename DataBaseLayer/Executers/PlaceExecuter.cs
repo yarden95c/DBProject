@@ -1,0 +1,131 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+
+namespace DataBaseLayer
+{
+    /// <summary>
+    /// PlaceExecuter - this class reprsent the executer of the place query.
+    /// </summary>
+    /// <seealso cref="DataBaseLayer.IExecuter" />
+    public class PlaceExecuter : IExecuter
+    {
+        /// <summary>
+        /// The place name
+        /// </summary>
+        private string placeName;
+        /// <summary>
+        /// The database connector
+        /// </summary>
+        private DataBaseConnector conn;
+        /// <summary>
+        /// The user
+        /// </summary>
+        private User user;
+        /// <summary>
+        /// The queries list
+        /// </summary>
+        private HeuristicsBank.PlaceHeuristics queriesList;
+        /// <summary>
+        /// The random
+        /// </summary>
+        private static Random rand = new Random();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PlaceExecuter"/> class.
+        /// </summary>
+        /// <param name="placeName">Name of the place.</param>
+        /// <param name="db">The database.</param>
+        /// <param name="user">The user.</param>
+        public PlaceExecuter(string placeName, DataBaseConnector db, User user)
+        {
+            this.placeName = placeName;
+            this.conn = db;
+            this.user = user;
+            this.queriesList = HeuristicsBank.GetPlaceHeuristics(this.conn);
+        }
+
+
+        /// <summary>
+        /// Gets the place entity.
+        /// </summary>
+        /// <param name="placeName">Name of the place.</param>
+        /// <returns>Place instance</returns>
+        private Place GetPlace(string placeName)
+        {
+            MySqlCommand command = new MySqlCommand();
+            command.Connection = conn.Connection;
+            command.CommandText = "select id_area from area where lower(area_name) = \"" + placeName.ToLower() + "\"";
+            List<string> result = conn.ExecuteOneColumnCommand(command);
+            if (result.Count <= 0)
+            {
+                return null;
+            }
+
+            Place place = new Place(int.Parse(result[0]), placeName);
+            return place;
+        }
+
+        /// <summary>
+        /// Gets the place entity, that reprsent the user's place of birth / residence.
+        /// </summary>
+        /// <returns>Place instance</returns>
+        private Place GetPlace()
+        {
+            MySqlCommand command = new MySqlCommand();
+            command.Connection = conn.Connection;
+            command.CommandText = "select area_name from area where id_area = " + user.PlaceId;
+            List<string> result = conn.ExecuteOneColumnCommand(command);
+            if (result.Count <= 0)
+            {
+                return null;
+            }
+
+            Place place = new Place(user.PlaceId, result[0]);
+            return place;
+        }
+
+        /// <summary>
+        /// Executes the query.
+        /// </summary>
+        /// <returns>
+        /// string that reprsent the result
+        /// </returns>
+        public string Execute()
+        {
+            Place place;
+            if (placeName.Equals(string.Empty))
+            {
+                place = GetPlace();
+            }
+            else
+            {
+                place = GetPlace(placeName);
+            }
+
+            if (place == null)
+            {
+                return "No such place";
+            }
+
+            Delegate[] arr = queriesList.GetInvocationList();
+            int queryNum = rand.Next(arr.Length);
+            SelfExecuterHeuristics h = ((HeuristicsBank.PlaceHeuristics)arr[queryNum])(user, place);
+            return h.Executer(conn);
+        }
+
+        /// <summary>
+        /// Gets the string that repsent that the query returned nothing.
+        /// </summary>
+        /// <returns>
+        /// the sorry message
+        /// </returns>
+        public string GetSorryMsg()
+        {
+            return string.Empty;
+        }
+    }
+}

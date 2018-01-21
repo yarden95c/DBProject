@@ -7,13 +7,34 @@ using MySql.Data.MySqlClient;
 
 namespace DataBaseLayer
 {
-    public class SimpleArtistExecuter
+    /// <summary>
+    /// SimpleArtistExecuter - this class reprsent an executer of a simple artist query,
+    /// for the "I know what I want" button.
+    /// </summary>
+    /// <seealso cref="DataBaseLayer.IExecuter" />
+    public class SimpleArtistExecuter : IExecuter
     {
-        //private List<MySqlCommand> commands;
+        /// <summary>
+        /// The command
+        /// </summary>
         private MySqlCommand command;
+        /// <summary>
+        /// The database connector
+        /// </summary>
         private DataBaseConnector conn;
+        /// <summary>
+        /// The sorry MSG
+        /// </summary>
         private const string sorryMsg = "Sorry, we couldn't find you an answer, please try again with another parameters.";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SimpleArtistExecuter"/> class.
+        /// </summary>
+        /// <param name="db">The database.</param>
+        /// <param name="songName">Name of the song.</param>
+        /// <param name="artistName">Name of the artist.</param>
+        /// <param name="fromYear">From year.</param>
+        /// <param name="toYear">To year.</param>
         public SimpleArtistExecuter(DataBaseConnector db,string songName,string artistName, int fromYear, int toYear)
         {
             this.conn = db;
@@ -22,14 +43,14 @@ namespace DataBaseLayer
             command.Parameters["@artistName"].Value = "%" + artistName + "%";
             command.Parameters["@fromYear"].Value = fromYear;
             command.Parameters["@toYear"].Value = toYear;
-            /*  this.commands = IKnowWhatIWantQuriesBank.GetArtistQuery(this.conn.Connection);
-              commands[1].Parameters["@songName"].Value = "%" + songName + "%";
-              commands[0].Parameters["@artistName"].Value = "%" + artistName + "%";
-              commands[0].Parameters["@fromYear"].Value = fromYear;
-              commands[0].Parameters["@toYear"].Value = toYear; */
         }
 
-
+        /// <summary>
+        /// Executes the query.
+        /// </summary>
+        /// <returns>
+        /// string that reprsent the result
+        /// </returns>
         public string Execute()
         {
             List<Dictionary<string, string>> result = conn.ExecuteCommand(command);
@@ -66,15 +87,15 @@ namespace DataBaseLayer
             return builder.ToString();
         }
 
-        // what to print if day or month or songs is null?
-        /*    private StringBuilder ArtistString(Dictionary<string,string> artist)
-            {
-                StringBuilder builder = new StringBuilder();
-                builder.AppendLine("Artist name : " + artist["artist_name"]);
-                builder.AppendLine("Song Name : " + artist["song_name"]);
-                builder.AppendFormat("Birthday : {0}/{1}/{2}" ,artist["begin_date_day"],artist["begin_date_month"],artist["begin_date_year"]);
-
-                return builder;
-            } */
+        /// <summary>
+        /// Gets the string that repsent that the query returned nothing.
+        /// </summary>
+        /// <returns>
+        /// the sorry message
+        /// </returns>
+        public string GetSorryMsg()
+        {
+            return sorryMsg;
+        }
     }
 }

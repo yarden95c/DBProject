@@ -7,8 +7,16 @@ using MySql.Data.MySqlClient;
 
 namespace DataBaseLayer
 {
+    /// <summary>
+    /// UserQueryBank - this class is a bank for different kinds of query about a user.
+    /// </summary>
     class UserQueryBank
     {
+        /// <summary>
+        /// Gets a simple user query.
+        /// </summary>
+        /// <param name="conn">The connection.</param>
+        /// <returns>MySqlCommand - simple user query</returns>
         public static MySqlCommand GetSimpleUserQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -21,6 +29,11 @@ namespace DataBaseLayer
             return command;
         }
 
+        /// <summary>
+        /// Gets user's songs query.
+        /// </summary>
+        /// <param name="conn">The connection.</param>
+        /// <returns>MySqlCommand - user's songs query</returns>
         public static MySqlCommand GetUserSongsQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -32,6 +45,11 @@ namespace DataBaseLayer
             return command;
         }
 
+        /// <summary>
+        /// Gets user's artists query.
+        /// </summary>
+        /// <param name="conn">The connection.</param>
+        /// <returns>MySqlCommand - user's artists query</returns>
         public static MySqlCommand GetUserArtistsQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();

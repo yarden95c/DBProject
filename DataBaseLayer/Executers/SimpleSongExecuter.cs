@@ -7,12 +7,34 @@ using MySql.Data.MySqlClient;
 
 namespace DataBaseLayer
 {
-    public class SimpleSongExecuter
+    /// <summary>
+    /// SimpleSongExecuter -  this class reprsent an executer of a simple song query,
+    /// for the "I know what I want" button.
+    /// </summary>
+    /// <seealso cref="DataBaseLayer.IExecuter" />
+    public class SimpleSongExecuter : IExecuter
     {
+        /// <summary>
+        /// The command
+        /// </summary>
         private MySqlCommand command;
+        /// <summary>
+        /// The database connector
+        /// </summary>
         private DataBaseConnector conn;
+        /// <summary>
+        /// The sorry MSG
+        /// </summary>
         private const string sorryMsg = "Sorry, we couldn't find you an answer, please try again with another parameters.";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SimpleSongExecuter"/> class.
+        /// </summary>
+        /// <param name="db">The database.</param>
+        /// <param name="songName">Name of the song.</param>
+        /// <param name="artistName">Name of the artist.</param>
+        /// <param name="fromYear">From year.</param>
+        /// <param name="toYear">To year.</param>
         public SimpleSongExecuter(DataBaseConnector db,string songName,string artistName, int fromYear, int toYear)
         {
             this.conn = db;
@@ -23,6 +45,12 @@ namespace DataBaseLayer
             command.Parameters["@toYear"].Value = toYear;
         }
 
+        /// <summary>
+        /// Executes the query.
+        /// </summary>
+        /// <returns>
+        /// string that reprsent the result
+        /// </returns>
         public string Execute()
         {
             List<Dictionary<string, string>> result = conn.ExecuteCommand(command);
@@ -38,12 +66,18 @@ namespace DataBaseLayer
             {
                 builder.Append(SongString(song));
                 builder.AppendLine();
-
             }
 
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Build a string that reprsent the song.
+        /// </summary>
+        /// <param name="song">The song record.</param>
+        /// <returns>
+        /// a string that reprsent the song.
+        /// </returns>
         private StringBuilder SongString(Dictionary<string,string> song)
         {
             StringBuilder builder = new StringBuilder();
@@ -52,6 +86,17 @@ namespace DataBaseLayer
             builder.AppendLine("Realase year : " + song["release_date_year"]);
 
             return builder;
+        }
+
+        /// <summary>
+        /// Gets the string that repsent that the query returned nothing.
+        /// </summary>
+        /// <returns>
+        /// the sorry message
+        /// </returns>
+        public string GetSorryMsg()
+        {
+            return sorryMsg;
         }
     }
 }

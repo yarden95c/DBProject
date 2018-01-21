@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `music_final` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `music_final`;
+CREATE DATABASE  IF NOT EXISTS `music_fact_generator_final` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `music_fact_generator_final`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: music_fact_generator
@@ -109,12 +109,12 @@ CREATE TABLE `users` (
   `last_name` text NOT NULL,
   `email` text NOT NULL,
   `password` text NOT NULL,
-  `id_area` int(11) DEFAULT NULL,
-  `id_favorite_genre` int(11) DEFAULT NULL,
+  `id_area` int(11) NOT NULL,
+  `id_favorite_genre` int(11) NOT NULL,
   `create_time` text,
-  `birthday_year` int(4) DEFAULT NULL,
-  `birthday_month` int(2) DEFAULT NULL,
-  `birthday_day` int(2) DEFAULT NULL,
+  `birthday_year` int(4) NOT NULL,
+  `birthday_month` int(2) NOT NULL,
+  `birthday_day` int(2) NOT NULL,
   PRIMARY KEY (`id_user`),
   FOREIGN KEY (`id_area`) REFERENCES area(`id_area`),
   FOREIGN KEY (`id_favorite_genre`) REFERENCES genres(`id_genre`)
@@ -144,8 +144,8 @@ DROP TABLE IF EXISTS `favoritesongbyuser`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `favoritesongbyuser` (
-  `id_user` int(11),
-  `id_song` varchar(45),
+  `id_user` int(11) NOT NULL,
+  `id_song` varchar(45) NOT NULL,
   FOREIGN KEY (`id_song`) REFERENCES songs(`id_song`),
   FOREIGN KEY (`id_user`) REFERENCES users(`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -161,8 +161,8 @@ DROP TABLE IF EXISTS `genresbyartist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genresbyartist` (
-  `id_artist` int(11) ,
-  `id_genre` int(11) ,
+  `id_artist` int(11) NOT NULL,
+  `id_genre` int(11) NOT NULL,
   FOREIGN KEY (`id_artist`) REFERENCES artists(`id_artist`),
   FOREIGN KEY (`id_genre`) REFERENCES genres(`id_genre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -178,8 +178,8 @@ DROP TABLE IF EXISTS `songsbyartist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `songsbyartist` (
-  `id_artist` int(11) ,
-  `id_song` varchar(45) ,
+  `id_artist` int(11) NOT NULL,
+  `id_song` varchar(45) NOT NULL,
   FOREIGN KEY (`id_artist`) REFERENCES artists(`id_artist`),
   FOREIGN KEY (`id_song`) REFERENCES songs(`id_song`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
