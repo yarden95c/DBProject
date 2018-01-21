@@ -193,7 +193,8 @@ namespace Project.Client.ViewModel
                 return _numberButton ?? (_numberButton = new RelayCommand(param =>
           {
               GetParam = new GetParamViewModel("Number");
-              SetVisibilities();
+              ButtonsVisibility = Visibility.Collapsed;
+              SendRequestParams();
           }));
             }
 
@@ -204,7 +205,7 @@ namespace Project.Client.ViewModel
             {
                 return _yearButton ?? (_yearButton = new RelayCommand(param =>
           {
-              GetParam = new GetParamViewModel("Year");
+              GetParam = new GetParamViewModel("Year", getParamOptions:_controller.GetYearsList);
               SetVisibilities();
 
           }));
@@ -250,13 +251,19 @@ namespace Project.Client.ViewModel
                         break;
                     case "Year":
                         // in the year input box- range of years should appear
-                        int.TryParse(GetParam.GivvenParam, out var year);
+                        if (!int.TryParse(GetParam.GivvenParam.Split('-')[0], out var from))
+                        {                        
+                            from = -1;
+                        }
+                        if (!int.TryParse(GetParam.GivvenParam.Split('-')[1], out var to))
+                        {
+                            to = -1;
+                        }
+
                         // if no year was entered, one should send -1,-1
-                        ResultInfo = _controller.GetYear(year,year);
+                        ResultInfo = _controller.GetYear(from,to);
                         break;
                     case "Number":
-                        // there is no need for an input box in the number window
-                        int.TryParse(GetParam.GivvenParam, out var num);
                         ResultInfo = _controller.GetNumber();
                         break;
                     case "Place":
