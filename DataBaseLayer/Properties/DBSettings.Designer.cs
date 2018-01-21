@@ -25,7 +25,7 @@ namespace DataBaseLayer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("final")]
+        [global::System.Configuration.DefaultSettingValueAttribute("music_fact_generator_final")]
         public string DBName {
             get {
                 return ((string)(this["DBName"]));

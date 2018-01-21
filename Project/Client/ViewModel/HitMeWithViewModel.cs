@@ -253,7 +253,7 @@ namespace Project.Client.ViewModel
                     case "Year":
                         // in the year input box- range of years should appear
                         if (!int.TryParse(GetParam.GivvenParam.Split('-')[0], out var from))
-                        {                        
+                        {
                             from = -1;
                         }
                         if (!int.TryParse(GetParam.GivvenParam.Split('-')[1], out var to))
@@ -262,13 +262,15 @@ namespace Project.Client.ViewModel
                         }
 
                         // if no year was entered, one should send -1,-1
-                        ResultInfo = _controller.GetYear(from,to);
+                        ResultInfo = _controller.GetYear(from, to);
                         break;
                     case "Number":
                         ResultInfo = _controller.GetNumber();
                         break;
                     case "Place":
                         ResultInfo = _controller.GetPlace(GetParam.GivvenParam);
+                        break;
+                    default:
                         break;
                 }
                 LoaderVisibility = Visibility.Collapsed;

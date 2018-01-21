@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Project.Client.View"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d" Height="250" Width="420">
+             mc:Ignorable="d" Height="450" Width="420">
     <UserControl.Resources>
         <DropShadowEffect x:Key="dropShadow" Color="Black" Opacity="1" ShadowDepth="6" />
         <DropShadowEffect x:Key="dropShadow2" Color="LightGray" Opacity="5" ShadowDepth="6" />
@@ -21,15 +21,26 @@
         </Style>
     </UserControl.Resources>
 
-    <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}">
-        <mui:ModernFrame VerticalAlignment="Center" >
-            <StackPanel VerticalAlignment="Stretch">
-                <ItemsControl ItemsSource="{Binding RequestedParams}" Margin="5,5,5,5">
-                </ItemsControl>
-                <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="1" Background="Transparent" >Sign Up!</Button>
-                <mui:BBCodeBlock BBCode="Already have an account?  [url=\Client\View\SignInView.xaml]Login here![/url] " VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="17" Margin="10,50,10,0"/>
-            </StackPanel>
-        </mui:ModernFrame>
-    </Border>
+    <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="400" >
+        <StackPanel>
+            <mui:ModernFrame VerticalAlignment="Center" Visibility="{Binding BeforeSignInVisibility}">
+                <StackPanel VerticalAlignment="Stretch">
+                    <ItemsControl ItemsSource="{Binding RequestedParams}" Margin="5,5,5,5">
+                    </ItemsControl>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="1" Background="Transparent" Command="{Binding SignUpCommand}" >Sign Up!</Button>
+                    <mui:BBCodeBlock BBCode="Already have an account?  [url=\Client\View\SignInView.xaml]Login here![/url] " VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="17" Margin="10,50,10,0"/>
+                </StackPanel>
+            </mui:ModernFrame>
+            <mui:ModernFrame VerticalAlignment="Center" Visibility="{Binding AfterSignInVisibility}">
+                <StackPanel VerticalAlignment="Stretch">
+                    <mui:BBCodeBlock FontWeight="Bold" FontSize="22" Margin="100,10,5,5" TextWrapping="Wrap" BBCode="You are signed in!"></mui:BBCodeBlock>
+                    <mui:BBCodeBlock FontWeight="Bold" FontSize="18" Margin="30,10,5,5" TextWrapping="Wrap" BBCode="Now you can continue getting more facts :)"></mui:BBCodeBlock>
+
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,100,10,10" BorderThickness="1" Background="Transparent" Command="{Binding SignOutCommand}" >sign out</Button>
+                </StackPanel>
+            </mui:ModernFrame>
+
+        </StackPanel>
+         </Border>
 
 </UserControl>
