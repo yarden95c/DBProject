@@ -252,17 +252,27 @@ namespace Project.Client.ViewModel
                         break;
                     case "Year":
                         // in the year input box- range of years should appear
-                        if (!int.TryParse(GetParam.GivvenParam.Split('-')[0], out var from))
+                        if (GetParam.GivvenParam.Split('-')[0].Equals(string.Empty))
                         {
-                            from = -1;
+                            ResultInfo = _controller.GetYear(-1, -1);
                         }
-                        if (!int.TryParse(GetParam.GivvenParam.Split('-')[1], out var to))
+                        else
                         {
-                            to = -1;
-                        }
 
-                        // if no year was entered, one should send -1,-1
-                        ResultInfo = _controller.GetYear(from, to);
+
+                            if (!int.TryParse(GetParam.GivvenParam.Split('-')[0], out var from))
+                            {
+                                from = -1;
+
+                            }
+                            if (!int.TryParse(GetParam.GivvenParam.Split('-')[1], out var to))
+                            {
+                                to = -1;
+                            }
+
+                            // if no year was entered, one should send -1,-1
+                            ResultInfo = _controller.GetYear(from, to);
+                        }
                         break;
                     case "Number":
                         ResultInfo = _controller.GetNumber();

@@ -49,23 +49,10 @@ namespace Controllers
         /// <value>
         /// The connected user.
         /// </value>
-        public User ConnectedUser { get => connectedUser = new User
+        public User ConnectedUser
         {
-            Id = 2,
-            Artists = new List<int> { 6046, 8391, 4490, 18 },
-            Day = 25,
-            Email = "dui@Craseo.net",
-            FirstName = "Nathan",
-            LastName = "Naomi",
-            Month = 4,
-            PlaceId = 16521,
-            Songs = new List<string> { "TRAGIHZ12903CD2CBD",
-                "TRAAPCL128F930CB6C",
-                "TRABFIY128F92D1A12",
-                "TRABFIY128F92D1A12",
-                "TRAEMKM128F145FCFE" },
-            Year = 1950
-        }; }
+            get => connectedUser;
+        }
 
         /// <summary>
         /// Sign in the user.
