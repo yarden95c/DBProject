@@ -42,7 +42,7 @@ namespace Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="CompletionController"/> class.
         /// </summary>
-        public CompletionController()
+        protected CompletionController()
         {
             _topArtistsCache = new Dictionary<string, List<string>>();
             _topPlacesCache = new Dictionary<string, List<string>>();

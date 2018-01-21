@@ -11,7 +11,7 @@ namespace Project.Client.ViewModel
 {
     public class HitMeWithViewModel : BaseViewModel
     {
-        private HitMeWithController _controller;
+        private readonly HitMeWithController _controller;
         private GetParamViewModel _getParam;
         private ICommand _sendMyRequestCommand;
         private ICommand _startAgainCommand;
@@ -30,13 +30,7 @@ namespace Project.Client.ViewModel
         private string _resultInfo;
         public HitMeWithViewModel()
         {
-            ParamVisibility = Visibility.Collapsed;
-            ResultVisibility = Visibility.Collapsed;
-            LoaderVisibility = Visibility.Collapsed;
-            BackButtonVisibility = Visibility.Collapsed;
-            StartAgainVisibility = Visibility.Collapsed;
-            ButtonsVisibility = Visibility.Visible;
-
+           
             _controller = new HitMeWithController();
             //if (_controller.SignInController.ConnectedUser == null)
             //{
@@ -47,6 +41,13 @@ namespace Project.Client.ViewModel
             //        m.ContentSource = m.MenuLinkGroups[0].Links[1].Source;
             //    });
             //}
+            ParamVisibility = Visibility.Collapsed;
+            ResultVisibility = Visibility.Collapsed;
+            LoaderVisibility = Visibility.Collapsed;
+            BackButtonVisibility = Visibility.Collapsed;
+            StartAgainVisibility = Visibility.Collapsed;
+            ButtonsVisibility = Visibility.Visible;
+
         }
 
         public Visibility ButtonsVisibility
