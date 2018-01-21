@@ -31,7 +31,6 @@ namespace Project.Client.ViewModel
             {
                 new GetParamViewModel(Consts.Artist.ArtistName ,getParamOptions: Controller.GetTopArtistsNames),
                 new GetParamViewModel(Consts.Artist.SongOfArtist ,getParamOptions:Controller.GetTopSongsNames),
-                //new GetParamViewModel(Consts.Artist.LivingPlace,getParamOptions: Controller.GetTopPlacesNames),
                 new GetParamViewModel(Consts.Artist.YearOfBirth, getParamOptions:Controller.GetYearsList)
             };
         }
@@ -40,29 +39,9 @@ namespace Project.Client.ViewModel
         {
             string artistName = _getParamViewModels[0].GivvenParam;
             string songName = _getParamViewModels[1].GivvenParam;
-            //string place = _getParamViewModels[2].GivvenParam;
-            try
-            {
-                string fromYearString = _getParamViewModels[2].GivvenParam.Split('-')[0].Remove(4);
-                string toYearString = _getParamViewModels[2].GivvenParam.Split('-')[1].Remove(/*0*/5);
-                int from, to;
-                if (!int.TryParse(fromYearString, out from))
-                {
-                    from = 0000;
-                }
-                if (!int.TryParse(toYearString, out to))
-                {
-                    from = 9999;
-                }
-                return Controller.GetArtist(artistName, songName, from, to);
-
-
-            }
-            catch (Exception e)
-            {
-                return Controller.GetArtist(artistName, songName, 0000, 9999);
-
-            } 
+            Pair<int, int> years = GetYears(_getParamViewModels[2].GivvenParam);
+            return Controller.GetArtist(artistName, songName, years.Key, years.Value);
+ 
         }
     }
 }

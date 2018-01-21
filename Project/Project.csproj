@@ -87,6 +87,7 @@
     <Compile Include="Client\Logic\ResultParams.cs" />
     <Compile Include="Client\ViewModel\ArtistViewModel.cs" />
     <Compile Include="Client\ViewModel\BaseViewModel.cs" />
+    <Compile Include="Client\ViewModel\FeelingLuckyViewModel.cs" />
     <Compile Include="Client\ViewModel\GetParamViewModel.cs" />
     <Compile Include="Client\ViewModel\FirstChoiseViewModel.cs" />
     <Compile Include="Client\ViewModel\HitMeWithViewModel.cs" />

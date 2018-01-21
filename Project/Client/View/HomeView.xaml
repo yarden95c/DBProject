@@ -24,7 +24,7 @@
         <StackPanel Height="300" Width="363" >
             <Button Margin="71,60,71,10"  Content="I Know What I Want" CommandParameter="/Client/View/IKnowWhatIWantView.xaml"/>
             <Button Margin="71,20,71,10"  Content="Hit Me With.."  CommandParameter="/Client/View/HitMeWithView.xaml" />
-            <Button Margin="71,20,71,30"  Content="I'm Feeling Lucky"  CommandParameter="/Client/View/IKnowWhatIWantView.xaml"/>
+            <Button Margin="71,20,71,30"  Content="I'm Feeling Lucky"  CommandParameter="/Client/View/FeelingLuckyView.xaml"/>
         </StackPanel>
     </mui:ModernFrame>
 

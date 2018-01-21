@@ -25,7 +25,7 @@ namespace Project
         public MainWindow()
         {
             InitializeComponent();
-                        
+             
         }
         
     }

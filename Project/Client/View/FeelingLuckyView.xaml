@@ -4,9 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Project.Client.View"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             Height="400" Width="600"
+             VerticalAlignment="Top">
+    <UserControl.Resources>
+        <DropShadowEffect x:Key="dropShadow" Color="Black" Opacity="1" ShadowDepth="6" />
+    </UserControl.Resources>
     <Grid>
-        <Label>Feeling Lucky</Label>
+        <mui:BBCodeBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="26" Margin="0,5,0,0" Width="278">Feeling Lucky!</mui:BBCodeBlock>
+
+        <mui:ModernFrame Width="400" Visibility="{Binding LoaderVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <Image Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Resources/spinner.gif" />
+                <mui:BBCodeBlock BBCode="Please wait..." TextAlignment="Justify"/>
+            </StackPanel>
+        </mui:ModernFrame>
+        <StackPanel Visibility="{Binding ResultVisibility}" Height="220" Width="300" Margin="10,20,10,10">
+            <Border  Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}"  Height="220" Width="300">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="-1,0,0,5" Height="220" Width="300">
+                    <mui:BBCodeBlock BBCode="{Binding ResultInfo}"  VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"/>
+                </ScrollViewer>
+            </Border>
+        </StackPanel>
+        <Button Margin="0,30,0,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="{Binding StartAgainVisibility}" Command="{Binding StartAgainCommand}" Content="Start Again" Background="Transparent"/>
+
     </Grid>
 </UserControl>

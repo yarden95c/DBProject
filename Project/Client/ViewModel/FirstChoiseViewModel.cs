@@ -44,16 +44,32 @@ namespace Project.Client.ViewModel
         public abstract ObservableCollection<GetParamViewModel> GetRequestParams();
         public abstract void InitIKnowParams();
         public abstract string GetResultInfo();
-         
-     /*   public ResultParams GetEntityFromRequest()
+
+        protected Pair<int, int> GetYears(string years)
         {
-            Dictionary<string, string> paramsAndValues = new Dictionary<string, string>();
-            foreach (var paramViewModel in _getParamViewModels)
+            try
             {
-                paramsAndValues.Add(paramViewModel.NameOfParam, paramViewModel.GivvenParam);
+                string fromYearString = years.Split('-')[0];
+
+                string toYearString = years.Split('-')[1];
+                int from, to;
+                if (!int.TryParse(fromYearString, out from))
+                {
+                    from = 0000;
+                }
+                if (!int.TryParse(toYearString, out to))
+                {
+                    from = 9999;
+                }
+                return new Pair<int, int>(from, to);
+
+
             }
-            RequestParams request = new RequestParams(type, paramsAndValues);
-            return _dbManager.GetResult(request);
-        } */
+            catch (Exception e)
+            {
+                return new Pair<int, int>(0000, 9999);
+
+            }
+        }
     }
 }

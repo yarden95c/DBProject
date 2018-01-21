@@ -18,9 +18,14 @@ namespace Project.Client.ViewModel
         public SignInViewModel()
         {
             _controller = SignInController.GetInstance();
+            Init();
+        }
+
+        public void Init()
+        {
             AfterSignInVisibility = Visibility.Collapsed;
             BeforeSignInVisibility = Visibility.Visible;
-            
+
             RequestedParams = new ObservableCollection<GetParamViewModel>
             {
                 new GetParamViewModel("Email"),
@@ -94,8 +99,7 @@ namespace Project.Client.ViewModel
         private void SignOut()
         {
             _controller.SignOut();
-            AfterSignInVisibility = Visibility.Collapsed;
-            BeforeSignInVisibility = Visibility.Visible;
+            Init();
         }
     }
 }

@@ -49,17 +49,17 @@
 
     </StackPanel>
         <StackPanel Visibility="{Binding ParamVisibility}">
-              <local:GetParamView Content="{Binding GetParam}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 100, 0, 50"></local:GetParamView>
+              <local:GetParamView Content="{Binding GetParam}" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="0, 100, 0, 50"></local:GetParamView>
             <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="WhiteSmoke" Command="{Binding SendMyRequestCommand}" Margin="0,5,5,5">Send My Request</Button>
         </StackPanel>
-        <StackPanel Visibility="{Binding ResultVisibility}">
-            <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="200" Width="300">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="50,50,50,50" >
+        <StackPanel Visibility="{Binding ResultVisibility}" Height="220" Width="300" Margin="10,20,10,10">
+            <Border  Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}"  Height="220" Width="300">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="-1,0,0,5" Height="220" Width="300">
                     <mui:BBCodeBlock BBCode="{Binding ResultInfo}"  VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"/>
                 </ScrollViewer>
             </Border>
         </StackPanel>
-        <mui:ModernFrame Width="400" Visibility="{Binding LoaderVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <mui:ModernFrame Width="400" Visibility="{Binding LoaderVisibility}" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,100,50,0">
             <StackPanel>
                 <Image Height="100" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Resources/spinner.gif" />
                 <mui:BBCodeBlock BBCode="Please wait..." TextAlignment="Justify"/>
