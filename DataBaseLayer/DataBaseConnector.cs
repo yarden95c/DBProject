@@ -95,9 +95,9 @@ namespace DataBaseLayer
             MySqlDataReader reader = command.ExecuteReader();
 
             for (int i = 0; i < reader.FieldCount; i++)
-            {
+            { 
                 colNames.Add(reader.GetName(i));
-            }
+            } 
 
             int index = 0;
             while (reader.Read())
@@ -105,7 +105,6 @@ namespace DataBaseLayer
                 result.Add(new Dictionary<string, string>());
                 foreach(string colName in colNames)
                 {
-                    
                     result[index][colName] = reader[colName].ToString();
                 }
                 index++;

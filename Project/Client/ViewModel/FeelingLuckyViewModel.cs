@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using Controllers;
 using FirstFloor.ModernUI.Presentation;
+using FirstFloor.ModernUI.Windows.Controls;
 
 namespace Project.Client.ViewModel
 {
@@ -18,15 +19,16 @@ namespace Project.Client.ViewModel
         public FeelingLuckyViewModel()
         {
             _controller = new FeelingLuckyController();
-            //if (_controller.SignInController.ConnectedUser == null)
-            //{
-            //    Application.Current.Dispatcher.Invoke(() =>
-            //    {
-            //        ModernDialog.ShowMessage("Sorry, if you want to use this button you to need sign in first.", "ERROR", MessageBoxButton.OK);
-            //        ModernWindow m = (ModernWindow)Application.Current.MainWindow;
-            //        m.ContentSource = m.MenuLinkGroups[0].Links[1].Source;
-            //    });
-            //}
+            if (_controller.SignInController.ConnectedUser == null)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ModernDialog.ShowMessage("Sorry, if you want to use this button you to need sign in first.", "ERROR", MessageBoxButton.OK);
+                    ModernWindow m = (ModernWindow)Application.Current.MainWindow;
+                    if (m != null) m.ContentSource = m.MenuLinkGroups[0].Links[1].Source;
+                });
+                return;
+            }
             Init();
         }
 
