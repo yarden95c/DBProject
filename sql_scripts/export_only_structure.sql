@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `music_fact_generator_final` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `music_fact_generator_final`;
+CREATE DATABASE  IF NOT EXISTS `facts_generator_final` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `facts_generator_final`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: music_fact_generator
@@ -104,7 +104,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id_user` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` text NOT NULL,
   `last_name` text NOT NULL,
   `email` text NOT NULL,
