@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,13 +39,30 @@ namespace DataBaseLayer
         public SimpleArtistExecuter(DataBaseConnector db,string songName,string artistName, int fromYear, int toYear)
         {
             this.conn = db;
-            this.command = IKnowWhatIWantQuriesBank.GetArtistQuery(this.conn.Connection);
-            command.Parameters["@songName"].Value = "%" + songName + "%";
-            command.Parameters["@artistName"].Value = "%" + artistName + "%";
-            command.Parameters["@fromYear"].Value = fromYear;
-            command.Parameters["@toYear"].Value = toYear;
+            SetQuery(songName, artistName, fromYear, toYear);
         }
 
+        public SimpleArtistExecuter(DataBaseConnector db)
+        {
+            this.conn = db;
+        }
+
+        public bool SetQuery(string songName, string artistName, int fromYear, int toYear)
+        {
+            try
+            {
+                this.command = IKnowWhatIWantQuriesBank.GetArtistQuery(this.conn.Connection);
+                command.Parameters["@songName"].Value = "%" + songName + "%";
+                command.Parameters["@artistName"].Value = "%" + artistName + "%";
+                command.Parameters["@fromYear"].Value = fromYear;
+                command.Parameters["@toYear"].Value = toYear;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
         /// <summary>
         /// Executes the query.
         /// </summary>
@@ -53,7 +71,8 @@ namespace DataBaseLayer
         /// </returns>
         public string Execute()
         {
-            List<Dictionary<string, string>> result = conn.ExecuteCommand(command);
+
+           List<Dictionary<string, string>> result = conn.ExecuteCommand(command);
             if (result.Count == 0)
             {
                 return sorryMsg;

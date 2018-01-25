@@ -19,6 +19,7 @@ namespace Project.Client.View
             Controller = controller;
             _name = name;
             type = EntityType.SONG;
+            _isChecked = false;
         }
         public override ObservableCollection<GetParamViewModel> GetRequestParams()
         {

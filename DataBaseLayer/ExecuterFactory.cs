@@ -57,7 +57,9 @@ namespace DataBaseLayer
 
             create += () =>
             {
-                return new SimpleSongExecuter(db, RandomRecordsBank.GetRandomSongName(), "", 0, 9999);
+                var executer = new SimpleSongExecuter(db);
+                executer.SetQuery(RandomRecordsBank.GetRandomSongName(), "", 0, 9999);
+                return executer;
             };
 
             create += () =>

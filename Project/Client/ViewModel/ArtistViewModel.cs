@@ -18,7 +18,8 @@ namespace Project.Client.ViewModel
             Controller = controller;
             type = EntityType.ARTIST;
             _name = name;
-            
+            _isChecked = false;
+
         }
         public override ObservableCollection<GetParamViewModel> GetRequestParams()
         {

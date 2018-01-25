@@ -20,8 +20,8 @@ namespace Project.Client.ViewModel
         private Visibility _passwordBoxVisibility;
         private bool _isNotWaitingForResponse;
         private readonly bool _isPassword;
-        
-        public GetParamViewModel(string name, string fieldName= null, Func<string, List<string>> getParamOptions = null, bool isPassword = false)
+
+        public GetParamViewModel(string name, string fieldName = null, Func<string, List<string>> getParamOptions = null, bool isPassword = false)
         {
             _isPassword = isPassword;
             _nameOfParam = name;
@@ -42,19 +42,18 @@ namespace Project.Client.ViewModel
 
         private void SetParamOptions()
         {
-            if(_isPassword) return;
+            if (_isPassword) return;
             IsNotWaitingForResponse = false;
             TextBoxVisibility = Visibility.Visible;
             CheckBoxVisibility = Visibility.Collapsed;
             if (_getParamOptions == null) return;
-           //Task.Run(() =>
-            //{
-                ParamOptions = _getParamOptions(GivvenParam);
-                IsNotWaitingForResponse = true;
-                TextBoxVisibility = Visibility.Collapsed;
-                CheckBoxVisibility = Visibility.Visible;
-            //});
+            ParamOptions = _getParamOptions(GivvenParam);
+            IsNotWaitingForResponse = true;
+            TextBoxVisibility = Visibility.Collapsed;
+            CheckBoxVisibility = Visibility.Visible;
+
         }
+
         public string NameOfParam
         {
             get => _nameOfParam;
@@ -74,7 +73,8 @@ namespace Project.Client.ViewModel
                 if (_givvenParam == value)
                     return;
                 _givvenParam = value;
-                SetParamOptions();
+                if(ParamOptions == null || !ParamOptions.Contains(GivvenParam))
+                    SetParamOptions();
                 OnPropertyChanged("GivvenParam");
             }
         }
@@ -108,7 +108,7 @@ namespace Project.Client.ViewModel
             get => _checkBoxVisibility;
             set
             {
-                if(_checkBoxVisibility == value)
+                if (_checkBoxVisibility == value)
                     return;
                 _checkBoxVisibility = value;
                 OnPropertyChanged("CheckBoxVisibility");

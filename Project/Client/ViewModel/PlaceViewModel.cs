@@ -18,9 +18,10 @@ namespace Project.Client.ViewModel
             Controller = controller;
             type = EntityType.AREA;
             _name = name;
-            
+            _isChecked = false;
+
         }
-        
+
         public override ObservableCollection<GetParamViewModel> GetRequestParams()
         {
             return _getParamViewModels;

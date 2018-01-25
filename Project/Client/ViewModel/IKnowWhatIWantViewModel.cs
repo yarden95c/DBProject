@@ -1,6 +1,7 @@
 ﻿using FirstFloor.ModernUI.Presentation;
 using Project.Client.View;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Controllers;
+using FirstFloor.ModernUI.Windows.Controls;
 using Project.Client.Logic;
 
 namespace Project.Client.ViewModel
@@ -29,14 +31,28 @@ namespace Project.Client.ViewModel
         private string _continueButton;
         private IKnowWhatIWantController _controller;
         private string _resultInfo;
+        private List<bool> _cancels;
+        private int currentRequestIndex;
         public IKnowWhatIWantViewModel()
         {
-
+            _cancels = new List<bool>();
+            currentRequestIndex = -1;
+            LoaderVisibility = Visibility.Collapsed;
             this.Init();
 
         }
         public void Init()
         {
+            if (LoaderVisibility == Visibility.Visible)
+            {
+                Task.Run(() =>
+                {
+                    _cancels[currentRequestIndex] = true;
+                    LoaderVisibility = Visibility.Collapsed;
+                    ParamsVisibility = Visibility.Visible;
+                });
+                return;
+            }
             _controller = new IKnowWhatIWantController();
             ResultVisibility = Visibility.Collapsed;
             LoaderVisibility = Visibility.Collapsed;
@@ -49,12 +65,14 @@ namespace Project.Client.ViewModel
                 new ArtistViewModel("Artist", _controller),
                 new PlaceViewModel("Place", _controller)
             };
+            FirstChoise = null;
             foreach (var choise in FirstChoises)
             {
                 choise.InitIKnowParams();
             }
             ContinueButton = "Continue";
             ContinueButtonAlignment = HorizontalAlignment.Right;
+            ResultInfo = "";
         }
 
 
@@ -211,7 +229,15 @@ namespace Project.Client.ViewModel
                 if (first.IsChecked)
                     _firstChoise = first;
             }
-            if (FirstChoise == null) return;
+
+            if (FirstChoise == null)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ModernDialog.ShowMessage("Please choose one of this options.", "ERROR", MessageBoxButton.OK);
+                });
+                return;
+            }
             RequestedParams = _firstChoise.GetRequestParams();
             RadioButtonsVisibility = Visibility.Collapsed;
             ContinueButton = "Back";
@@ -221,16 +247,44 @@ namespace Project.Client.ViewModel
 
         private void SendRequestParams()
         {
+            currentRequestIndex++;
             ParamsVisibility = Visibility.Collapsed;
             LoaderVisibility = Visibility.Visible;
             Task.Run(() =>
             {
+                int index = currentRequestIndex;
+                _cancels.Add(false);
                 ResultInfo = FirstChoise.GetResultInfo();
+                if (_cancels[index])
+                {
+                    if (ResultInfo.Contains("Sorry"))
+                    {
+                        for (; index < _cancels.Count; index++)
+                        {
+                            CancelRequest(index);
+                        }
+                    }
+                    else
+                    {
+                        ResultInfo = "";
+                        return;
+                    }
+                }
                 LoaderVisibility = Visibility.Collapsed;
                 ResultVisibility = Visibility.Visible;
+                ContinueButton = "Start again";
+                ContinueButtonAlignment = HorizontalAlignment.Right;
+
             });
-            Task.WaitAll();
-            
+           
+        }
+
+        private void CancelRequest(int index)
+        {
+            if (_cancels.Count > index)
+            {
+                _cancels[index] = true;
+            }
         }
     }
 }

@@ -35,16 +35,29 @@ namespace DataBaseLayer
         /// <param name="artistName">Name of the artist.</param>
         /// <param name="fromYear">From year.</param>
         /// <param name="toYear">To year.</param>
-        public SimpleSongExecuter(DataBaseConnector db,string songName,string artistName, int fromYear, int toYear)
+        public SimpleSongExecuter(DataBaseConnector db)
         {
             this.conn = db;
-            this.command = IKnowWhatIWantQuriesBank.GetSongQuery(this.conn.Connection);
-            command.Parameters["@songName"].Value = "%" + songName + "%";
-            command.Parameters["@artistName"].Value = "%" + artistName + "%";
-            command.Parameters["@fromYear"].Value = fromYear;
-            command.Parameters["@toYear"].Value = toYear;
         }
 
+        public bool SetQuery(string songName, string artistName, int fromYear, int toYear)
+        {
+            try
+            {
+                this.command = IKnowWhatIWantQuriesBank.GetSongQuery(this.conn.Connection);
+                command.Parameters["@songName"].Value = "%" + songName + "%";
+                command.Parameters["@artistName"].Value = "%" + artistName + "%";
+                command.Parameters["@fromYear"].Value = fromYear;
+                command.Parameters["@toYear"].Value = toYear;
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
         /// <summary>
         /// Executes the query.
         /// </summary>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using DataBaseLayer;
 using MySql.Data.MySqlClient;
@@ -14,6 +15,7 @@ namespace Controllers
     /// <seealso cref="Controllers.CompletionController" />
     public class IKnowWhatIWantController : CompletionController
     {
+        private readonly Mutex dbMutex = new Mutex();
         /// <summary>
         /// Initializes a new instance of the <see cref="IKnowWhatIWantController"/> class.
         /// </summary>
@@ -31,8 +33,16 @@ namespace Controllers
         /// <returns> a string that represent the result of the query </returns>
         public string GetSong(string songName, string artistName, int fromYear, int toYear)
         {
-            SimpleSongExecuter executer = new SimpleSongExecuter(conn, songName.ToLower(), artistName.ToLower(), fromYear, toYear);
-            return executer.Execute();
+            dbMutex.WaitOne();
+            SimpleSongExecuter executer = new SimpleSongExecuter(conn);
+            if(!executer.SetQuery(songName.ToLower(), artistName.ToLower(), fromYear, toYear))
+            {
+                dbMutex.ReleaseMutex();;
+                return executer.GetSorryMsg();
+            }
+            string ret = executer.Execute();
+            dbMutex.ReleaseMutex();
+            return ret;
         }
 
         /// <summary>
@@ -45,8 +55,16 @@ namespace Controllers
         /// <returns> a string that represent the result of the query </returns>
         public string GetArtist(string artistName, string songName, int fromYear, int toYear)
         {
-            SimpleArtistExecuter executer = new SimpleArtistExecuter(conn, songName.ToLower(), artistName.ToLower(), fromYear, toYear);
-            return executer.Execute();
+            dbMutex.WaitOne();
+            SimpleArtistExecuter executer = new SimpleArtistExecuter(conn);
+            if (!executer.SetQuery(songName.ToLower(), artistName.ToLower(), fromYear, toYear))
+            {
+                dbMutex.ReleaseMutex();
+                return executer.GetSorryMsg();
+            }
+            string ret = executer.Execute();
+            dbMutex.ReleaseMutex();
+            return ret;
         }
 
         /// <summary>
