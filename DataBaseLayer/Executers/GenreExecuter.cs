@@ -53,7 +53,7 @@ namespace DataBaseLayer
         /// </summary>
         /// <param name="genre">The genre name.</param>
         /// <returns>Genre instance</returns>
-        private Genre GetGenre(string genre)
+     /*   private Genre GetGenre(string genre)
         {
             MySqlCommand command = new MySqlCommand();
             command.Connection = conn.Connection;
@@ -66,7 +66,7 @@ namespace DataBaseLayer
 
             Genre genreObject = new Genre(genre, int.Parse(result[0]));
             return genreObject;
-        }
+        } */
 
         /// <summary>
         /// Gets the genre entity, that represent the user's favourite genre.
@@ -74,17 +74,18 @@ namespace DataBaseLayer
         /// <returns>Genre instance</returns>
         private Genre GetGenre()
         {
-            MySqlCommand command = new MySqlCommand();
-            command.Connection = conn.Connection;
-            command.CommandText = "select genere_name from genres where id_genre = " + user.GenreId;
-            List<string> result = conn.ExecuteOneColumnCommand(command);
-            if (result.Count <= 0)
-            {
-                return null;
-            }
+            /* MySqlCommand command = new MySqlCommand();
+             command.Connection = conn.Connection;
+             command.CommandText = "select genere_name from genres where id_genre = " + user.GenreId;
+             List<string> result = conn.ExecuteOneColumnCommand(command);
+             if (result.Count <= 0)
+             {
+                 return null;
+             }
 
-            Genre genre = new Genre(result[0], user.GenreId);
-            return genre;
+             Genre genre = new Genre(result[0], user.GenreId);
+             return genre; */
+            return Entities.EntitiesFactory.GetGenreFromGenreId(user.GenreId, conn);
         }
 
         /// <summary>
@@ -102,7 +103,7 @@ namespace DataBaseLayer
             }
             else
             {
-                genre = GetGenre(genreName);
+                genre = Entities.EntitiesFactory.GetGenreFromGenreName(genreName, conn);
             }
 
             if (genre == null)

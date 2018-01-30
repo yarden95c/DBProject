@@ -32,7 +32,12 @@ namespace Project.Client.ViewModel
                 new GetParamViewModel("Password", isPassword:true),
                 new GetParamViewModel("Confirm Password", isPassword:true),
                 new GetParamViewModel("Favorite Genre", getParamOptions:_controller.GetTopGenresNames),
-                new GetParamViewModel("Place", getParamOptions:_controller.GetTopPlacesNames)
+                new GetParamViewModel("Place", getParamOptions:_controller.GetTopPlacesNames),
+                new GetParamViewModel("First Name"),
+                new GetParamViewModel("Last Name"),
+                new GetParamViewModel("Birth Date- day"),
+                new GetParamViewModel("Birth Date- month"),
+                new GetParamViewModel("Birth Date- year")
             };
 
         }
@@ -90,6 +95,12 @@ namespace Project.Client.ViewModel
             string confirmPassword = _requestedParams[2].GivvenParam;
             string genre = _requestedParams[3].GivvenParam;
             string place = _requestedParams[4].GivvenParam;
+            string firstName = _requestedParams[5].GivvenParam;
+            string lastName = _requestedParams[6].GivvenParam;
+            int day = int.Parse(_requestedParams[7].GivvenParam);
+            int month = int.Parse(_requestedParams[8].GivvenParam);
+            int year = int.Parse(_requestedParams[9].GivvenParam);
+
             var msg = ValidateInput(email, password, confirmPassword, genre, place);
             if (msg != null)
             {
@@ -101,7 +112,7 @@ namespace Project.Client.ViewModel
             }
             else
             {
-                if (!_controller.SignUp(email, password, genre, place))
+                if (!_controller.SignUp(firstName,lastName,email,day,month,year,password,genre,place))
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
@@ -138,9 +149,9 @@ namespace Project.Client.ViewModel
 
         private void SignOut()
         {
-            _controller.SignOut();
+            //_controller.SignOut();
+            SignInController.GetInstance().SignOut();
             Init();
-
         }
     }
 }

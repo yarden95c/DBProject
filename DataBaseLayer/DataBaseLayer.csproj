@@ -54,9 +54,12 @@
   <ItemGroup>
     <Compile Include="Entities\Artist.cs" />
     <Compile Include="DataBaseConnector.cs" />
+    <Compile Include="Entities\EntitiesFactory.cs" />
+    <Compile Include="Entities\Song.cs" />
     <Compile Include="ExecuterFactory.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Executers\GenreExecuter.cs" />
+    <Compile Include="Executers\SignUpExecuter.cs" />
     <Compile Include="Heuristics.cs" />
     <Compile Include="Banks\HeuristicsBank.cs" />
     <Compile Include="HeuristicsFactory.cs" />

@@ -54,7 +54,7 @@ namespace DataBaseLayer
         /// </summary>
         /// <param name="placeName">Name of the place.</param>
         /// <returns>Place instance</returns>
-        private Place GetPlace(string placeName)
+      /*  private Place GetPlace(string placeName)
         {
             MySqlCommand command = new MySqlCommand();
             command.Connection = conn.Connection;
@@ -67,7 +67,7 @@ namespace DataBaseLayer
 
             Place place = new Place(int.Parse(result[0]), placeName);
             return place;
-        }
+        } */
 
         /// <summary>
         /// Gets the place entity, that reprsent the user's place of birth / residence.
@@ -75,17 +75,18 @@ namespace DataBaseLayer
         /// <returns>Place instance</returns>
         private Place GetPlace()
         {
-            MySqlCommand command = new MySqlCommand();
-            command.Connection = conn.Connection;
-            command.CommandText = "select area_name from area where id_area = " + user.PlaceId;
-            List<string> result = conn.ExecuteOneColumnCommand(command);
-            if (result.Count <= 0)
-            {
-                return null;
-            }
+            /* MySqlCommand command = new MySqlCommand();
+             command.Connection = conn.Connection;
+             command.CommandText = "select area_name from area where id_area = " + user.PlaceId;
+             List<string> result = conn.ExecuteOneColumnCommand(command);
+             if (result.Count <= 0)
+             {
+                 return null;
+             }
 
-            Place place = new Place(user.PlaceId, result[0]);
-            return place;
+             Place place = new Place(user.PlaceId, result[0]);
+             return place;*/
+            return Entities.EntitiesFactory.GetPlaceFromPlaceId(user.PlaceId,conn);
         }
 
         /// <summary>
@@ -103,7 +104,7 @@ namespace DataBaseLayer
             }
             else
             {
-                place = GetPlace(placeName);
+                place = Entities.EntitiesFactory.GetPlaceFromPlaceName(placeName, conn);
             }
 
             if (place == null)

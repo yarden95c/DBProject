@@ -1,26 +1,20 @@
 ﻿using System.Linq;
 using DataBaseLayer;
+using DataBaseLayer.Executers;
+using System.Collections.Generic;
+using DataBaseLayer.Entities;
 
 namespace Controllers
 {
     public class SignUpController : CompletionController
     {
-        /// <summary>
-        /// The connected user
-        /// </summary>
-        private static User connectedUser;
-        /// <summary>
-        /// The database connector
-        /// </summary>
-        private DataBaseConnector db;
-        /// <summary>
-        /// The instance of this controller
-        /// </summary>
+
+        private SignUpExecuter executer;
+        private string password;
 
         public SignUpController()
         {
-            connectedUser = null;
-            db = DataBaseConnector.GetInstance();
+            executer = new SignUpExecuter();
         }
 
         public bool IsValidGenre(string genreName)
@@ -33,16 +27,45 @@ namespace Controllers
             return GetTopPlacesNames(placeName).Any(p => p.Equals(placeName));
         }
 
-        public bool SignUp(string email, string password, string genre, string place)
+        public bool SignUp(string firstName, string lastName, string email, int day, int month, int year, string password, string genreName, string placeName)
         {
-            return true;
+            bool result = executer.Execute(firstName, lastName, email, day, month, year, password, genreName, placeName);
+            if (result)
+            {
+                SignInController.GetInstance().SignIn(email, password);
+                this.password = password;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        /// <summary>
-        /// Sign out the user.
-        /// </summary>
-        public void SignOut()
+
+        public bool AddSongs(List<string> songs)
         {
-            connectedUser = null;
+            SignInController signIn = SignInController.GetInstance();
+            List<string> result = executer.AddSongsToUser(signIn.ConnectedUser, songs);
+
+            if (result.Count != 0)
+            {
+                signIn.ConnectedUser.Songs = result;
+                return true;
+            }
+            return false;
+        }
+
+        public bool AddArtists(List<string> artists)
+        {
+            SignInController signIn = SignInController.GetInstance();
+            List<int> result = executer.AddArtistsToUser(signIn.ConnectedUser, artists);
+
+            if (result.Count != 0)
+            {
+                signIn.ConnectedUser.Artists = result;
+                return true;
+            }
+            return false;
         }
 
     }

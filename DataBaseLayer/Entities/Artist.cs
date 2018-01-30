@@ -10,7 +10,7 @@ namespace DataBaseLayer
     /// Artist - this class represent an artist entity.
     /// </summary>
     /// <seealso cref="System.IEquatable{DataBaseLayer.Artist}" />
-    class Artist : IEquatable<Artist>
+    public class Artist : IEquatable<Artist>
     {
         /// <summary>
         /// The identifier

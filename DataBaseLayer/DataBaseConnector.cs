@@ -55,8 +55,8 @@ namespace DataBaseLayer
                                         "Port = " + port + ";" +
                                         "Database = " + dbName + ";" +
                                         "Uid = " + userName + ";" +
-                                        "Pwd = " + password +";"+
-                                        "IgnorePrepare = false;"+
+                                        "Pwd = " + password + ";" +
+                                        "IgnorePrepare = false;" +
                                         "ConnectionTimeout = 60;"
                                        );
             conn.Open();
@@ -95,15 +95,15 @@ namespace DataBaseLayer
             MySqlDataReader reader = command.ExecuteReader();
 
             for (int i = 0; i < reader.FieldCount; i++)
-            { 
+            {
                 colNames.Add(reader.GetName(i));
-            } 
+            }
 
             int index = 0;
             while (reader.Read())
             {
                 result.Add(new Dictionary<string, string>());
-                foreach(string colName in colNames)
+                foreach (string colName in colNames)
                 {
                     result[index][colName] = reader[colName].ToString();
                 }
@@ -125,7 +125,7 @@ namespace DataBaseLayer
             List<string> result = new List<string>();
             MySqlDataReader reader = command.ExecuteReader();
 
-            while(reader.Read())
+            while (reader.Read())
             {
                 result.Add(reader[0].ToString());
             }
@@ -143,6 +143,40 @@ namespace DataBaseLayer
         public int ExecuteScalarCommand(MySqlCommand command)
         {
             return int.Parse(command.ExecuteScalar() + "");
+        }
+
+
+        public bool ExecuteUpdateCommands(List<MySqlCommand> commands)
+        {
+            MySqlTransaction myTrans = conn.BeginTransaction();
+            try
+            {
+                foreach (MySqlCommand command in commands)
+                {
+                    command.Transaction = myTrans;
+                    if (command.ExecuteNonQuery() < 1)
+                    {
+                        return false;
+                    }
+                }
+
+                myTrans.Commit();
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    myTrans.Rollback();
+                }
+                catch (MySqlException ex)
+                {
+                    return false;
+                }
+
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
