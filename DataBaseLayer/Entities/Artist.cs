@@ -134,11 +134,14 @@ namespace DataBaseLayer
                 month = "unknown";
             }
             builder.AppendFormat("Birthday : {0}/{1}/{2}\n", day, month, Year);
-            builder.Append("Songs list : ");
-
-            foreach(string song in songs)
+            if (songs.Count > 0)
             {
-                builder.AppendFormat("\n\t" + song);
+                builder.Append("Songs list : ");
+
+                foreach (string song in songs)
+                {
+                    builder.AppendFormat("\n\t" + song);
+                }
             }
             
             return builder.ToString();

@@ -51,9 +51,17 @@ namespace DataBaseLayer
         {
             try
             {
-                this.command = IKnowWhatIWantQuriesBank.GetArtistQuery(this.conn.Connection);
-                command.Parameters["@songName"].Value = "%" + songName + "%";
-                command.Parameters["@artistName"].Value = "%" + artistName + "%";
+                bool songNamePresent = !songName.Equals(string.Empty);
+                bool artistNamePresent = !artistName.Equals(string.Empty);
+                this.command = IKnowWhatIWantQuriesBank.GetArtistQuery(artistNamePresent,songNamePresent,this.conn.Connection);
+                if (songNamePresent)
+                {
+                    command.Parameters["@songName"].Value = "%" + songName + "%";
+                }
+                if (artistNamePresent)
+                {
+                    command.Parameters["@artistName"].Value = "%" + artistName + "%";
+                }
                 command.Parameters["@fromYear"].Value = fromYear;
                 command.Parameters["@toYear"].Value = toYear;
                 return true;
@@ -92,15 +100,19 @@ namespace DataBaseLayer
                 {
                     artists.Add(artistObject);
                 }
-                artists.Find(artistObject.Equals).AddSong(artist["song_name"]);
+                if (!artist["song_name"].Equals(string.Empty))
+                {
+                    artists.Find(artistObject.Equals).AddSong(artist["song_name"]);
+                }
             }
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("We found you the following artists:");
-
+            builder.AppendLine();
             foreach (Artist artist in artists)
             {
                 builder.AppendLine(artist.ToString());
+                builder.AppendLine();
             }
 
             return builder.ToString();

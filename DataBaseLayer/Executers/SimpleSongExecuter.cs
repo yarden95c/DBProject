@@ -44,9 +44,17 @@ namespace DataBaseLayer
         {
             try
             {
-                this.command = IKnowWhatIWantQuriesBank.GetSongQuery(this.conn.Connection);
-                command.Parameters["@songName"].Value = "%" + songName + "%";
-                command.Parameters["@artistName"].Value = "%" + artistName + "%";
+                bool artistNamePresent = !artistName.Equals(string.Empty);
+                bool songNamePresent = !songName.Equals(string.Empty);
+                this.command = IKnowWhatIWantQuriesBank.GetSongQuery(songNamePresent,artistNamePresent,this.conn.Connection);
+                if (songNamePresent)
+                {
+                    command.Parameters["@songName"].Value = "%" + songName + "%";
+                }
+                if(artistNamePresent)
+                {
+                    command.Parameters["@artistName"].Value = "%" + artistName + "%";
+                }
                 command.Parameters["@fromYear"].Value = fromYear;
                 command.Parameters["@toYear"].Value = toYear;
                 return true;
@@ -95,7 +103,13 @@ namespace DataBaseLayer
         {
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("Song name : " + song["song_name"]);
-            builder.AppendLine("Artist : " + song["artist_name"]);
+            if(song["artist_name"].Equals(string.Empty))
+            {
+                builder.AppendLine("Unknown Artist");
+            } else
+            {
+                builder.AppendLine("Artist : " + song["artist_name"]);
+            }
             builder.AppendLine("Realase year : " + song["release_date_year"]);
 
             return builder;

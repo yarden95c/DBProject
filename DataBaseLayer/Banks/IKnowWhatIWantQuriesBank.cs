@@ -17,21 +17,57 @@ namespace DataBaseLayer
         /// </summary>
         /// <param name="conn">The connection.</param>
         /// <returns> MySqlCommand - query of song </returns>
-        public static MySqlCommand GetSongQuery(MySqlConnection conn)
+        public static MySqlCommand GetSongQuery(bool songName, bool artistName, MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
-            command.CommandText = "select DISTINCT song_name,release_date_year,artist_name " +
-                                  "from songs left join songsbyartist using(id_song) left join artists using(id_artist) " +
-                                  "where lower(song_name) like @songName "+
-                                  "and release_date_year between @fromYear and @toYear "+
-                                  "and lower(artist_name) like @artistName limit 10";
             command.Connection = conn;
-            command.Parameters.AddWithValue("@songName", "%%");
-            command.Parameters.AddWithValue("@artistName", "%%");
-            command.Parameters.AddWithValue("@fromYear", 0);
-            command.Parameters.AddWithValue("@toYear", 9999);
+            if (songName && artistName)
+            {
+                command.CommandText = "select DISTINCT song_name,release_date_year,artist_name " +
+                                      "from songs left join songsbyartist using(id_song) left join artists using(id_artist) " +
+                                      "where lower(song_name) like @songName " +
+                                      "and release_date_year between @fromYear and @toYear " +
+                                      "and lower(artist_name) like @artistName limit 10";
+                command.Parameters.AddWithValue("@songName", "%%");
+                command.Parameters.AddWithValue("@artistName", "%%");
+                command.Parameters.AddWithValue("@fromYear", 0);
+                command.Parameters.AddWithValue("@toYear", 9999);
+            }
+            else if (songName)
+            {
+                command.CommandText = "select DISTINCT song_name,release_date_year,artist_name " +
+                                      "from songs left join songsbyartist using(id_song) left join artists using(id_artist) " +
+                                      "where lower(song_name) like @songName " +
+                                      "and release_date_year between @fromYear and @toYear " +
+                                      "limit 10";
+                command.Parameters.AddWithValue("@songName", "%%");
+                command.Parameters.AddWithValue("@fromYear", 0);
+                command.Parameters.AddWithValue("@toYear", 9999);
+            }
+            else if (artistName)
+            {
+                command.CommandText = "select song_name,release_date_year,artist_name " +
+                                      "from songs left join songsbyartist using(id_song) left join artists using(id_artist) " +
+                                      "where " +
+                                      "release_date_year between @fromYear and @toYear " +
+                                      "and lower(artist_name) like @artistName limit 10";
+                command.Parameters.AddWithValue("@artistName", "%%");
+                command.Parameters.AddWithValue("@fromYear", 0);
+                command.Parameters.AddWithValue("@toYear", 9999);
+            }
+            else
+            {
+                command.CommandText = "select DISTINCT song_name,release_date_year,artist_name " +
+                                      "from songs left join songsbyartist using(id_song) left join artists using(id_artist) " +
+                                      "where " +
+                                      "release_date_year between @fromYear and @toYear " +
+                                      "limit 10";
+                command.Parameters.AddWithValue("@fromYear", 0);
+                command.Parameters.AddWithValue("@toYear", 9999);
+            }
+
             command.Prepare();
-            
+
             return command;
         }
 
@@ -40,22 +76,56 @@ namespace DataBaseLayer
         /// </summary>
         /// <param name="conn">The connection.</param>
         /// <returns> MySqlCommand - query of artist </returns>
-        public static MySqlCommand GetArtistQuery(MySqlConnection conn)
+        public static MySqlCommand GetArtistQuery(bool artistName, bool songName, MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
-             command.CommandText = "select DISTINCT id_artist,artist_name,song_name,begin_date_day,begin_date_month,begin_date_year from artists left join songsbyartist using(id_artist) left join songs using(id_song) " +
-                                   "where lower(artist_name) like @artistName " +
-                                   "and lower(song_name) like @songName " +
-                                   "and begin_date_year between @fromYear and @toYear limit 10; ";
+            command.Connection = conn;
 
-             command.Connection = conn;
-             command.Parameters.AddWithValue("@songName", "%%");
-             command.Parameters.AddWithValue("@artistName", "%%");
-             command.Parameters.AddWithValue("@fromYear", 0);
-             command.Parameters.AddWithValue("@toYear", 9999);
-             command.Prepare();
+            if (artistName && songName)
+            {
+                command.CommandText = "select DISTINCT id_artist,artist_name,song_name,begin_date_day,begin_date_month,begin_date_year from artists left join songsbyartist using(id_artist) left join songs using(id_song) " +
+                                      "where lower(artist_name) like @artistName " +
+                                      "and lower(song_name) like @songName " +
+                                      "and begin_date_year between @fromYear and @toYear limit 10; ";
+                command.Parameters.AddWithValue("@songName", "%%");
+                command.Parameters.AddWithValue("@artistName", "%%");
+                command.Parameters.AddWithValue("@fromYear", 0);
+                command.Parameters.AddWithValue("@toYear", 9999);
+            }
+            else if (artistName)
+            {
+                command.CommandText = "select DISTINCT id_artist,artist_name,song_name,begin_date_day,begin_date_month,begin_date_year from artists left join songsbyartist using(id_artist) left join songs using(id_song) " +
+                                                      "where lower(artist_name) like @artistName " +
+                                                      "and begin_date_year between @fromYear and @toYear limit 10; ";
+                command.Parameters.AddWithValue("@artistName", "%%");
+                command.Parameters.AddWithValue("@fromYear", 0);
+                command.Parameters.AddWithValue("@toYear", 9999);
+            }
+            else if (songName)
+            {
+                /* command.CommandText = "select DISTINCT id_artist,artist_name,song_name,begin_date_day,begin_date_month,begin_date_year from artists left join songsbyartist using(id_artist) left join songs using(id_song) " +
+                                       "where " +
+                                       "lower(song_name) like @songName " +
+                                       "and begin_date_year between @fromYear and @toYear limit 10; ";*/
+                command.CommandText = "select distinct id_artist,artist_name,song_name,begin_date_day,begin_date_month,begin_date_year from songs left join songsbyartist using(id_song) left join artists using (id_artist) " +
+                                      "where lower(song_name) like @songName " +
+                                      "and begin_date_year between @fromYear and @toYear limit 10; ";
+                command.Parameters.AddWithValue("@songName", "%%");
+                command.Parameters.AddWithValue("@fromYear", 0);
+                command.Parameters.AddWithValue("@toYear", 9999);
+            }
+            else
+            {
+                command.CommandText = "select DISTINCT id_artist,artist_name,song_name,begin_date_day,begin_date_month,begin_date_year from artists left join songsbyartist using(id_artist) left join songs using(id_song) " +
+                                      "where " +
+                                      "begin_date_year between @fromYear and @toYear limit 10; ";
+                command.Parameters.AddWithValue("@fromYear", 0);
+                command.Parameters.AddWithValue("@toYear", 9999);
+            }
 
-             return command; 
+
+            command.Prepare();
+            return command;
         }
 
         /// <summary>
@@ -65,21 +135,24 @@ namespace DataBaseLayer
         /// <param name="artistName">if set to <c>true</c> [artist name]- meaning the artist name is present.</param>
         /// <param name="placeName">if set to <c>true</c> [place name]- meaning the place name is present.</param>
         /// <returns> MySqlCommand - query of place </returns>
-        public static MySqlCommand GetPlaceQuery(MySqlConnection conn, bool artistName,bool placeName)
+        public static MySqlCommand GetPlaceQuery(MySqlConnection conn, bool artistName, bool placeName)
         {
             MySqlCommand command = new MySqlCommand();
 
             if (artistName && placeName)
             {
                 command.CommandText = "select area_name, artist_name from area left join artists using (id_area) where lower(area_name) like @placeName and lower(artist_name) like @artistName  limit 10;";
-            } else if (placeName)
+            }
+            else if (placeName)
             {
                 command.CommandText = "select area_name, artist_name from (select area_name, IFNULL(artist_name, \"\") as artist_name from area left join artists using (id_area)) as t " +
                                       "where lower(area_name) like @placeName order by area_name limit 10;";
-            } else if (artistName)
+            }
+            else if (artistName)
             {
                 command.CommandText = "select area_name, artist_name from area left join artists using (id_area) where lower(artist_name) like @artistName order by area_name limit 10;";
-            } else
+            }
+            else
             {
                 command.CommandText = "select area_name, artist_name from area left join artists using (id_area) " +
                                       "limit 10;";
@@ -87,11 +160,11 @@ namespace DataBaseLayer
 
 
             command.Connection = conn;
-            if(placeName)
+            if (placeName)
             {
                 command.Parameters.AddWithValue("@placeName", "%%");
             }
-            if(artistName)
+            if (artistName)
             {
                 command.Parameters.AddWithValue("@artistName", "%%");
             }
