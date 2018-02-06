@@ -67,6 +67,7 @@ namespace DataBaseLayer
             }
 
             command.Prepare();
+            command.CommandTimeout = 30;
 
             return command;
         }
@@ -107,9 +108,12 @@ namespace DataBaseLayer
                                        "where " +
                                        "lower(song_name) like @songName " +
                                        "and begin_date_year between @fromYear and @toYear limit 10; ";*/
-                command.CommandText = "select distinct id_artist,artist_name,song_name,begin_date_day,begin_date_month,begin_date_year from songs left join songsbyartist using(id_song) left join artists using (id_artist) " +
-                                      "where lower(song_name) like @songName " +
-                                      "and begin_date_year between @fromYear and @toYear limit 10; ";
+
+               /* command.CommandText = "select distinct id_artist,artist_name,song_name,begin_date_day,begin_date_month,begin_date_year from songs left join songsbyartist using(id_song) left join artists using (id_artist) " +
+                                       "where begin_date_year between @fromYear and @toYear " +
+                                       "and lower(song_name) like @songName limit 10; "; */
+                command.CommandText = "select distinct id_artist,artist_name,song_name,begin_date_day,begin_date_month,begin_date_year from (select id_song,song_name from songs where lower(song_name) like @songName) as t " +
+                                      "left join songsbyartist using (id_song) left join artists using (id_artist) where begin_date_year between @fromYear and @toYear limit 10; "; 
                 command.Parameters.AddWithValue("@songName", "%%");
                 command.Parameters.AddWithValue("@fromYear", 0);
                 command.Parameters.AddWithValue("@toYear", 9999);
@@ -125,6 +129,8 @@ namespace DataBaseLayer
 
 
             command.Prepare();
+            command.CommandTimeout = 30;
+
             return command;
         }
 
@@ -169,6 +175,8 @@ namespace DataBaseLayer
                 command.Parameters.AddWithValue("@artistName", "%%");
             }
             command.Prepare();
+            command.CommandTimeout = 30;
+
 
             return command;
         }

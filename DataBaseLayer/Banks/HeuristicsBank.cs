@@ -50,6 +50,10 @@ namespace DataBaseLayer
         {
             GenreHeuristics queriesList = (User u, Genre g) =>
             {
+                if (g == null)
+                {
+                    g = Entities.EntitiesFactory.GetGenreFromGenreId(u.GenreId, conn);
+                }
                 SelfExecuterHeuristics heuristics = HeuristicsFactory.CreateSelfExecuterHeuristics("select count(id_artist) from genresbyartist where id_genre = " + g.Id, "The number of artists tagged as the genre \"" + g.Name + "\" is {0}", conn);
                 SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
                 {
@@ -62,6 +66,10 @@ namespace DataBaseLayer
 
             queriesList += (User u, Genre g) =>
             {
+                if (g == null)
+                {
+                    g = Entities.EntitiesFactory.GetGenreFromGenreId(u.GenreId, conn);
+                }
                 SelfExecuterHeuristics heuristics = HeuristicsFactory.CreateSelfExecuterHeuristics("select artist_name,num_of_hits from artists left join genresbyartist using (id_artist) where id_genre = " + g.Id + " order by num_of_hits desc limit 1", "The most popular artist that tagged as the genre \"" + g.Name + "\" is {0}, with {1} number of hits in our database", conn);
                 SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
                 {
@@ -75,6 +83,34 @@ namespace DataBaseLayer
                 heuristics.Executer = del;
                 return heuristics;
             };
+
+            queriesList += (User u, Genre g) =>
+            {
+                string commandText, format;
+                if (g == null)
+                {
+                    commandText = "select count(*) as num,genere_name from (select id_artist from favoriteartistbyuser where id_user = " + u.Id + ") as t left join genresbyartist using(id_artist) left join genres using (id_genre) where genere_name is not null group by id_genre limit 1;";
+                } else
+                {
+                    commandText = "select count(*) as num,genere_name from (select id_artist from favoriteartistbyuser where id_user = "+ u.Id+") as t left join genresbyartist using(id_artist) left join genres using (id_genre) where genere_name is not null and genere_name = \""+g.Name+"\" group by id_genre limit 1;";
+                }
+
+                format = "There are {0} of your favourite artists that tagged as the genre \"{1}\"";
+                SelfExecuterHeuristics heuristics = HeuristicsFactory.CreateSelfExecuterHeuristics(commandText, format, conn);
+                SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
+                {
+                    List<Dictionary<string, string>> result = connector.ExecuteCommand(heuristics.Command);
+                    if(result.Count == 0)
+                    {
+                        return string.Format(heuristics.ResultFormat, 0, g.Name);
+                    }
+                    return string.Format(heuristics.ResultFormat, result[0]["num"], result[0]["genere_name"]);
+                };
+                heuristics.Executer = del;
+                return heuristics;
+            };
+
+
 
             return queriesList;
         }
@@ -120,6 +156,10 @@ namespace DataBaseLayer
         {
             PlaceHeuristics queriesList = (User u, Place p) =>
             {
+                if (p == null)
+                {
+                    p = Entities.EntitiesFactory.GetPlaceFromPlaceId(u.PlaceId, conn);
+                }
                 SelfExecuterHeuristics heuristics = HeuristicsFactory.CreateSelfExecuterHeuristics("select count(id_artist) from artists where id_area = " + p.Id, "The number of artists from " + p.Name + " is {0}", conn);
                 SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
                 {
@@ -132,6 +172,10 @@ namespace DataBaseLayer
 
             queriesList += (User u, Place p) =>
             {
+                if (p == null)
+                {
+                    p = Entities.EntitiesFactory.GetPlaceFromPlaceId(u.PlaceId, conn);
+                }
                 SelfExecuterHeuristics heuristics = HeuristicsFactory.CreateSelfExecuterHeuristics("select count(id_artist) from artists left join genresbyartist using(id_artist) where id_area = " + p.Id + " and id_genre = " + u.GenreId, "The number of artists tagged as your favourite genere and from " + p.Name + " is {0}", conn);
                 SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
                 {
@@ -144,6 +188,10 @@ namespace DataBaseLayer
 
             queriesList += (User u, Place p) =>
             {
+                if (p == null)
+                {
+                    p = Entities.EntitiesFactory.GetPlaceFromPlaceId(u.PlaceId, conn);
+                }
                 SelfExecuterHeuristics heuristics = HeuristicsFactory.CreateSelfExecuterHeuristics("select artist_name from artists where id_area = " + p.Id + " limit 10", "These are artists from " + p.Name + ":\n{0}", conn);
                 SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
                 {
@@ -165,6 +213,10 @@ namespace DataBaseLayer
 
             queriesList += (User u, Place p) =>
             {
+                if (p == null)
+                {
+                    p = Entities.EntitiesFactory.GetPlaceFromPlaceId(u.PlaceId, conn);
+                }
                 SelfExecuterHeuristics heuristics = HeuristicsFactory.CreateSelfExecuterHeuristics("select distinct song_name from songs where lower(song_name) like \"%" + p.Name.ToLower() + "%\" limit 10", "These are songs with \"" + p.Name + "\" in there title:\n{0}", conn);
                 SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
                 {
@@ -183,6 +235,7 @@ namespace DataBaseLayer
                 heuristics.Executer = del;
                 return heuristics;
             };
+
 
             return queriesList;
         }

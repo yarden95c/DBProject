@@ -97,20 +97,17 @@ namespace DataBaseLayer
         /// </returns>
         public string Execute()
         {
-            Place place;
-            if (placeName.Equals(string.Empty))
-            {
-                place = GetPlace();
-            }
-            else
+            Place place = null;
+            if (!placeName.Equals(string.Empty))
             {
                 place = Entities.EntitiesFactory.GetPlaceFromPlaceName(placeName, conn);
+                if (place == null)
+                {
+                    return "No such place";
+                }
             }
 
-            if (place == null)
-            {
-                return "No such place";
-            }
+            
 
             Delegate[] arr = queriesList.GetInvocationList();
             int queryNum = rand.Next(arr.Length);

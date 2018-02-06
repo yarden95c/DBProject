@@ -24,6 +24,7 @@ namespace DataBaseLayer
             MySqlCommand command = new MySqlCommand();
             command.CommandText = commandText;
             command.Connection = conn.Connection;
+            command.CommandTimeout = 30;
             return new Heuristics(command, resultFormat);
         }
 
@@ -39,6 +40,7 @@ namespace DataBaseLayer
             MySqlCommand command = new MySqlCommand();
             command.CommandText = commandText;
             command.Connection = conn.Connection;
+            command.CommandTimeout = 30;
             return new SelfExecuterHeuristics(command, resultFormat);
         }
     }

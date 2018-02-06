@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using DataBaseLayer.Entities;
 
 namespace DataBaseLayer
 {
@@ -93,6 +94,18 @@ namespace DataBaseLayer
             years["to"] = GetRandomYear(2018);
             years["from"] = GetRandomYear(years["to"]);
             return years;
+        }
+
+        public static Song GetRandomSongFromUser(User user)
+        {
+            int num = rand.Next(user.Songs.Count);
+            return EntitiesFactory.GetSongFromSongId(user.Songs[num],conn);
+        }
+
+        public static Artist GetRandomArtistFromUser(User user)
+        {
+            int num = rand.Next(user.Artists.Count);
+            return EntitiesFactory.GetArtistFromArtistId(user.Artists[num].ToString(), conn);
         }
     }
 }

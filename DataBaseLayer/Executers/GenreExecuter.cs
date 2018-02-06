@@ -96,24 +96,19 @@ namespace DataBaseLayer
         /// </returns>
         public string Execute()
         {
-            Genre genre;
-            if (genreName.Equals(string.Empty))
-            {
-                genre = GetGenre();
-            }
-            else
+            Genre genre = null;
+            if (!genreName.Equals(string.Empty))
             {
                 genre = Entities.EntitiesFactory.GetGenreFromGenreName(genreName, conn);
-            }
-
-            if (genre == null)
-            {
-                return "No such genre";
+                if (genre == null)
+                {
+                    return "No such genre";
+                }
             }
 
             Delegate[] arr = queriesList.GetInvocationList();
             int queryNum = rand.Next(arr.Length);
-            SelfExecuterHeuristics h = ((HeuristicsBank.GenreHeuristics)arr[queryNum])(user,genre);
+            SelfExecuterHeuristics h = ((HeuristicsBank.GenreHeuristics)arr[queryNum])(user, genre);
             return h.Executer(conn);
         }
 
