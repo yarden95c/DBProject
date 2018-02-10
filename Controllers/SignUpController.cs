@@ -68,5 +68,10 @@ namespace Controllers
             return false;
         }
 
+        public bool IsAlreadySignIn()
+        {
+            return _signInController.ConnectedUser != null;
+        }
+
     }
 }

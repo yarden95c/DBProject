@@ -13,13 +13,11 @@ namespace Controllers
         /// <summary>
         /// The sign in controller
         /// </summary>
-        private readonly SignInController _signInController;
         /// <summary>
         /// Initializes a new instance of the <see cref="HitMeWithController"/> class.
         /// </summary>
         public HitMeWithController() : base()
         {
-            _signInController = SignInController.GetInstance();
         }
 
         /// <summary>

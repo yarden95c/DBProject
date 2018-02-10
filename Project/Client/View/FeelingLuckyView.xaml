@@ -11,6 +11,13 @@
              VerticalAlignment="Top">
     <UserControl.Resources>
         <DropShadowEffect x:Key="dropShadow" Color="Black" Opacity="1" ShadowDepth="6" />
+        <Style TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <mui:BBCodeBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="26" Margin="0,5,0,0" Width="278">Feeling Lucky!</mui:BBCodeBlock>
@@ -21,13 +28,15 @@
                 <mui:BBCodeBlock BBCode="Please wait..." TextAlignment="Justify"/>
             </StackPanel>
         </mui:ModernFrame>
-        <StackPanel Visibility="{Binding ResultVisibility}" Height="220" Width="300" Margin="10,20,10,10">
-            <Border  Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}"  Height="220" Width="300">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="-1,0,0,5" Height="220" Width="300">
-                    <mui:BBCodeBlock BBCode="{Binding ResultInfo}"  VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"/>
-                </ScrollViewer>
-            </Border>
-        </StackPanel>
+        <mui:ModernFrame Width="400" Height="300">
+            <StackPanel Visibility="{Binding ResultVisibility}">
+                <Border Background="GhostWhite" BorderBrush="Gainsboro"  BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="300">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300" Width="400" HorizontalAlignment="Left" Margin="-1,0,0,5" >
+                        <mui:BBCodeBlock BBCode="{Binding ResultInfo}"  VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap"  Margin="10,20,10,0" Width="300" FontWeight="Bold"/>
+                    </ScrollViewer>
+                </Border>
+            </StackPanel>
+        </mui:ModernFrame>
         <Button Margin="0,30,0,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="{Binding StartAgainVisibility}" Command="{Binding StartAgainCommand}" Content="Start Again" Background="Transparent"/>
 
     </Grid>

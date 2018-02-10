@@ -237,6 +237,13 @@
     <Resource Include="docs\MySqlCommandBuilder.xml" />
     <Resource Include="docs\MySqlCommand.xml" />
     <Resource Include="Resources\spinner.gif" />
+    <Resource Include="Resources\artist.jpg" />
+    <Resource Include="Resources\place.png" />
+    <Resource Include="Resources\Music-icon.png" />
+    <Resource Include="Resources\place-colors.png" />
+    <Resource Include="Resources\singer.png" />
+    <Resource Include="Resources\plus.png" />
+    <Resource Include="Resources\plus-music.png" />
     <Content Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />

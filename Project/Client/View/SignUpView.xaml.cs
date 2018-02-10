@@ -26,5 +26,6 @@ namespace Project.Client.View
             InitializeComponent();
             this.DataContext = new SignUpViewModel();
         }
+        
     }
 }

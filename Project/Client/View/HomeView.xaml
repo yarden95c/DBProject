@@ -17,6 +17,11 @@
                 <Setter Property="Background" Value="#FFC2D7F4"/>
                 <Setter Property="Command" Value="mui:LinkCommands.NavigateLink"/>
             </Style.Setters>
+               <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Cursor" Value="Hand"></Setter>
+                    </Trigger>
+                </Style.Triggers>
         </Style>
     </UserControl.Resources>
 
