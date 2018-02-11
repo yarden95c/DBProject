@@ -38,7 +38,7 @@ namespace Project.Client.ViewModel
                 {
                     ModernDialog.ShowMessage("Sorry, if you want to use this button you to need sign in first.", "ERROR", MessageBoxButton.OK);
                     ModernWindow m = (ModernWindow)Application.Current.MainWindow;
-                    if (m != null) m.ContentSource = m.MenuLinkGroups[0].Links[1].Source;
+                    if (m != null) m.ContentSource = m.MenuLinkGroups[1].Links[0].Source;
                 });
                 return;
             }

@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Project.Client.View"
+            
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d" Height="450" Width="420">
+             mc:Ignorable="d" Height="450" Width="450">
     <UserControl.Resources>
         <DropShadowEffect x:Key="dropShadow" Color="Black" Opacity="1" ShadowDepth="6" />
         <DropShadowEffect x:Key="dropShadow2" Color="LightGray" Opacity="5" ShadowDepth="6" />
+        <ImageBrush x:Key="ImageBrush" ImageSource="../../Resources/plus.png"></ImageBrush>
         <Style TargetType="{x:Type Button}">
             <Style.Setters>
                 <Setter Property="Effect" Value="{StaticResource dropShadow2}"/>
@@ -18,29 +19,95 @@
                 <Setter Property="Height" Value="36"/>
                 <Setter Property="Background" Value="FloralWhite"></Setter>
             </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
         </Style>
+    
     </UserControl.Resources>
 
-    <Border Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="400" >
-        <StackPanel>
-            <mui:ModernFrame VerticalAlignment="Center" Visibility="{Binding BeforeSignInVisibility}">
+    <StackPanel>
+        <Border Visibility="{Binding BeforeSignInVisibility}" Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="400" >
+            <mui:ModernFrame VerticalAlignment="Center" >
                 <StackPanel VerticalAlignment="Stretch">
-                    <ItemsControl ItemsSource="{Binding RequestedParams}" Margin="5,5,5,5">
-                    </ItemsControl>
-                    <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="1" Background="Transparent" Command="{Binding SignUpCommand}" >Sign Up!</Button>
-                    <mui:BBCodeBlock BBCode="Already have an account?  [url=\Client\View\SignInView.xaml]Login here![/url] " VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="17" Margin="10,50,10,0"/>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" Background="Transparent" Command="{Binding ContinueCommand}" >Start Sign Up!</Button>
+                    <mui:BBCodeBlock BBCode="Already have an account?  [url=\Client\View\SignInView.xaml|_parent]Login here![/url] " VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="17" Margin="10,50,10,0"/>
                 </StackPanel>
             </mui:ModernFrame>
-            <mui:ModernFrame VerticalAlignment="Center" Visibility="{Binding AfterSignInVisibility}">
+        </Border>
+        <Border Visibility="{Binding FirstDetails}" Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="400" >
+            <mui:ModernFrame VerticalAlignment="Center">
+                <StackPanel VerticalAlignment="Stretch">
+                    <ItemsControl ItemsSource="{Binding FirstRequestedParams}" Margin="5,5,5,5">
+                    </ItemsControl>
+                    <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                        <Button HorizontalAlignment="Left" BorderThickness="1" Background="Transparent" Command="{Binding BackCommand}" Margin="10,0,0,0">Back</Button >
+                        <Button HorizontalAlignment="Right" BorderThickness="1" Background="Transparent" Command="{Binding ContinueCommand}" Content="Continue" Margin="139,0,0,0" />
+                    </WrapPanel>
+                </StackPanel>
+            </mui:ModernFrame>
+        </Border>
+        <Border Visibility="{Binding SecondDetails}" Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="400" >
+            <mui:ModernFrame VerticalAlignment="Center" >
+                <StackPanel VerticalAlignment="Stretch">
+                    <ItemsControl ItemsSource="{Binding SecondRequestedParams}" Margin="5,5,5,5">
+                    </ItemsControl>
+                    <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                        <Button HorizontalAlignment="Left" BorderThickness="1" Background="Transparent" Command="{Binding BackCommand}" Margin="10,0,0,0">Back</Button >
+                        <Button HorizontalAlignment="Right" BorderThickness="1" Background="Transparent" Command="{Binding ContinueCommand}" Content="Continue" Margin="139,0,0,0" />
+                    </WrapPanel>
+                </StackPanel>
+            </mui:ModernFrame>
+        </Border>
+
+        <Border Visibility="{Binding LastDetails}" Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="400" Width="430" >
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="390" Width="430" HorizontalAlignment="Left" Margin="-1,0,0,5" >
+                <mui:ModernFrame VerticalAlignment="Center">
+                    <StackPanel VerticalAlignment="Stretch">
+                        <mui:BBCodeBlock FontWeight="Bold" BBCode="Please Choose Your Favorite Artists"></mui:BBCodeBlock>
+                        <ItemsControl ItemsSource="{Binding ArtistsCollection}" Margin="5,5,5,5">
+                        </ItemsControl>
+                        <ToggleButton HorizontalAlignment="Right" Command="{Binding AddArtistCommand}" BorderThickness="0" Width="30" Height="30" ToolTip="Add Another Favorite Song">
+                            <ToggleButton.Background>
+                                <ImageBrush ImageSource="../../Resources/plus.png"></ImageBrush>
+                            </ToggleButton.Background>
+                            <ToggleButton.Foreground>
+                                <ImageBrush ImageSource="../../Resources/plus.png"></ImageBrush>
+                            </ToggleButton.Foreground>
+                        </ToggleButton>
+                        <mui:BBCodeBlock FontWeight="Bold" BBCode="Please Choose Your Favorite Songs"></mui:BBCodeBlock>
+                        <ItemsControl ItemsSource="{Binding SongsCollection}" Margin="5,5,5,5">
+                        </ItemsControl>
+                        <ToggleButton HorizontalAlignment="Right" Command="{Binding AddSongCommand}" BorderThickness="0" Width="30" Height="30" ToolTip="Add Another Favorite Artist">
+                            <ToggleButton.Background>
+                                <ImageBrush ImageSource="../../Resources/plus-music.png"></ImageBrush>
+                            </ToggleButton.Background>
+                            <ToggleButton.Foreground>
+                                <ImageBrush ImageSource="../../Resources/plus.png"></ImageBrush>
+                            </ToggleButton.Foreground>
+                        </ToggleButton>
+
+                        <WrapPanel Margin="0,40,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                            <Button HorizontalAlignment="Left" BorderThickness="1" Background="Transparent" Command="{Binding BackCommand}" Margin="10,0,0,0">Back</Button >
+                            <Button HorizontalAlignment="Right" BorderThickness="1" Background="Transparent" Command="{Binding SignUpCommand}" FontWeight="Bold" Content="Sign Up!" Margin="139,0,0,0" />
+                        </WrapPanel>
+                    </StackPanel>
+                </mui:ModernFrame>
+
+            </ScrollViewer>
+        </Border>
+        <Border  Visibility="{Binding AfterSignInVisibility}" Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="400" >
+            <mui:ModernFrame VerticalAlignment="Center">
                 <StackPanel VerticalAlignment="Stretch">
                     <mui:BBCodeBlock FontWeight="Bold" FontSize="22" Margin="100,10,5,5" TextWrapping="Wrap" BBCode="You are signed in!"></mui:BBCodeBlock>
                     <mui:BBCodeBlock FontWeight="Bold" FontSize="18" Margin="30,10,5,5" TextWrapping="Wrap" BBCode="Now you can continue getting more facts :)"></mui:BBCodeBlock>
-
+                    <Button Margin="71,60,71,10"  Content="Lets Start Play!" FontWeight="Bold" BorderThickness="1" Background="Transparent" Command="mui:LinkCommands.NavigateLink" CommandParameter="/Client/View/HomeView.xaml"/>
                     <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,100,10,10" BorderThickness="1" Background="Transparent" Command="{Binding SignOutCommand}" >sign out</Button>
                 </StackPanel>
             </mui:ModernFrame>
-
-        </StackPanel>
-         </Border>
+        </Border>
+    </StackPanel>
 
 </UserControl>

@@ -6,7 +6,9 @@ xmlns:mui="http://firstfloorsoftware.com/ModernUI" Title="Music Fact Generator"
                   IsEnabled="True"
                   Height="600"
                   Width="700" WindowStyle="ToolWindow"
-                  ContentSource="Client/View/SignInView.xaml"
+                  ContentSource="Client/View/HomeView.xaml"
+                  Icon="Resources/Music-icon.png" 
+                  
                   >
     <Window.Resources>
         <Style TargetType="{x:Type mui:ModernFrame}">
@@ -23,17 +25,27 @@ xmlns:mui="http://firstfloorsoftware.com/ModernUI" Title="Music Fact Generator"
         </Style>
 
     </Window.Resources>
+
+    <mui:ModernWindow.TitleLinks>
+        <mui:Link DisplayName="" Source="Client/View/ProfilView.xaml">
+        </mui:Link>
+    </mui:ModernWindow.TitleLinks>
     <mui:ModernWindow.MenuLinkGroups>
-        <mui:LinkGroup DisplayName="Welcome">
-            <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Sign up" Source="\Client\View\SignUpView.xaml"></mui:Link>
-                <mui:Link DisplayName="Sign in" Source="\Client\View\SignInView.xaml"></mui:Link>
-            </mui:LinkGroup.Links>
-        </mui:LinkGroup>
+        
         <mui:LinkGroup DisplayName="Start" >
             <mui:LinkGroup.Links >
                 <mui:Link DisplayName="Start Play" Source="\Client\View\HomeView.xaml" ></mui:Link>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Sign in">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Sign in" Source="\Client\View\SignInView.xaml"></mui:Link>
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Sign up">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Sign up" Source="\Client\View\SignUpView.xaml"></mui:Link>
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>     
     </mui:ModernWindow.MenuLinkGroups>
 </mui:ModernWindow>

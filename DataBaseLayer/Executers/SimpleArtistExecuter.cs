@@ -128,5 +128,10 @@ namespace DataBaseLayer
         {
             return sorryMsg;
         }
+
+        public static string GetArtistNameFromId(int id, DataBaseConnector conn)
+        {
+            return Entities.EntitiesFactory.GetArtistFromArtistId(id.ToString(), conn).Name;
+        }
     }
 }

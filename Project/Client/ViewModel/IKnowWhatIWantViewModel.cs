@@ -20,6 +20,9 @@ namespace Project.Client.ViewModel
     {
         private ICommand _continueCommand;
         private ICommand _sendMyRequestCommand;
+        private ICommand _artistCommand;
+        private ICommand _songCommand;
+        private ICommand _placeCommand;
         private Visibility _radioButtonsVisibility;
         private Visibility _paramsVisibility;
         private Visibility _resultVisibility;

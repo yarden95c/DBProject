@@ -14,6 +14,8 @@ namespace Controllers
     /// </summary>
     public abstract class CompletionController
     {
+
+        protected readonly SignInController _signInController;
         /// <summary>
         /// The data base connector
         /// </summary>
@@ -44,6 +46,8 @@ namespace Controllers
         /// </summary>
         protected CompletionController()
         {
+
+            _signInController = SignInController.GetInstance();
             _topArtistsCache = new Dictionary<string, List<string>>();
             _topPlacesCache = new Dictionary<string, List<string>>();
             _topSongsCache = new Dictionary<string, List<string>>();

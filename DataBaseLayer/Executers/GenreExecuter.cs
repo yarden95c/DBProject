@@ -88,6 +88,11 @@ namespace DataBaseLayer
             return Entities.EntitiesFactory.GetGenreFromGenreId(user.GenreId, conn);
         }
 
+        public static string GetGenreNameByID(int genreID, DataBaseConnector conn)
+        {
+            return Entities.EntitiesFactory.GetGenreFromGenreId(genreID, conn).Name;
+        }
+
         /// <summary>
         /// Executes the query.
         /// </summary>

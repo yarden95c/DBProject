@@ -28,6 +28,7 @@
                           viewModel:PasswordHelper.Password="{Binding GivvenParam, Mode=TwoWay,UpdateSourceTrigger=LostFocus}" 
                           Grid.Column="1" Visibility="{Binding PasswordBoxVisibility}" VerticalAlignment="Center"
                          Width="170"/>
+            <Label Content="{Binding GivvenParam}" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Center" Visibility="{Binding LabelVisibility}"></Label>
         </Grid>
     </Border>
 

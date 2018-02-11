@@ -56,6 +56,7 @@
     <Compile Include="FeelingLuckyController.cs" />
     <Compile Include="HitMeWithController.cs" />
     <Compile Include="IKnowWhatIWantController.cs" />
+    <Compile Include="ProfileController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignInController.cs" />
     <Compile Include="SignUpController.cs" />

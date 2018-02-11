@@ -26,6 +26,15 @@
             <Setter Property="Width" Value="228"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
+        <Style TargetType="{x:Type ToggleButton}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
     </UserControl.Resources>
 
     <Grid >
@@ -39,9 +48,9 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <RadioButton Height="40" Width="115" IsChecked="{Binding IsChecked}" GroupName="group1" Content="{Binding Name}" />
-                        </DataTemplate>
+                        <DataTemplate>  
+                                <RadioButton VerticalContentAlignment="Center" Cursor="Hand" Height="40" Width="115" IsChecked="{Binding IsChecked}" GroupName="group1" Content="{Binding Name}" />
+                          </DataTemplate>
                     </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
@@ -63,7 +72,7 @@
             <StackPanel Visibility="{Binding ResultVisibility}">
                 <Border Background="GhostWhite" BorderBrush="Gainsboro"  BorderThickness="1" CornerRadius="8,8,8,8" Effect="{StaticResource dropShadow}" Height="300">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="300" Width="400" HorizontalAlignment="Left" Margin="-1,0,0,5" >
-                        <mui:BBCodeBlock BBCode="{Binding ResultInfo}"  VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap"  Margin="10,50,10,0" Width="300" FontWeight="Bold"/>
+                        <mui:BBCodeBlock BBCode="{Binding ResultInfo}"  VerticalAlignment="Top" HorizontalAlignment="Center" TextWrapping="Wrap"  Margin="10,20,10,0" Width="300" FontWeight="Bold"/>
                     </ScrollViewer>
                 </Border>
             </StackPanel>

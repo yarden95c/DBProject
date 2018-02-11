@@ -23,6 +23,12 @@ namespace Project.Client.ViewModel
 
         public void Init()
         {
+            if (_controller.ConnectedUser != null)
+            {
+                BeforeSignInVisibility = Visibility.Collapsed;
+                AfterSignInVisibility = Visibility.Visible;
+                return;
+            }
             AfterSignInVisibility = Visibility.Collapsed;
             BeforeSignInVisibility = Visibility.Visible;
 
@@ -31,8 +37,7 @@ namespace Project.Client.ViewModel
                 new GetParamViewModel("Email"),
                 new GetParamViewModel("Password", isPassword:true)
             };
-            RequestedParams[0].GivvenParam = "dui@Craseu.net";
-            RequestedParams[1].GivvenParam = "AGB48LEC1GB";
+           // RequestedParams[0].GivvenParam = "yarden@cohen.il";
         }
 
         public Visibility BeforeSignInVisibility
@@ -88,6 +93,11 @@ namespace Project.Client.ViewModel
             {
                 AfterSignInVisibility = Visibility.Visible;
                 BeforeSignInVisibility = Visibility.Collapsed;
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ModernWindow m = (ModernWindow)Application.Current.MainWindow;
+                    if (m != null) m.TitleLinks[0].DisplayName = "Profile";
+                });
             }
             else
             {
@@ -102,6 +112,11 @@ namespace Project.Client.ViewModel
         {
             _controller.SignOut();
             Init();
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ModernWindow m = (ModernWindow)Application.Current.MainWindow;
+                if (m != null) m.TitleLinks[0].DisplayName = "";
+            });
         }
     }
 }
