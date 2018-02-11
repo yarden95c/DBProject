@@ -31,8 +31,8 @@ namespace Project.Client.ViewModel
                 new GetParamViewModel("Email"),
                 new GetParamViewModel("Password", isPassword:true)
             };
-            RequestedParams[0].GivvenParam = "at@Maecenas.co.uk";
-            RequestedParams[1].GivvenParam = "TDH23BLR0JK";
+            RequestedParams[0].GivvenParam = "dui@Craseu.net";
+            RequestedParams[1].GivvenParam = "AGB48LEC1GB";
         }
 
         public Visibility BeforeSignInVisibility

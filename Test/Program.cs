@@ -75,24 +75,40 @@ namespace Test
                    Console.WriteLine(luck.GetResult());
                } */
 
-            SignUpController up = new SignUpController();
-            Console.WriteLine(up.SignUp("first name3", "last name3", "email3@email.com", 1, 2, 2000, "password", "ROCK", "isRael"));
-            List<string> songs = new List<string> { "I want to hold your hand", "sound of silence","bla","don't cry for me argentina" };
-            List<string> artists = new List<string> {"art garfunkel","coldplay","radiohead","mozart","foo fighters" };
-            Console.WriteLine(up.AddSongs(songs));
-            Console.WriteLine(up.AddArtists(artists));
-            Console.WriteLine(SignInController.GetInstance().ConnectedUser.Email);
-            foreach (string songId in SignInController.GetInstance().ConnectedUser.Songs)
-            {
-                Song song = EntitiesFactory.GetSongFromSongId(songId, DataBaseLayer.DataBaseConnector.GetInstance());
-                Console.WriteLine("song name: {0}, song id: {1}", song.Name, song.Id);
-            }
+            /*   SignUpController up = new SignUpController();
+               Console.WriteLine(up.SignUp("first name3", "last name3", "email3@email.com", 1, 2, 2000, "password", "ROCK", "isRael"));
+               List<string> songs = new List<string> { "I want to hold your hand", "sound of silence","bla","don't cry for me argentina" };
+               List<string> artists = new List<string> {"art garfunkel","coldplay","radiohead","mozart","foo fighters" };
+               Console.WriteLine(up.AddSongs(songs));
+               Console.WriteLine(up.AddArtists(artists));
+               Console.WriteLine(SignInController.GetInstance().ConnectedUser.Email);
+               foreach (string songId in SignInController.GetInstance().ConnectedUser.Songs)
+               {
+                   Song song = EntitiesFactory.GetSongFromSongId(songId, DataBaseLayer.DataBaseConnector.GetInstance());
+                   Console.WriteLine("song name: {0}, song id: {1}", song.Name, song.Id);
+               }
 
-            foreach (int artistId in SignInController.GetInstance().ConnectedUser.Artists)
-            {
-                Artist artist = EntitiesFactory.GetArtistFromArtistId(artistId.ToString(), DataBaseLayer.DataBaseConnector.GetInstance());
-                Console.WriteLine("artist name: {0}, artist id: {1}", artist.Name, artist.Id);
-            }
+               foreach (int artistId in SignInController.GetInstance().ConnectedUser.Artists)
+               {
+                   Artist artist = EntitiesFactory.GetArtistFromArtistId(artistId.ToString(), DataBaseLayer.DataBaseConnector.GetInstance());
+                   Console.WriteLine("artist name: {0}, artist id: {1}", artist.Name, artist.Id);
+               } */
+
+            SignInController signIn = SignInController.GetInstance();
+            signIn.SignIn("scelerisque.dui@pedenonummy.org", "JRF51YHU3GE");
+
+            FeelingLuckyController lucky = new FeelingLuckyController();
+            Console.WriteLine(lucky.GetResult());
+
+            HitMeWithController hitMe = new HitMeWithController();
+            Console.WriteLine(hitMe.GetPlace(""));
+            Console.WriteLine(hitMe.GetPlace("autralia"));
+            Console.WriteLine(hitMe.GetGenre("hip hop"));
+            Console.WriteLine(hitMe.GetNumber());
+            Console.WriteLine(hitMe.GetYear(2000,2018));
+            Console.WriteLine(hitMe.GetYear(-1, -1));
+
+
 
             while (true) ;
         }
