@@ -18,31 +18,40 @@ namespace Project.Client.ViewModel
         private Visibility _checkBoxVisibility;
         private Visibility _textBoxVisibility;
         private Visibility _passwordBoxVisibility;
+        private Visibility _labelVisibility;
         private bool _isNotWaitingForResponse;
         private readonly bool _isPassword;
-
-        public GetParamViewModel(string name, string fieldName = null, Func<string, List<string>> getParamOptions = null, bool isPassword = false)
+        private bool _isLabel;
+        public GetParamViewModel(string name, string fieldName = null, Func<string, List<string>> getParamOptions = null, bool isPassword = false, bool isLabel = false, string givvenParam = "")
         {
             _isPassword = isPassword;
             _nameOfParam = name;
+            _isLabel = isLabel;
             _getParamOptions = getParamOptions;
             FieldName = fieldName;
             Init();
             SetParamOptions();
+            if (isLabel)
+            {
+                LabelVisibility = Visibility.Visible;
+                GivvenParam = givvenParam;
+
+            }
         }
 
         private void Init()
         {
-            GivvenParam = "";
+            if(!_isLabel)
+                GivvenParam = "";
             TextBoxVisibility = Visibility.Collapsed;
             CheckBoxVisibility = Visibility.Collapsed;
+            LabelVisibility = Visibility.Collapsed;
             PasswordBoxVisibility = _isPassword ? Visibility.Visible : Visibility.Collapsed;
-
         }
 
         private void SetParamOptions()
         {
-            if (_isPassword) return;
+            if (_isPassword || _isLabel) return;
             IsNotWaitingForResponse = false;
             TextBoxVisibility = Visibility.Visible;
             CheckBoxVisibility = Visibility.Collapsed;
@@ -54,6 +63,12 @@ namespace Project.Client.ViewModel
 
         }
 
+        public void EnableEdit()
+        {
+            Init();
+            _isLabel = false;
+            SetParamOptions();
+        }
         public string NameOfParam
         {
             get => _nameOfParam;
@@ -103,6 +118,17 @@ namespace Project.Client.ViewModel
             }
         }
 
+        public Visibility LabelVisibility
+        {
+            get => _labelVisibility;
+            set
+            {
+                if(_labelVisibility == value)
+                    return;
+                _labelVisibility = value;
+                OnPropertyChanged(nameof(LabelVisibility));
+            }
+        }
         public Visibility CheckBoxVisibility
         {
             get => _checkBoxVisibility;

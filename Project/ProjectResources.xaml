@@ -26,5 +26,8 @@
     <DataTemplate DataType="{x:Type vm:FeelingLuckyViewModel}">
         <vw:FeelingLuckyView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ProfilViewModel}">
+        <vw:ProfilView/>
+    </DataTemplate>
 
 </ResourceDictionary>

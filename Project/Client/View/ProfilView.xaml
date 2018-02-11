@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Project.Client.View.ProfilView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project.Client.View"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="340" d:DesignWidth="300">
+    <StackPanel>
+        <Image Height="70" HorizontalAlignment="Left" Margin="10,10,10,10" Source="../../Resources/artist.jpg"></Image>
+        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Visibility="{Binding FirstDetailsVisibility}">
+            <ItemsControl ItemsSource="{Binding FirstDetails}" Margin="5,0,5,5">
+            </ItemsControl>
+            <ToggleButton Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="30" Width="30" Command="{Binding ContinueCommand}" >
+                <ToggleButton.Background>
+                    <ImageBrush ImageSource="../../Resources/continue.png"></ImageBrush>
+                </ToggleButton.Background>
+            </ToggleButton>
+        </StackPanel>
+        <ScrollViewer Visibility="{Binding SecondDetailsVisibility}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="390" Width="430" HorizontalAlignment="Left" Margin="-1,0,0,5" >
+            <mui:ModernFrame VerticalAlignment="Center">
+                <StackPanel VerticalAlignment="Stretch">
+                    <mui:BBCodeBlock FontWeight="Bold" BBCode="Your Favorite Artists"></mui:BBCodeBlock>
+                    <ItemsControl ItemsSource="{Binding ArtistsCollection}" Margin="5,5,5,5">
+                    </ItemsControl>
+                    <ToggleButton HorizontalAlignment="Right" Command="{Binding AddArtistCommand}" BorderThickness="0" Width="30" Height="30" ToolTip="Add Another Favorite Song">
+                        <ToggleButton.Background>
+                            <ImageBrush ImageSource="../../Resources/plus.png"></ImageBrush>
+                        </ToggleButton.Background>
+                        <ToggleButton.Foreground>
+                            <ImageBrush ImageSource="../../Resources/plus.png"></ImageBrush>
+                        </ToggleButton.Foreground>
+                    </ToggleButton>
+                    <mui:BBCodeBlock FontWeight="Bold" BBCode="Your Favorite Songs"></mui:BBCodeBlock>
+                    <ItemsControl ItemsSource="{Binding SongsCollection}" Margin="5,5,5,5">
+                    </ItemsControl>
+                    <ToggleButton HorizontalAlignment="Right" Command="{Binding AddSongCommand}" BorderThickness="0" Width="30" Height="30" ToolTip="Add Another Favorite Artist">
+                        <ToggleButton.Background>
+                            <ImageBrush ImageSource="../../Resources/plus-music.png"></ImageBrush>
+                        </ToggleButton.Background>
+                        <ToggleButton.Foreground>
+                            <ImageBrush ImageSource="../../Resources/plus.png"></ImageBrush>
+                        </ToggleButton.Foreground>
+                    </ToggleButton>
+
+                    <WrapPanel Margin="0,40,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                        <Button HorizontalAlignment="Left" BorderThickness="1" Background="Transparent" Command="{Binding BackCommand}" Margin="10,0,0,0">Back</Button >
+                        <Button HorizontalAlignment="Right" BorderThickness="1" Background="Transparent" Command="{Binding SignUpCommand}" FontWeight="Bold" Content="Sign Up!" Margin="139,0,0,0" />
+                    </WrapPanel>
+                </StackPanel>
+            </mui:ModernFrame>
+
+        </ScrollViewer>
+
+    </StackPanel>
+</UserControl>

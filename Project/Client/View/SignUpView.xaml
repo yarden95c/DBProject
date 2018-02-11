@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Project.Client.View"
+            
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" Height="450" Width="450">
     <UserControl.Resources>
@@ -24,7 +24,8 @@
                     <Setter Property="Cursor" Value="Hand"></Setter>
                 </Trigger>
             </Style.Triggers>
-            </Style>
+        </Style>
+    
     </UserControl.Resources>
 
     <StackPanel>
@@ -32,7 +33,7 @@
             <mui:ModernFrame VerticalAlignment="Center" >
                 <StackPanel VerticalAlignment="Stretch">
                     <Button HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" Background="Transparent" Command="{Binding ContinueCommand}" >Start Sign Up!</Button>
-                    <mui:BBCodeBlock BBCode="Already have an account?  [url=\Client\View\SignInView.xaml]Login here![/url] " VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="17" Margin="10,50,10,0"/>
+                    <mui:BBCodeBlock BBCode="Already have an account?  [url=\Client\View\SignInView.xaml|_parent]Login here![/url] " VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="17" Margin="10,50,10,0"/>
                 </StackPanel>
             </mui:ModernFrame>
         </Border>
@@ -103,7 +104,6 @@
                     <mui:BBCodeBlock FontWeight="Bold" FontSize="22" Margin="100,10,5,5" TextWrapping="Wrap" BBCode="You are signed in!"></mui:BBCodeBlock>
                     <mui:BBCodeBlock FontWeight="Bold" FontSize="18" Margin="30,10,5,5" TextWrapping="Wrap" BBCode="Now you can continue getting more facts :)"></mui:BBCodeBlock>
                     <Button Margin="71,60,71,10"  Content="Lets Start Play!" FontWeight="Bold" BorderThickness="1" Background="Transparent" Command="mui:LinkCommands.NavigateLink" CommandParameter="/Client/View/HomeView.xaml"/>
-
                     <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,100,10,10" BorderThickness="1" Background="Transparent" Command="{Binding SignOutCommand}" >sign out</Button>
                 </StackPanel>
             </mui:ModernFrame>

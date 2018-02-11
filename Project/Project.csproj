@@ -94,6 +94,7 @@
     <Compile Include="Client\ViewModel\IKnowWhatIWantViewModel.cs" />
     <Compile Include="Client\ViewModel\PasswordHelper.cs" />
     <Compile Include="Client\ViewModel\PlaceViewModel.cs" />
+    <Compile Include="Client\ViewModel\ProfilViewModel.cs" />
     <Compile Include="Client\ViewModel\ResultViewModel.cs" />
     <Compile Include="Client\ViewModel\SignInViewModel.cs" />
     <Compile Include="Client\ViewModel\SignUpViewModel.cs" />
@@ -111,6 +112,9 @@
     </Compile>
     <Compile Include="Client\View\IKnowWhatIWantView.xaml.cs">
       <DependentUpon>IKnowWhatIWantView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Client\View\ProfilView.xaml.cs">
+      <DependentUpon>ProfilView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Client\View\ResultView.xaml.cs">
       <DependentUpon>ResultView.xaml</DependentUpon>
@@ -141,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Client\View\IKnowWhatIWantView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Client\View\ProfilView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,6 +252,8 @@
     <Resource Include="Resources\singer.png" />
     <Resource Include="Resources\plus.png" />
     <Resource Include="Resources\plus-music.png" />
+    <Resource Include="Resources\edit.png" />
+    <Resource Include="Resources\continue.png" />
     <Content Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />

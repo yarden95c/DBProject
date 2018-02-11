@@ -321,7 +321,12 @@ namespace Project.Client.ViewModel
 
                     _controller.AddSongs(songs);
                     _controller.AddArtists(artists);
-                }
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ModernWindow m = (ModernWindow)Application.Current.MainWindow;
+                        if (m != null) m.TitleLinks[0].DisplayName = "Profile";
+                    });
+                    }
             }
             }
             catch (Exception e)
@@ -360,6 +365,11 @@ namespace Project.Client.ViewModel
             //_controller.SignOut();
             SignInController.GetInstance().SignOut();
             Init();
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ModernWindow m = (ModernWindow)Application.Current.MainWindow;
+                if (m != null) m.TitleLinks[0].DisplayName = "";
+            });
         }
 
         private void Continue()

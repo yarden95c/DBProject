@@ -125,5 +125,9 @@ namespace DataBaseLayer
         {
             return sorryMsg;
         }
+        public static string GetSongNameFromId(int id, DataBaseConnector conn)
+        {
+            return Entities.EntitiesFactory.GetSongFromSongId(id.ToString(), conn).Name;
+        }
     }
 }

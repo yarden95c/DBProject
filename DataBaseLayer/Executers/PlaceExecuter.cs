@@ -89,6 +89,10 @@ namespace DataBaseLayer
             return Entities.EntitiesFactory.GetPlaceFromPlaceId(user.PlaceId,conn);
         }
 
+        public static string GetPlaceNameById(int ID, DataBaseConnector conn)
+        {
+            return Entities.EntitiesFactory.GetPlaceFromPlaceId(ID, conn).Name;
+        }
         /// <summary>
         /// Executes the query.
         /// </summary>
