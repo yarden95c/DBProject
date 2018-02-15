@@ -28,6 +28,15 @@ namespace DataBaseLayer
         private const string sorryMsg = "Sorry, we couldn't find you an answer, please try again with another parameters.";
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="SimpleSongExecuter" /> class.
+        /// </summary>
+        /// <param name="db">The database.</param>
+        public SimpleSongExecuter(DataBaseConnector db)
+        {
+            this.conn = db;
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SimpleSongExecuter"/> class.
         /// </summary>
         /// <param name="db">The database.</param>
@@ -35,23 +44,32 @@ namespace DataBaseLayer
         /// <param name="artistName">Name of the artist.</param>
         /// <param name="fromYear">From year.</param>
         /// <param name="toYear">To year.</param>
-        public SimpleSongExecuter(DataBaseConnector db)
+        public SimpleSongExecuter(DataBaseConnector db, string songName, string artistName, int fromYear, int toYear)
         {
             this.conn = db;
+            SetQuery(songName, artistName, fromYear, toYear);
         }
 
+        /// <summary>
+        /// Sets the query.
+        /// </summary>
+        /// <param name="songName">Name of the song.</param>
+        /// <param name="artistName">Name of the artist.</param>
+        /// <param name="fromYear">From year.</param>
+        /// <param name="toYear">To year.</param>
+        /// <returns> true if succeeded and false otherwise </returns>
         public bool SetQuery(string songName, string artistName, int fromYear, int toYear)
         {
             try
             {
                 bool artistNamePresent = !artistName.Equals(string.Empty);
                 bool songNamePresent = !songName.Equals(string.Empty);
-                this.command = IKnowWhatIWantQuriesBank.GetSongQuery(songNamePresent,artistNamePresent,this.conn.Connection);
+                this.command = IKnowWhatIWantQuriesBank.GetSongQuery(songNamePresent, artistNamePresent, this.conn.Connection);
                 if (songNamePresent)
                 {
                     command.Parameters["@songName"].Value = "%" + songName + "%";
                 }
-                if(artistNamePresent)
+                if (artistNamePresent)
                 {
                     command.Parameters["@artistName"].Value = "%" + artistName + "%";
                 }
@@ -75,15 +93,15 @@ namespace DataBaseLayer
         public string Execute()
         {
             List<Dictionary<string, string>> result = conn.ExecuteCommand(command);
-            if(result.Count==0)
+            if (result.Count == 0)
             {
                 return sorryMsg;
             }
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("We found you the following songs:\n");
-            
-            foreach(Dictionary<string,string> song in result)
+
+            foreach (Dictionary<string, string> song in result)
             {
                 builder.Append(SongString(song));
                 builder.AppendLine();
@@ -99,14 +117,15 @@ namespace DataBaseLayer
         /// <returns>
         /// a string that reprsent the song.
         /// </returns>
-        private StringBuilder SongString(Dictionary<string,string> song)
+        private StringBuilder SongString(Dictionary<string, string> song)
         {
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("Song name : " + song["song_name"]);
-            if(song["artist_name"].Equals(string.Empty))
+            if (song["artist_name"].Equals(string.Empty))
             {
                 builder.AppendLine("Unknown Artist");
-            } else
+            }
+            else
             {
                 builder.AppendLine("Artist : " + song["artist_name"]);
             }
@@ -125,6 +144,14 @@ namespace DataBaseLayer
         {
             return sorryMsg;
         }
+
+
+        /// <summary>
+        /// Gets the song name from identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns> name of song </returns>
         public static string GetSongNameFromId(int id, DataBaseConnector conn)
         {
             return Entities.EntitiesFactory.GetSongFromSongId(id.ToString(), conn).Name;

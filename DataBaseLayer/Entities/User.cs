@@ -57,7 +57,7 @@ namespace DataBaseLayer
         private List<int> artists;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="User"/> class.
+        /// Initializes a new instance of the <see cref="User" /> class.
         /// </summary>
         public User()
         {

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using BusinessLogic;
 using Controllers;
 using Project.Client.Logic;
 
@@ -18,7 +17,6 @@ namespace Project.Client.View
         {
             Controller = controller;
             _name = name;
-            type = EntityType.SONG;
             _isChecked = false;
         }
         public override ObservableCollection<GetParamViewModel> GetRequestParams()
@@ -35,7 +33,6 @@ namespace Project.Client.View
                 new GetParamViewModel(Consts.Song.Year, getParamOptions:Controller.GetYearsList)
             };
         }
-
         public override string GetResultInfo()
         {
             string songName = _getParamViewModels[0].GivvenParam;

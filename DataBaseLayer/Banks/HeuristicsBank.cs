@@ -235,15 +235,15 @@ namespace DataBaseLayer
                 {
                     p = Entities.EntitiesFactory.GetPlaceFromPlaceId(u.PlaceId, conn);
                 }
-                string format = "The top 10 popular female singers from " + p.Name + " are:\n{0}";
-                string commandText = "select distinct artist_name,num_of_hits from artists where id_area=" + p.Id + " and gender=\"Female\" order by num_of_hits desc limit 10;";
+                string format = "The top popular artists that start with the same name as yours and from " + p.Name + " are:\n{0}";
+                string commandText = "select distinct artist_name, num_of_hits from artists, users where users.id_user = " + u.Id + " and LEFT(artist_name , 2) = LEFT(users.first_name, 2) and artists.id_area = " + p.Id + " having num_of_hits > 1 order by artists.num_of_hits desc limit 10;";
                 SelfExecuterHeuristics heuristics = HeuristicsFactory.CreateSelfExecuterHeuristics(commandText, format, conn);
                 SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
                 {
                     List<Dictionary<string, string>> result = conn.ExecuteCommand(heuristics.Command);
                     if (result.Count == 0)
                     {
-                        return "There are no female singers from " + p.Name;
+                        return "There are no artists that start with the same name as yours and from " + p.Name;
                     }
 
                     StringBuilder builder = new StringBuilder();
@@ -256,6 +256,34 @@ namespace DataBaseLayer
                 heuristics.Executer = del;
                 return heuristics;
             };
+
+            queriesList += (User u, Place p) =>
+             {
+                 if (p == null)
+                 {
+                     p = Entities.EntitiesFactory.GetPlaceFromPlaceId(u.PlaceId, conn);
+                 }
+                 string format = "The top 10 popular female singers from " + p.Name + " are:\n{0}";
+                 string commandText = "select distinct artist_name,num_of_hits from artists where id_area=" + p.Id + " and gender=\"Female\" order by num_of_hits desc limit 10;";
+                 SelfExecuterHeuristics heuristics = HeuristicsFactory.CreateSelfExecuterHeuristics(commandText, format, conn);
+                 SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
+                 {
+                     List<Dictionary<string, string>> result = conn.ExecuteCommand(heuristics.Command);
+                     if (result.Count == 0)
+                     {
+                         return "There are no female singers from " + p.Name;
+                     }
+
+                     StringBuilder builder = new StringBuilder();
+                     foreach (Dictionary<string, string> record in result)
+                     {
+                         builder.AppendLine(record["artist_name"] + " with " + record["num_of_hits"] + " hits in our database");
+                     }
+                     return string.Format(heuristics.ResultFormat, builder.ToString());
+                 };
+                 heuristics.Executer = del;
+                 return heuristics;
+             };
 
             queriesList += (User u, Place p) =>
            {
@@ -350,6 +378,52 @@ namespace DataBaseLayer
         public static YearHeuristics GetYearHeuristics(DataBaseConnector conn)
         {
             YearHeuristics queriesList = (User u, int f, int t) =>
+            {
+                string format;
+                if (f != t)
+                {
+                    format = "The top 10 artists that their names is like your first or last name and born between " + f + " and " + t + " are:\n{0}";
+                }
+                else
+                {
+                    format = "The top 10 artists that their names is like your first or last name and born in the year " + f + " are:\n{0}";
+                }
+                string commandText = "select distinct artist_name, num_of_hits as total "
+                                     + "from artists "
+                                     + "where (lower(artist_name) "
+                                     + "like \"%" + u.FirstName.ToLower() + "%\" "
+                                     + "or lower(artist_name) like \"%" + u.LastName.ToLower() + "%\") and begin_date_year between " + f + " and " + t + " "
+                                     + "having total> 1 "
+                                     + "order by total desc limit 10;";
+                SelfExecuterHeuristics heuristics = HeuristicsFactory.CreateSelfExecuterHeuristics(commandText, format, conn);
+
+                SelfExecuterHeuristics.ExecuteDel del = (DataBaseConnector connector) =>
+                {
+                    List<Dictionary<string, string>> result = conn.ExecuteCommand(heuristics.Command);
+                    if (result.Count == 0)
+                    {
+                        if (f != t)
+                        {
+                            return "There are no artists that their names is like your first or last name and born between " + f + " and " + t;
+                        }
+                        else
+                        {
+                            return "There are no that their names is like your first or last name and born in the year " + f;
+                        }
+                    }
+
+                    StringBuilder builder = new StringBuilder();
+                    foreach (Dictionary<string, string> record in result)
+                    {
+                        builder.AppendLine(record["artist_name"] + " with " + record["total"] + " hits in our database");
+                    }
+                    return string.Format(heuristics.ResultFormat, builder.ToString());
+                };
+                heuristics.Executer = del;
+                return heuristics;
+            };
+
+            queriesList += (User u, int f, int t) =>
             {
                 string format;
                 if (f != t)

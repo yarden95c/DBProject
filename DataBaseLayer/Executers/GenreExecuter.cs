@@ -35,7 +35,7 @@ namespace DataBaseLayer
         private static Random rand = new Random();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenreExecuter"/> class.
+        /// Initializes a new instance of the <see cref="GenreExecuter" /> class.
         /// </summary>
         /// <param name="genreName">Name of the genre.</param>
         /// <param name="conn">The connection.</param>
@@ -51,43 +51,20 @@ namespace DataBaseLayer
         /// <summary>
         /// Gets the genre entity.
         /// </summary>
-        /// <param name="genre">The genre name.</param>
-        /// <returns>Genre instance</returns>
-     /*   private Genre GetGenre(string genre)
-        {
-            MySqlCommand command = new MySqlCommand();
-            command.Connection = conn.Connection;
-            command.CommandText = "select id_genre from genres where lower(genere_name) = \"" + genre.ToLower() + "\"";
-            List<string> result = conn.ExecuteOneColumnCommand(command);
-            if (result.Count <= 0)
-            {
-                return null;
-            }
-
-            Genre genreObject = new Genre(genre, int.Parse(result[0]));
-            return genreObject;
-        } */
-
-        /// <summary>
-        /// Gets the genre entity, that represent the user's favourite genre.
-        /// </summary>
-        /// <returns>Genre instance</returns>
+        /// <returns>
+        /// Genre instance
+        /// </returns>
         private Genre GetGenre()
         {
-            /* MySqlCommand command = new MySqlCommand();
-             command.Connection = conn.Connection;
-             command.CommandText = "select genere_name from genres where id_genre = " + user.GenreId;
-             List<string> result = conn.ExecuteOneColumnCommand(command);
-             if (result.Count <= 0)
-             {
-                 return null;
-             }
-
-             Genre genre = new Genre(result[0], user.GenreId);
-             return genre; */
             return Entities.EntitiesFactory.GetGenreFromGenreId(user.GenreId, conn);
         }
 
+        /// <summary>
+        /// Gets the genre name by identifier.
+        /// </summary>
+        /// <param name="genreID">The genre identifier.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns></returns>
         public static string GetGenreNameByID(int genreID, DataBaseConnector conn)
         {
             return Entities.EntitiesFactory.GetGenreFromGenreId(genreID, conn).Name;

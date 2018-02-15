@@ -15,9 +15,12 @@ namespace Controllers
     /// <seealso cref="Controllers.CompletionController" />
     public class IKnowWhatIWantController : CompletionController
     {
+        /// <summary>
+        /// The database mutex
+        /// </summary>
         private readonly Mutex dbMutex = new Mutex();
         /// <summary>
-        /// Initializes a new instance of the <see cref="IKnowWhatIWantController"/> class.
+        /// Initializes a new instance of the <see cref="IKnowWhatIWantController" /> class.
         /// </summary>
         public IKnowWhatIWantController() : base()
         {
@@ -30,7 +33,9 @@ namespace Controllers
         /// <param name="artistName">Name of the artist.</param>
         /// <param name="fromYear">From year.</param>
         /// <param name="toYear">To year.</param>
-        /// <returns> a string that represent the result of the query </returns>
+        /// <returns>
+        /// a string that represent the result of the query
+        /// </returns>
         public string GetSong(string songName, string artistName, int fromYear, int toYear)
         {
             dbMutex.WaitOne();
@@ -52,7 +57,9 @@ namespace Controllers
         /// <param name="songName">Name of the song.</param>
         /// <param name="fromYear">From year.</param>
         /// <param name="toYear">To year.</param>
-        /// <returns> a string that represent the result of the query </returns>
+        /// <returns>
+        /// a string that represent the result of the query
+        /// </returns>
         public string GetArtist(string artistName, string songName, int fromYear, int toYear)
         {
             dbMutex.WaitOne();
@@ -72,7 +79,9 @@ namespace Controllers
         /// </summary>
         /// <param name="placeName">Name of the place.</param>
         /// <param name="artistName">Name of the artist.</param>
-        /// <returns> a string that represent the result of the query </returns>
+        /// <returns>
+        /// a string that represent the result of the query
+        /// </returns>
         public string GetPlace(string placeName, string artistName)
         {
             SimplePlaceExecuter executer = new SimplePlaceExecuter(conn, placeName.ToLower(), artistName.ToLower());

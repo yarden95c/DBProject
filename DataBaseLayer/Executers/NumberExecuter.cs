@@ -32,7 +32,7 @@ namespace DataBaseLayer
         private static Random rand = new Random();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NumberExecuter"/> class.
+        /// Initializes a new instance of the <see cref="NumberExecuter" /> class.
         /// </summary>
         /// <param name="user">The user.</param>
         /// <param name="connector">The connector.</param>
@@ -66,7 +66,7 @@ namespace DataBaseLayer
         /// </returns>
         public string GetSorryMsg()
         {
-            return string.Empty;
+            return "";
         }
     }
 }

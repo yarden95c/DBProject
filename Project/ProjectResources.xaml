@@ -17,9 +17,6 @@
     <DataTemplate DataType="{x:Type vm:SignUpViewModel}">
         <vw:SignUpView/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:ResultViewModel}">
-        <vw:ResultView/>
-    </DataTemplate>
     <DataTemplate DataType="{x:Type vm:HitMeWithViewModel}">
         <vw:HitMeWithView/>
     </DataTemplate>

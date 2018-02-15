@@ -66,14 +66,6 @@
       <Project>{6a95e323-3c26-47b0-9846-ef4ca5fa0027}</Project>
       <Name>DataBaseLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Project\BusinessLogic\BusinessLogic.csproj">
-      <Project>{2f604916-07f7-4f16-8984-e9ccde62032c}</Project>
-      <Name>BusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Project\DataBaseEngine\DataBaseEngine.csproj">
-      <Project>{881f82c9-c758-47ea-accd-4aa5c876bfe7}</Project>
-      <Name>DataBaseEngine</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="docs\MySqlCommand.xml" />

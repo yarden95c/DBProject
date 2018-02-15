@@ -42,7 +42,7 @@ namespace DataBaseLayer
         private static DataBaseConnector instance;
 
         /// <summary>
-        /// Prevents a default instance of the <see cref="DataBaseConnector"/> class from being created.
+        /// Prevents a default instance of the <see cref="DataBaseConnector" /> class from being created.
         /// </summary>
         private DataBaseConnector()
         {
@@ -65,7 +65,9 @@ namespace DataBaseLayer
         /// <summary>
         /// Gets the instance.
         /// </summary>
-        /// <returns> an instance of this class </returns>
+        /// <returns>
+        /// an instance of this class
+        /// </returns>
         public static DataBaseConnector GetInstance()
         {
             return instance ?? (instance = new DataBaseConnector());
@@ -87,7 +89,9 @@ namespace DataBaseLayer
         /// Executes the command.
         /// </summary>
         /// <param name="command">The command.</param>
-        /// <returns> a list of dictionaries, when each dictionary reprsent a record (row) in the database. </returns>
+        /// <returns>
+        /// a list of dictionaries, when each dictionary reprsent a record (row) in the database.
+        /// </returns>
         public List<Dictionary<string, string>> ExecuteCommand(MySqlCommand command)
         {
             List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
@@ -119,7 +123,9 @@ namespace DataBaseLayer
         /// Executes a one column command.
         /// </summary>
         /// <param name="command">The command.</param>
-        /// <returns> a list of the records that was returned from the database. </returns>
+        /// <returns>
+        /// a list of the records that was returned from the database.
+        /// </returns>
         public List<string> ExecuteOneColumnCommand(MySqlCommand command)
         {
             List<string> result = new List<string>();
@@ -139,13 +145,19 @@ namespace DataBaseLayer
         /// Executes a scalar command.
         /// </summary>
         /// <param name="command">The command.</param>
-        /// <returns> a number that reprsent the result of the command. </returns>
+        /// <returns>
+        /// a number that reprsent the result of the command.
+        /// </returns>
         public int ExecuteScalarCommand(MySqlCommand command)
         {
             return int.Parse(command.ExecuteScalar() + "");
         }
 
-
+        /// <summary>
+        /// Executes the update commands.
+        /// </summary>
+        /// <param name="commands">The commands.</param>
+        /// <returns> true if succeeded and false otherwise </returns>
         public bool ExecuteUpdateCommands(List<MySqlCommand> commands)
         {
             MySqlTransaction myTrans = conn.BeginTransaction();

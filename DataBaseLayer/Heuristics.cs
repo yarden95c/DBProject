@@ -21,14 +21,14 @@ namespace DataBaseLayer
         /// </summary>
         private string resultFormat;
         /// <summary>
-        /// Initializes a new instance of the <see cref="Heuristics"/> class.
+        /// Initializes a new instance of the <see cref="Heuristics" /> class.
         /// </summary>
         public Heuristics()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Heuristics"/> class.
+        /// Initializes a new instance of the <see cref="Heuristics" /> class.
         /// </summary>
         /// <param name="command">The command.</param>
         /// <param name="resultFormat">The result format.</param>

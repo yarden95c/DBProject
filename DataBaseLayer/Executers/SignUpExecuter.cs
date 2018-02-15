@@ -8,13 +8,31 @@ using DataBaseLayer.Entities;
 
 namespace DataBaseLayer.Executers
 {
+    /// <summary>
+    /// SignUpExecuter - this class reprsent an executer for the sign up query.
+    /// </summary>
     public class SignUpExecuter
     {
+        /// <summary>
+        /// The connection
+        /// </summary>
         private DataBaseConnector conn;
+        /// <summary>
+        /// The add user command
+        /// </summary>
         private MySqlCommand addUserCommand;
+        /// <summary>
+        /// The add song command text
+        /// </summary>
         private const string addSongCommandText = "INSERT ignore INTO favoritesongbyuser (id_user, id_song) VALUES (@idUser, @idSong)";
+        /// <summary>
+        /// The add artist command text
+        /// </summary>
         private const string addArtistCommandText = "INSERT ignore INTO favoriteartistbyuser (id_user, id_artist) VALUES (@idUser, @idArtist)";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SignUpExecuter"/> class.
+        /// </summary>
         public SignUpExecuter()
         {
             conn = DataBaseConnector.GetInstance();
@@ -34,6 +52,12 @@ namespace DataBaseLayer.Executers
 
         }
 
+        /// <summary>
+        /// Gets the add song command.
+        /// </summary>
+        /// <param name="idUser">The identifier user.</param>
+        /// <param name="idSong">The identifier song.</param>
+        /// <returns> add song command </returns>
         private MySqlCommand GetAddSongCommand(int idUser, string idSong)
         {
             MySqlCommand command = new MySqlCommand();
@@ -45,6 +69,12 @@ namespace DataBaseLayer.Executers
             return command;
         }
 
+        /// <summary>
+        /// Gets the add artist command.
+        /// </summary>
+        /// <param name="idUser">The identifier user.</param>
+        /// <param name="idArtist">The identifier artist.</param>
+        /// <returns> add artist command </returns>
         private MySqlCommand GetAddArtistCommand(int idUser,string idArtist)
         {
             MySqlCommand command = new MySqlCommand();
@@ -56,6 +86,19 @@ namespace DataBaseLayer.Executers
             return command;
         }
 
+        /// <summary>
+        /// Executes the specified first name.
+        /// </summary>
+        /// <param name="firstName">The first name.</param>
+        /// <param name="lastName">The last name.</param>
+        /// <param name="email">The email.</param>
+        /// <param name="day">The day.</param>
+        /// <param name="month">The month.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="genreName">Name of the genre.</param>
+        /// <param name="placeName">Name of the place.</param>
+        /// <returns> true if succeeded and false otherwise </returns>
         public bool Execute(string firstName, string lastName, string email, int day, int month, int year, string password, string genreName, string placeName)
         {
             Genre genre = Entities.EntitiesFactory.GetGenreFromGenreName(genreName, conn);
@@ -83,6 +126,12 @@ namespace DataBaseLayer.Executers
             return conn.ExecuteUpdateCommands(commands);
         }
 
+        /// <summary>
+        /// Adds the songs to user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="songsNames">The songs names.</param>
+        /// <returns> list of songs that added to the user </returns>
         public List<string> AddSongsToUser(User user, List<string> songsNames)
         {
             List<MySqlCommand> commands = new List<MySqlCommand>();
@@ -107,6 +156,12 @@ namespace DataBaseLayer.Executers
             return songsId;
         }
 
+        /// <summary>
+        /// Adds the artists to user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="artistsNames">The artists names.</param>
+        /// <returns> list of artists added to the user </returns>
         public List<int> AddArtistsToUser(User user, List<string> artistsNames)
         {
             List<MySqlCommand> commands = new List<MySqlCommand>();

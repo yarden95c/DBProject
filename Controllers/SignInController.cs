@@ -26,7 +26,7 @@ namespace Controllers
         private static SignInController _instance;
 
         /// <summary>
-        /// Prevents a default instance of the <see cref="SignInController"/> class from being created.
+        /// Prevents a default instance of the <see cref="SignInController" /> class from being created.
         /// </summary>
         private SignInController()
         {
@@ -37,7 +37,9 @@ namespace Controllers
         /// <summary>
         /// Gets the instance.
         /// </summary>
-        /// <returns> an instance of this class </returns>
+        /// <returns>
+        /// an instance of this class
+        /// </returns>
         public static SignInController GetInstance()
         {
             return _instance ?? (_instance = new SignInController());
@@ -59,7 +61,9 @@ namespace Controllers
         /// </summary>
         /// <param name="email">The email.</param>
         /// <param name="password">The password.</param>
-        /// <returns> true if the user logged in successfully, and false otherwise. </returns>
+        /// <returns>
+        /// true if the user logged in successfully, and false otherwise.
+        /// </returns>
         public bool SignIn(string email, string password)
         {
             connectedUser = new SignInExecuter(email, password, db).Execute();

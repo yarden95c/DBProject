@@ -26,7 +26,7 @@ namespace DataBaseLayer
         private User user;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LuckyExecuter"/> class.
+        /// Initializes a new instance of the <see cref="LuckyExecuter" /> class.
         /// </summary>
         /// <param name="db">The database.</param>
         /// <param name="user">The user.</param>
@@ -60,10 +60,9 @@ namespace DataBaseLayer
         /// <returns>
         /// the sorry message
         /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         public string GetSorryMsg()
         {
-            throw new NotImplementedException();
+            return "";
         }
     }
 }

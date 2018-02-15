@@ -15,8 +15,12 @@ namespace DataBaseLayer
         /// <summary>
         /// Gets the song query.
         /// </summary>
+        /// <param name="songName">if set to <c>true</c> [song name].</param>
+        /// <param name="artistName">if set to <c>true</c> [artist name].</param>
         /// <param name="conn">The connection.</param>
-        /// <returns> MySqlCommand - query of song </returns>
+        /// <returns>
+        /// MySqlCommand - query of song
+        /// </returns>
         public static MySqlCommand GetSongQuery(bool songName, bool artistName, MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -75,8 +79,12 @@ namespace DataBaseLayer
         /// <summary>
         /// Gets the artist query.
         /// </summary>
+        /// <param name="artistName">if set to <c>true</c> [artist name].</param>
+        /// <param name="songName">if set to <c>true</c> [song name].</param>
         /// <param name="conn">The connection.</param>
-        /// <returns> MySqlCommand - query of artist </returns>
+        /// <returns>
+        /// MySqlCommand - query of artist
+        /// </returns>
         public static MySqlCommand GetArtistQuery(bool artistName, bool songName, MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -140,7 +148,9 @@ namespace DataBaseLayer
         /// <param name="conn">The connection.</param>
         /// <param name="artistName">if set to <c>true</c> [artist name]- meaning the artist name is present.</param>
         /// <param name="placeName">if set to <c>true</c> [place name]- meaning the place name is present.</param>
-        /// <returns> MySqlCommand - query of place </returns>
+        /// <returns>
+        /// MySqlCommand - query of place
+        /// </returns>
         public static MySqlCommand GetPlaceQuery(MySqlConnection conn, bool artistName, bool placeName)
         {
             MySqlCommand command = new MySqlCommand();
@@ -185,7 +195,9 @@ namespace DataBaseLayer
         /// Gets the songs names query.
         /// </summary>
         /// <param name="conn">The connection.</param>
-        /// <returns> MySqlCommand - query of song names </returns>
+        /// <returns>
+        /// MySqlCommand - query of song names
+        /// </returns>
         public static MySqlCommand GetSongsNamesQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -203,7 +215,9 @@ namespace DataBaseLayer
         /// Gets the artists names query.
         /// </summary>
         /// <param name="conn">The connection.</param>
-        /// <returns> MySqlCommand - query of artists names </returns>
+        /// <returns>
+        /// MySqlCommand - query of artists names
+        /// </returns>
         public static MySqlCommand GetArtistsNamesQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -221,7 +235,9 @@ namespace DataBaseLayer
         /// Gets the places names query.
         /// </summary>
         /// <param name="conn">The connection.</param>
-        /// <returns> MySqlCommand - query of places names </returns>
+        /// <returns>
+        /// MySqlCommand - query of places names
+        /// </returns>
         public static MySqlCommand GetPlacesNamesQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -238,7 +254,9 @@ namespace DataBaseLayer
         /// Gets the genres names query.
         /// </summary>
         /// <param name="conn">The connection.</param>
-        /// <returns> MySqlCommand - query of genres names </returns>
+        /// <returns>
+        /// MySqlCommand - query of genres names
+        /// </returns>
         public static MySqlCommand GetGenresNamesQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();

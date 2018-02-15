@@ -83,8 +83,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Client\Logic\Consts.cs" />
-    <Compile Include="Client\Logic\RequestParams.cs" />
-    <Compile Include="Client\Logic\ResultParams.cs" />
+    <Compile Include="Client\Logic\Pair.cs" />
     <Compile Include="Client\ViewModel\ArtistViewModel.cs" />
     <Compile Include="Client\ViewModel\BaseViewModel.cs" />
     <Compile Include="Client\ViewModel\FeelingLuckyViewModel.cs" />
@@ -126,8 +125,6 @@
       <DependentUpon>SignUpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Client\ViewModel\SongViewModel.cs" />
-    <Compile Include="DB\DbManager.cs" />
-    <Compile Include="Server\SpecificFact.cs" />
     <Page Include="Client\View\FeelingLuckyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -218,18 +215,6 @@
     <ProjectReference Include="..\DataBaseLayer\DataBaseLayer.csproj">
       <Project>{6a95e323-3c26-47b0-9846-ef4ca5fa0027}</Project>
       <Name>DataBaseLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test\Test.csproj">
-      <Project>{72f7f1d1-bb94-4df5-bd82-4b380de6a38b}</Project>
-      <Name>Test</Name>
-    </ProjectReference>
-    <ProjectReference Include="BusinessLogic\BusinessLogic.csproj">
-      <Project>{2F604916-07F7-4F16-8984-E9CCDE62032C}</Project>
-      <Name>BusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="DataBaseEngine\DataBaseEngine.csproj">
-      <Project>{881F82C9-C758-47EA-ACCD-4AA5C876BFE7}</Project>
-      <Name>DataBaseEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

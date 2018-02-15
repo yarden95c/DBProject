@@ -28,7 +28,7 @@ namespace DataBaseLayer
         private const string sorryMsg = "Sorry, we couldn't find you an answer, please try again with another parameters.";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SimplePlaceExecuter"/> class.
+        /// Initializes a new instance of the <see cref="SimplePlaceExecuter" /> class.
         /// </summary>
         /// <param name="db">The database.</param>
         /// <param name="placeName">Name of the place.</param>

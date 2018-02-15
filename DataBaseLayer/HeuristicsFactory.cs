@@ -18,7 +18,9 @@ namespace DataBaseLayer
         /// <param name="commandText">The command text.</param>
         /// <param name="resultFormat">The result format.</param>
         /// <param name="conn">The database connector.</param>
-        /// <returns> the heuristics </returns>
+        /// <returns>
+        /// the heuristics
+        /// </returns>
         public static Heuristics CreateHeuristics(string commandText, string resultFormat, DataBaseConnector conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -34,7 +36,9 @@ namespace DataBaseLayer
         /// <param name="commandText">The command text.</param>
         /// <param name="resultFormat">The result format.</param>
         /// <param name="conn">The database connector.</param>
-        /// <returns> the self executer heuristics </returns>
+        /// <returns>
+        /// the self executer heuristics
+        /// </returns>
         public static SelfExecuterHeuristics CreateSelfExecuterHeuristics(string commandText, string resultFormat, DataBaseConnector conn)
         {
             MySqlCommand command = new MySqlCommand();

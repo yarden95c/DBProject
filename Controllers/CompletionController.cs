@@ -9,12 +9,15 @@ using MySql.Data.MySqlClient;
 namespace Controllers
 {
     /// <summary>
-    /// CompletionController - this controller is a base class for controllers that need a completion 
+    /// CompletionController - this controller is a base class for controllers that need a completion
     /// methods for songs names, artists names, genres names and years.
     /// </summary>
     public abstract class CompletionController
     {
 
+        /// <summary>
+        /// The sign in controller
+        /// </summary>
         protected readonly SignInController _signInController;
         /// <summary>
         /// The data base connector
@@ -42,7 +45,7 @@ namespace Controllers
         private List<string> _yearsList;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CompletionController"/> class.
+        /// Initializes a new instance of the <see cref="CompletionController" /> class.
         /// </summary>
         protected CompletionController()
         {

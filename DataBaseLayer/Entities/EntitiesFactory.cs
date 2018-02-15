@@ -7,8 +7,17 @@ using MySql.Data.MySqlClient;
 
 namespace DataBaseLayer.Entities
 {
+    /// <summary>
+    /// Class that generate entities from database records.
+    /// </summary>
     public class EntitiesFactory
     {
+        /// <summary>
+        /// Gets the name of the song from song.
+        /// </summary>
+        /// <param name="songName">Name of the song.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns></returns>
         public static Song GetSongFromSongName(string songName, DataBaseConnector conn)
         {
 
@@ -25,6 +34,12 @@ namespace DataBaseLayer.Entities
             return song;
         }
 
+        /// <summary>
+        /// Gets the song from song identifier.
+        /// </summary>
+        /// <param name="songId">The song identifier.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns></returns>
         public static Song GetSongFromSongId(string songId, DataBaseConnector conn)
         {
 
@@ -41,6 +56,12 @@ namespace DataBaseLayer.Entities
             return song;
         }
 
+        /// <summary>
+        /// Gets the name of the artist from artist.
+        /// </summary>
+        /// <param name="artistName">Name of the artist.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns></returns>
         public static Artist GetArtistFromArtistName(string artistName, DataBaseConnector conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -61,6 +82,12 @@ namespace DataBaseLayer.Entities
             return artist;
         }
 
+        /// <summary>
+        /// Gets the artist from artist identifier.
+        /// </summary>
+        /// <param name="artistId">The artist identifier.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns></returns>
         public static Artist GetArtistFromArtistId(string artistId, DataBaseConnector conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -81,6 +108,12 @@ namespace DataBaseLayer.Entities
             return artist;
         }
 
+        /// <summary>
+        /// Gets the name of the place from place.
+        /// </summary>
+        /// <param name="placeName">Name of the place.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns></returns>
         public static Place GetPlaceFromPlaceName(string placeName, DataBaseConnector conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -96,6 +129,12 @@ namespace DataBaseLayer.Entities
             return place;
         }
 
+        /// <summary>
+        /// Gets the place from place identifier.
+        /// </summary>
+        /// <param name="placeId">The place identifier.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns></returns>
         public static Place GetPlaceFromPlaceId(int placeId, DataBaseConnector conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -111,6 +150,12 @@ namespace DataBaseLayer.Entities
             return place;
         }
 
+        /// <summary>
+        /// Gets the name of the genre from genre.
+        /// </summary>
+        /// <param name="genreName">Name of the genre.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns></returns>
         public static Genre GetGenreFromGenreName(string genreName, DataBaseConnector conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -126,6 +171,12 @@ namespace DataBaseLayer.Entities
             return genreObject;
         }
 
+        /// <summary>
+        /// Gets the genre from genre identifier.
+        /// </summary>
+        /// <param name="genreId">The genre identifier.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns></returns>
         public static Genre GetGenreFromGenreId(int genreId, DataBaseConnector conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -141,6 +192,13 @@ namespace DataBaseLayer.Entities
             return genre;
         }
 
+        /// <summary>
+        /// Gets the user from email and password.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns></returns>
         public static User GetUserFromEmailAndPassword(string email,string password,DataBaseConnector conn)
         {
             MySqlCommand getUser = UserQueryBank.GetSimpleUserQuery(conn.Connection);

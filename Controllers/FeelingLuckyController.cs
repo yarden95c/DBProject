@@ -22,7 +22,7 @@ namespace Controllers
         private readonly SignInController _signInController;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FeelingLuckyController"/> class.
+        /// Initializes a new instance of the <see cref="FeelingLuckyController" /> class.
         /// </summary>
         public FeelingLuckyController()
         {
@@ -44,7 +44,9 @@ namespace Controllers
         /// <summary>
         /// Gets the result of the "I'm feeling lucky" query.
         /// </summary>
-        /// <returns> a string that represent the result </returns>
+        /// <returns>
+        /// a string that represent the result
+        /// </returns>
         public string GetResult()
         {
             LuckyExecuter luckyExecuter = new LuckyExecuter(db, SignInController.ConnectedUser);

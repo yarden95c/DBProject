@@ -25,7 +25,9 @@ namespace DataBaseLayer
         /// <summary>
         /// Gets a name of a random artist.
         /// </summary>
-        /// <returns>artist name</returns>
+        /// <returns>
+        /// artist name
+        /// </returns>
         public static string GetRandomArtistName()
         {
             MySqlCommand command = new MySqlCommand();
@@ -38,7 +40,9 @@ namespace DataBaseLayer
         /// <summary>
         /// Gets a name of a random song.
         /// </summary>
-        /// <returns>song name</returns>
+        /// <returns>
+        /// song name
+        /// </returns>
         public static string GetRandomSongName()
         {
             MySqlCommand command = new MySqlCommand();
@@ -51,7 +55,9 @@ namespace DataBaseLayer
         /// <summary>
         /// Gets a name of a random genre.
         /// </summary>
-        /// <returns>genre name</returns>
+        /// <returns>
+        /// genre name
+        /// </returns>
         public static string GetRandomGenreName()
         {
             MySqlCommand command = new MySqlCommand();
@@ -64,7 +70,9 @@ namespace DataBaseLayer
         /// <summary>
         /// Gets a name of a random place.
         /// </summary>
-        /// <returns>place name</returns>
+        /// <returns>
+        /// place name
+        /// </returns>
         public static string GetRandomPlaceName()
         {
             MySqlCommand command = new MySqlCommand();
@@ -78,7 +86,9 @@ namespace DataBaseLayer
         /// Gets a random year.
         /// </summary>
         /// <param name="upperBound">The upper bound.</param>
-        /// <returns>year</returns>
+        /// <returns>
+        /// year
+        /// </returns>
         private static int GetRandomYear(int upperBound)
         {
             return rand.Next(upperBound);
@@ -87,7 +97,9 @@ namespace DataBaseLayer
         /// <summary>
         /// Gets a random years range.
         /// </summary>
-        /// <returns>dictionary that represent a years range- with "from" and "to" keys</returns>
+        /// <returns>
+        /// dictionary that represent a years range- with "from" and "to" keys
+        /// </returns>
         public static Dictionary<string,int> GetRandomYears()
         {
             Dictionary<string, int> years = new Dictionary<string, int>();
@@ -96,12 +108,22 @@ namespace DataBaseLayer
             return years;
         }
 
+        /// <summary>
+        /// Gets the random song from user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns></returns>
         public static Song GetRandomSongFromUser(User user)
         {
             int num = rand.Next(user.Songs.Count);
             return EntitiesFactory.GetSongFromSongId(user.Songs[num],conn);
         }
 
+        /// <summary>
+        /// Gets the random artist from user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns></returns>
         public static Artist GetRandomArtistFromUser(User user)
         {
             int num = rand.Next(user.Artists.Count);

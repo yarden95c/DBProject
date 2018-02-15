@@ -26,7 +26,9 @@ namespace DataBaseLayer
         /// </summary>
         /// <param name="user">The user.</param>
         /// <param name="db">The database connector.</param>
-        /// <returns> CreateExecuter delegate </returns>
+        /// <returns>
+        /// CreateExecuter delegate
+        /// </returns>
         private static CreateExecuter Create(User user, DataBaseConnector db)
         {
             CreateExecuter create = () =>
@@ -37,6 +39,16 @@ namespace DataBaseLayer
             create += () =>
             {
                 return new NumberExecuter(user, db);
+            };
+
+            create += () =>
+            {
+                return new SimpleArtistExecuter(db, "", RandomRecordsBank.GetRandomArtistFromUser(user).Name, 0, 9999);
+            };
+
+            create += () =>
+            {
+                return new SimpleSongExecuter(db, RandomRecordsBank.GetRandomSongFromUser(user).Name, "", 0, 9999);
             };
 
             create += () =>
@@ -81,7 +93,9 @@ namespace DataBaseLayer
         /// </summary>
         /// <param name="user">The user.</param>
         /// <param name="db">The database connector.</param>
-        /// <returns> random executer </returns>
+        /// <returns>
+        /// random executer
+        /// </returns>
         public static IExecuter GetExecuter(User user, DataBaseConnector db)
         {
             Delegate[] arr = Create(user,db).GetInvocationList();

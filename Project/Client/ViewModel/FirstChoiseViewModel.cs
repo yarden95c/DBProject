@@ -1,11 +1,9 @@
-﻿using Project.DB;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLogic;
 using Controllers;
 using Project.Client.Logic;
 
@@ -15,9 +13,7 @@ namespace Project.Client.ViewModel
     {
         protected bool _isChecked;
         protected string _name;
-       // protected static DbManager _dbManager = new DbManager();
         protected ObservableCollection<GetParamViewModel> _getParamViewModels;
-        protected EntityType type;
         protected IKnowWhatIWantController Controller;
         public string Name
         {

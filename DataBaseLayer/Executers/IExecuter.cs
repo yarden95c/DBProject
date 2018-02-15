@@ -15,12 +15,16 @@ namespace DataBaseLayer
         /// <summary>
         /// Executes the query.
         /// </summary>
-        /// <returns>string that reprsent the result</returns>
+        /// <returns>
+        /// string that reprsent the result
+        /// </returns>
         string Execute();
         /// <summary>
         /// Gets the string that repsent that the query returned nothing.
         /// </summary>
-        /// <returns>the sorry message</returns>
+        /// <returns>
+        /// the sorry message
+        /// </returns>
         string GetSorryMsg();
     }
 }

@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLogic;
 using Controllers;
 using Project.Client.Logic;
 
@@ -16,7 +15,6 @@ namespace Project.Client.ViewModel
         public ArtistViewModel(string name, IKnowWhatIWantController controller)
         {
             Controller = controller;
-            type = EntityType.ARTIST;
             _name = name;
             _isChecked = false;
 

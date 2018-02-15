@@ -29,7 +29,7 @@ namespace DataBaseLayer
         private const string sorryMsg = "Sorry, we couldn't find you an answer, please try again with another parameters.";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SimpleArtistExecuter"/> class.
+        /// Initializes a new instance of the <see cref="SimpleArtistExecuter" /> class.
         /// </summary>
         /// <param name="db">The database.</param>
         /// <param name="songName">Name of the song.</param>
@@ -42,11 +42,23 @@ namespace DataBaseLayer
             SetQuery(songName, artistName, fromYear, toYear);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SimpleArtistExecuter"/> class.
+        /// </summary>
+        /// <param name="db">The database.</param>
         public SimpleArtistExecuter(DataBaseConnector db)
         {
             this.conn = db;
         }
 
+        /// <summary>
+        /// Sets the query.
+        /// </summary>
+        /// <param name="songName">Name of the song.</param>
+        /// <param name="artistName">Name of the artist.</param>
+        /// <param name="fromYear">From year.</param>
+        /// <param name="toYear">To year.</param>
+        /// <returns> true if succeeded false otherwise </returns>
         public bool SetQuery(string songName, string artistName, int fromYear, int toYear)
         {
             try
@@ -129,6 +141,12 @@ namespace DataBaseLayer
             return sorryMsg;
         }
 
+        /// <summary>
+        /// Gets the artist name from identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="conn">The connection.</param>
+        /// <returns> the artist name </returns>
         public static string GetArtistNameFromId(int id, DataBaseConnector conn)
         {
             return Entities.EntitiesFactory.GetArtistFromArtistId(id.ToString(), conn).Name;

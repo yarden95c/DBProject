@@ -21,7 +21,7 @@ namespace DataBaseLayer
         private string name;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Place"/> class.
+        /// Initializes a new instance of the <see cref="Place" /> class.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="name">The name.</param>
@@ -32,7 +32,7 @@ namespace DataBaseLayer
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Place"/> class.
+        /// Initializes a new instance of the <see cref="Place" /> class.
         /// </summary>
         public Place()
         {

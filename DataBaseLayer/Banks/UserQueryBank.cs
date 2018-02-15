@@ -16,7 +16,9 @@ namespace DataBaseLayer
         /// Gets a simple user query.
         /// </summary>
         /// <param name="conn">The connection.</param>
-        /// <returns>MySqlCommand - simple user query</returns>
+        /// <returns>
+        /// MySqlCommand - simple user query
+        /// </returns>
         public static MySqlCommand GetSimpleUserQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -33,7 +35,9 @@ namespace DataBaseLayer
         /// Gets user's songs query.
         /// </summary>
         /// <param name="conn">The connection.</param>
-        /// <returns>MySqlCommand - user's songs query</returns>
+        /// <returns>
+        /// MySqlCommand - user's songs query
+        /// </returns>
         public static MySqlCommand GetUserSongsQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();
@@ -49,7 +53,9 @@ namespace DataBaseLayer
         /// Gets user's artists query.
         /// </summary>
         /// <param name="conn">The connection.</param>
-        /// <returns>MySqlCommand - user's artists query</returns>
+        /// <returns>
+        /// MySqlCommand - user's artists query
+        /// </returns>
         public static MySqlCommand GetUserArtistsQuery(MySqlConnection conn)
         {
             MySqlCommand command = new MySqlCommand();

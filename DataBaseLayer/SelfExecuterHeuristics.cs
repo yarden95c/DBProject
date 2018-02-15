@@ -29,7 +29,7 @@ namespace DataBaseLayer
         private ExecuteDel executer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SelfExecuterHeuristics"/> class.
+        /// Initializes a new instance of the <see cref="SelfExecuterHeuristics" /> class.
         /// </summary>
         /// <param name="command">The command.</param>
         /// <param name="resultFormat">The result format.</param>
@@ -40,7 +40,7 @@ namespace DataBaseLayer
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SelfExecuterHeuristics"/> class.
+        /// Initializes a new instance of the <see cref="SelfExecuterHeuristics" /> class.
         /// </summary>
         /// <param name="command">The command.</param>
         /// <param name="resultFormat">The result format.</param>

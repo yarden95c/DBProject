@@ -48,44 +48,12 @@ namespace DataBaseLayer
             this.queriesList = HeuristicsBank.GetPlaceHeuristics(this.conn);
         }
 
-
-        /// <summary>
-        /// Gets the place entity.
-        /// </summary>
-        /// <param name="placeName">Name of the place.</param>
-        /// <returns>Place instance</returns>
-      /*  private Place GetPlace(string placeName)
-        {
-            MySqlCommand command = new MySqlCommand();
-            command.Connection = conn.Connection;
-            command.CommandText = "select id_area from area where lower(area_name) = \"" + placeName.ToLower() + "\"";
-            List<string> result = conn.ExecuteOneColumnCommand(command);
-            if (result.Count <= 0)
-            {
-                return null;
-            }
-
-            Place place = new Place(int.Parse(result[0]), placeName);
-            return place;
-        } */
-
         /// <summary>
         /// Gets the place entity, that reprsent the user's place of birth / residence.
         /// </summary>
         /// <returns>Place instance</returns>
         private Place GetPlace()
         {
-            /* MySqlCommand command = new MySqlCommand();
-             command.Connection = conn.Connection;
-             command.CommandText = "select area_name from area where id_area = " + user.PlaceId;
-             List<string> result = conn.ExecuteOneColumnCommand(command);
-             if (result.Count <= 0)
-             {
-                 return null;
-             }
-
-             Place place = new Place(user.PlaceId, result[0]);
-             return place;*/
             return Entities.EntitiesFactory.GetPlaceFromPlaceId(user.PlaceId,conn);
         }
 
@@ -110,9 +78,7 @@ namespace DataBaseLayer
                     return "No such place";
                 }
             }
-
             
-
             Delegate[] arr = queriesList.GetInvocationList();
             int queryNum = rand.Next(arr.Length);
             SelfExecuterHeuristics h = ((HeuristicsBank.PlaceHeuristics)arr[queryNum])(user, place);

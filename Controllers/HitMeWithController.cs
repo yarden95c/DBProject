@@ -13,9 +13,6 @@ namespace Controllers
         /// <summary>
         /// The sign in controller
         /// </summary>
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HitMeWithController"/> class.
-        /// </summary>
         public HitMeWithController() : base()
         {
         }
@@ -35,7 +32,9 @@ namespace Controllers
         /// Gets the result of the place query.
         /// </summary>
         /// <param name="placeName">Name of the place.</param>
-        /// <returns> a string that represent the result of the query </returns>
+        /// <returns>
+        /// a string that represent the result of the query
+        /// </returns>
         public string GetPlace(string placeName)
         {
             PlaceExecuter placeExecuter = new PlaceExecuter(placeName, conn, SignInController.ConnectedUser);
@@ -45,7 +44,9 @@ namespace Controllers
         /// <summary>
         /// Gets the result of the number query.
         /// </summary>
-        /// <returns> a string that represent the result of the query </returns>
+        /// <returns>
+        /// a string that represent the result of the query
+        /// </returns>
         public string GetNumber()
         {
             NumberExecuter numExecuter = new NumberExecuter(SignInController.ConnectedUser, conn);
@@ -57,7 +58,9 @@ namespace Controllers
         /// </summary>
         /// <param name="fromYear">From year.</param>
         /// <param name="toYear">To year.</param>
-        /// <returns> a string that represent the result of the query </returns>
+        /// <returns>
+        /// a string that represent the result of the query
+        /// </returns>
         public string GetYear(int fromYear,int toYear)
         {
             YearExecuter yearExecuter = new YearExecuter(conn, fromYear, toYear, SignInController.ConnectedUser);
@@ -68,7 +71,9 @@ namespace Controllers
         /// Gets the result of the genre query.
         /// </summary>
         /// <param name="genre">The genre.</param>
-        /// <returns> a string that represent the result of the query </returns>
+        /// <returns>
+        /// a string that represent the result of the query
+        /// </returns>
         public string GetGenre(string genre)
         {
             GenreExecuter genreExecuter = new GenreExecuter(genre, conn, SignInController.ConnectedUser);

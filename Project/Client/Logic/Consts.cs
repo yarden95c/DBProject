@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using BusinessLogic;
 
 namespace Project.Client.Logic
 {
     public static class Consts
     {
-
-        public static Dictionary<EntityType, Dictionary<string,string>> FieldsDictionary = new Dictionary<EntityType, Dictionary<string, string>>
-        {
-            { EntityType.AREA, Area.fields},
-            {EntityType.ARTIST, Artist.fields },
-            { EntityType.SONG, Song.fields} 
-        }; 
+        
         public static class Artist
         {
             public const string ArtistName = "Artist Name: ";
